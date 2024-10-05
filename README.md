@@ -1,6 +1,6 @@
-# Tauri + React
+# Drufflebag [WIP]
 
-This template should help get you started developing with Tauri and React in Vite.
+A desktop frontend for the Adobe Flash emulator Ruffle. 
 
 ## Recommended IDE Setup
 
