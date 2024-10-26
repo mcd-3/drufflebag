@@ -14,41 +14,27 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>Welcome to Tauri!</h1>
-
-      <p>In development: Drufflebag!</p>
-
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <div className="top-level-nav">
+        <div className="nav-left">
+          <p>Top Level Buttons (Open, Scan Directory, Settings)</p>
+        </div>
+        <div className="nav-right">
+          <p>If "Global URL" is set in settings, show this</p>
+          <p>URL: [ url... ]</p>
+        </div>
       </div>
+      <div className="swf-content-table">
+        <table>
+          <tr>
+            <th>Name</th>
+          </tr>
+          <tr>
+            <td><button onClick={() => greet()}>Duck Life</button></td>
 
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-
-      <p>{greetMsg}</p>
+          </tr>
+        </table>
+      </div>
     </div>
   );
 }

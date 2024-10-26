@@ -17,6 +17,7 @@ async fn open_ruffle(app: tauri::AppHandle) {
         "Ruffle",
         tauri::WebviewUrl::App("ruffle.html".into())
     )
+    .title("hey")
     .build()
     .unwrap();
 }
