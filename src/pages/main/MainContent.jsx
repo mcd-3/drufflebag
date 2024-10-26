@@ -1,9 +1,8 @@
 import { useState } from "react";
-import reactLogo from "../assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
-import "../styles/App.css";
+import "./../../styles/App.css";
 
-function App() {
+function MainContent() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
 
@@ -39,4 +38,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainContent;

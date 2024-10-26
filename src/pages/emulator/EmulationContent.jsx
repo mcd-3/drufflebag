@@ -1,4 +1,4 @@
-function Emulator() {
+function EmulationContent() {
   return (
     <div className="container">
         <p>hello world!</p>
@@ -6,4 +6,4 @@ function Emulator() {
   );
 }
 
-export default Emulator;
+export default EmulationContent;

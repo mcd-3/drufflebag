@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Emulator from "../components/Emulator";
+import MainContent from "./MainContent";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Emulator />
+    <MainContent />
   </React.StrictMode>,
 );
