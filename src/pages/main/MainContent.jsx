@@ -3,15 +3,11 @@ import { invoke } from "@tauri-apps/api/core";
 import "./../../styles/App.css";
 
 import Iconbutton from "./../../components/iconButton";
+import TopBar from "../../components/topBar";
 
 function MainContent() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
-
-  // TODO: Move this function
-  const getAssetPath = assetFileName => {
-    return `src/assets/${assetFileName}`;
-  };
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -23,7 +19,7 @@ function MainContent() {
     <div>
       <div className="top-level-nav">
         <div className="nav-left">
-          <Iconbutton text="open" src={getAssetPath('folder-demo.svg')}/>
+          <TopBar />
           <p>Top Level Buttons (Open, Scan Directory, Settings)</p>
         </div>
         <div className="nav-right">
