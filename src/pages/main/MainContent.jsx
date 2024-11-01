@@ -2,7 +2,6 @@ import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./../../styles/App.css";
 
-import Iconbutton from "./../../components/iconButton";
 import TopBar from "../../components/topBar";
 
 function MainContent() {
@@ -18,24 +17,30 @@ function MainContent() {
   return (
     <div>
       <div className="top-level-nav">
-        <div className="nav-left">
-          <TopBar />
-          <p>Top Level Buttons (Open, Scan Directory, Settings)</p>
-        </div>
-        <div className="nav-right">
-          <p>If "Global URL" is set in settings, show this</p>
-          <p>URL: [ url... ]</p>
-        </div>
+        <TopBar />
       </div>
       <div className="swf-content-table">
         <table>
-          <tr>
-            <th>Name</th>
-          </tr>
-          <tr>
-            <td><button onClick={() => greet()}>Duck Life</button></td>
-
-          </tr>
+          <thead>
+            <tr>
+              <th>ASV</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Last Played</th>
+              <th>URL Spoof</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 (image)</td>
+              <td><button onClick={() => greet()}>Duck Life</button></td>
+              <td>Game (Select)</td>
+              <td>253 kb</td>
+              <td>June 23, 2024</td>
+              <td>ducklife.com</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
