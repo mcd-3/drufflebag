@@ -1,13 +1,12 @@
-
+/* 
 .topBar-root {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-
 }
 
-/* Columns */
+/* Columns 
 .topBar-file-column {
     width: 30%;
     display: flex;
@@ -29,7 +28,7 @@
     justify-content: space-between;
 }
 
-/* Individual Buttons */
+/* Individual Buttons 
 .topBar-open-button {
     width: 30%;
 }
@@ -48,4 +47,51 @@
 
 .topBar-stop-button {
     width: 45%;
+} */
+
+/* Root Container */
+.topBar-root {
+    width: 100%;
+    height: 82px;
+}
+
+/* Columns */
+.topBar-file-column {
+    width: 200px;
+    float: left;
+}
+
+.topBar-control-column {
+    width: 130px;
+    float: left;
+}
+
+.topBar-spoof-column {
+    display: flex;
+    background-color: red;
+}
+
+/* Individual Elements */
+.topBar-open-button,
+.topBar-refresh-button,
+.topBar-settings-button,
+.topBar-pause-button,
+.topBar-stop-button {
+    display: inline-block;
+    width: 64px;
+}
+
+.topBar-vertical-divider {
+    float: left;
+    width: 1px;
+    margin-left: 8px;
+    margin-right: 8px;
+    height: 64px;
+    background: #555555;
+}
+
+input {
+    width: 80%;
+    margin: auto;
+    display: flex;
 }
