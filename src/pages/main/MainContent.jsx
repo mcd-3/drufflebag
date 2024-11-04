@@ -3,6 +3,7 @@ import { invoke } from "@tauri-apps/api/core";
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
+import SwfTable from "../../components/swfTable";
 
 function MainContent() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -20,7 +21,7 @@ function MainContent() {
         <TopBar />
       </div>
       <div className="swf-content-table">
-        <table>
+        <SwfTable>
           <thead>
             <tr>
               <th>ASV</th>
@@ -40,8 +41,16 @@ function MainContent() {
               <td>June 23, 2024</td>
               <td>ducklife.com</td>
             </tr>
+            <tr>
+              <td>3 (image)</td>
+              <td><button onClick={() => greet()}>That Gravity Game</button></td>
+              <td>Game (Select)</td>
+              <td>543 kb</td>
+              <td>November 4, 2024</td>
+              <td>moegames.com</td>
+            </tr>
           </tbody>
-        </table>
+        </SwfTable>
       </div>
     </div>
   );
