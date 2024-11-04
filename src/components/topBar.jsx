@@ -15,9 +15,9 @@ const TopBar = () => {
   return (
     <div className={styles["topBar-root"]}>
       <div className={styles["topBar-file-column"]}>
-        <IconButton className={styles["topBar-open-button"]} text="open" src={getAssetPath('folder-demo.svg')}/>
-        <IconButton className={styles["topBar-refresh-button"]} text="refresh" src={getAssetPath('folder-demo.svg')}/>
-        <IconButton className={styles["topBar-settings-button"]} text="settings" src={getAssetPath('folder-demo.svg')}/>
+        <IconButton className={styles["topBar-open-button"]} text="open" src={getAssetPath('folder-demo.svg')} onClick={ () => { console.error('asd'); } }/>
+        <IconButton className={styles["topBar-refresh-button"]} text="refresh" src={getAssetPath('folder-demo.svg')} onClick={ () => { console.error('sdf'); } }/>
+        <IconButton className={styles["topBar-settings-button"]} text="settings" src={getAssetPath('folder-demo.svg')} onClick={ () => { console.error('dfg'); } }/>
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-control-column"]}>

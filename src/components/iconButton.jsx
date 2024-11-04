@@ -17,8 +17,10 @@ const IconButton = ({
 }) => {
   return (
     <div className={className}>
-      <img className={styles.icon} src={src}/>
-      <p className={styles.text}>{text}</p>
+      <button onClick={() => onClick()}>
+        <img className={styles.icon} src={src}/>
+        <p className={styles.text}>{text}</p>
+      </button>
     </div>
   )
 };
