@@ -14,7 +14,6 @@
 .swfTable-root > table > thead {
     text-align: left;
     background-color: rgb(73, 73, 73);
-    font-family: 'Inter', sans-serif;
     font-weight: bold;
     font-size: 12px;
 }
@@ -36,7 +35,6 @@
 .swfTable-root > table > tbody {
     text-align: left;
     background-color: rgb(255, 255, 255);
-    font-family: 'Inter', sans-serif;
     font-size: 12px;
 }
 
