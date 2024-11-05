@@ -17,12 +17,13 @@
 }
 
 .swfTable-root > table > thead > tr > th {
-    padding-left: 4px; /* Unsure if I should keep this or just pad the thead/tr itself */
+    padding-left: 4px;
     padding-bottom: 4px;
     padding-top: 4px;
     border-left: solid 2px rgb(175, 175, 175);
     color: white;
     font-size: 0.9em;
+    height: 20px;
 }
 
 .swfTable-root > table > thead > tr > th:nth-child(1) {
@@ -35,12 +36,13 @@
     background-color: rgb(255, 255, 255);
 }
 
+.swfTable-root > table > tbody > tr {
+    font-size: 0.85em;
+    height: 36px;
+}
+
 .swfTable-root > table > tbody > tr > td {
-    padding-left: 4px; /* Unsure if I should keep this or just pad the thead/tr itself */
-    padding-bottom: 2px;
-    padding-top: 2px;
-    /* border: solid 1px rgb(62, 62, 62);
-    border-bottom: solid 1px rgb(18, 18, 18); */
+    padding-left: 4px;
 }
 
 .swfTable-root > table > tbody > tr:nth-child(2n) {
