@@ -52,7 +52,7 @@
 /* Root Container */
 .topBar-root {
     width: 100%;
-    height: 82px;
+    height: 64px;
 }
 
 /* Columns */
@@ -68,10 +68,10 @@
 
 .topBar-spoof-column {
     display: flex;
-    background-color: red;
+    height: 100%;
 }
 
-/* Individual Elements */
+/* Buttons and Dividers */
 .topBar-open-button,
 .topBar-refresh-button,
 .topBar-settings-button,
@@ -91,8 +91,29 @@
     background: #555555;
 }
 
-input {
-    width: 80%;
-    margin: auto;
-    display: flex;
+/* Spoof Column Elements */
+.topBar-spoof-checkbox {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.topBar-spoof-icon {
+    height: 32px;
+    width: 32px;
+    margin-right: 8px;
+}
+
+.topBar-spoof-url-textbox {
+    height: 24px;
+    width: 100%;
+    margin-right: 12px;
+}
+
+.topBar-spoof-checkbox,
+.topBar-spoof-icon,
+.topBar-spoof-url-textbox {
+    margin-top: auto;
+    margin-bottom: auto;
 }

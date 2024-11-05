@@ -26,7 +26,9 @@ const TopBar = () => {
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-spoof-column"]}>
-        <p>[c] (_) [Spoof Url...                        ]</p>
+        <input className={styles["topBar-spoof-checkbox"]} type='checkbox'/>
+        <img className={styles["topBar-spoof-icon"]} src={getAssetPath('globe-demo.svg')}/>
+        <input className={styles["topBar-spoof-url-textbox"]} type='text' placeholder='Global Spoof Url...' alt="Global Spoof Url" />
       </div>
     </div>
   );
