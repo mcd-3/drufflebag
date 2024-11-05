@@ -24,7 +24,7 @@ function MainContent() {
         <SwfTable>
           <thead>
             <tr>
-              <th>ASV</th>
+              <th>AVM</th>
               <th>Name</th>
               <th>Type</th>
               <th>Size</th>
@@ -34,7 +34,7 @@ function MainContent() {
           </thead>
           <tbody>
             <tr>
-              <td>1 (image)</td>
+              <td><img src="public/AVM1.png" /></td>
               <td><button onClick={() => greet()}>Duck Life</button></td>
               <td>Game (Select)</td>
               <td>253 kb</td>
@@ -42,7 +42,7 @@ function MainContent() {
               <td>ducklife.com</td>
             </tr>
             <tr>
-              <td>3 (image)</td>
+              <td><img src="public/AVM2.png" /></td>
               <td><button onClick={() => greet()}>That Gravity Game</button></td>
               <td>Game (Select)</td>
               <td>543 kb</td>
@@ -50,7 +50,7 @@ function MainContent() {
               <td>moegames.com</td>
             </tr>
             <tr>
-              <td>2 (image)</td>
+              <td><img src="public/AVM1.png" /></td>
               <td><button onClick={() => greet()}>Red Ball</button></td>
               <td>Game (Select)</td>
               <td>123 kb</td>
