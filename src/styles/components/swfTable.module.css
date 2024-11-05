@@ -1,3 +1,4 @@
+/* Table + Root Styles */
 .swfTable-root {
     display: flex;
     width: 100%;
@@ -9,7 +10,7 @@
     border-collapse: collapse;
 }
 
-
+/* Table Header Styles */
 .swfTable-root > table > thead {
     text-align: left;
     background-color: rgb(35, 35, 35);
@@ -22,7 +23,7 @@
     border: solid 1px rgb(18, 18, 18);
 }
 
-
+/* Table Body Styles */
 .swfTable-root > table > tbody {
     text-align: left;
     background-color: rgb(99, 99, 99);
@@ -34,6 +35,10 @@
     padding-top: 2px;
     border: solid 1px rgb(62, 62, 62);
     border-bottom: solid 1px rgb(18, 18, 18);
+}
+
+.swfTable-root > table > tbody > tr:nth-child(2n) {
+    background-color: blueviolet;
 }
 
 

@@ -49,6 +49,14 @@ function MainContent() {
               <td>November 4, 2024</td>
               <td>moegames.com</td>
             </tr>
+            <tr>
+              <td>2 (image)</td>
+              <td><button onClick={() => greet()}>Red Ball</button></td>
+              <td>Game (Select)</td>
+              <td>123 kb</td>
+              <td>April 20, 2024</td>
+              <td>king.com</td>
+            </tr>
           </tbody>
         </SwfTable>
       </div>
