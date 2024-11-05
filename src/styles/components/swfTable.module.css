@@ -14,6 +14,9 @@
 .swfTable-root > table > thead {
     text-align: left;
     background-color: rgb(73, 73, 73);
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
 }
 
 .swfTable-root > table > thead > tr > th {
@@ -22,7 +25,6 @@
     padding-top: 4px;
     border-left: solid 2px rgb(175, 175, 175);
     color: white;
-    font-size: 0.9em;
     height: 20px;
 }
 
@@ -34,10 +36,11 @@
 .swfTable-root > table > tbody {
     text-align: left;
     background-color: rgb(255, 255, 255);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
 }
 
 .swfTable-root > table > tbody > tr {
-    font-size: 0.85em;
     height: 36px;
 }
 
@@ -48,6 +51,7 @@
 .swfTable-root > table > tbody > tr:nth-child(2n) {
     background-color: rgb(231, 231, 231);
 }
+
 
 /* TODO: Uncomment when light/dark switch is implemented */
 /* @media (prefers-color-scheme: dark) {
