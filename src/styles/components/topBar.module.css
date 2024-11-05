@@ -79,6 +79,7 @@
 .topBar-stop-button {
     display: inline-block;
     width: 64px;
+    text-align: center;
 }
 
 .topBar-vertical-divider {

@@ -5,6 +5,22 @@
     margin-bottom: 0;
 }
 
+.iconButton-button {
+    background-color: #ffffff00;
+    border: none;
+    cursor: pointer;
+}
+
+.iconButton-button:hover {
+    background-color: #00000035;
+    border-radius: 3px;
+}
+
+.iconButton-button:active {
+    background-color: #00000070;
+    border-radius: 3px;
+}
+
 .icon {
     display: block;
     margin-left: auto;
@@ -14,7 +30,7 @@
 }
 
 .text {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
     text-align: center;
 }

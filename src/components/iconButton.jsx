@@ -17,7 +17,7 @@ const IconButton = ({
 }) => {
   return (
     <div className={className}>
-      <button onClick={() => onClick()}>
+      <button onClick={() => onClick()} className={styles['iconButton-button']}>
         <img className={styles.icon} src={src}/>
         <p className={styles.text}>{text}</p>
       </button>
