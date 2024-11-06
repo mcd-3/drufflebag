@@ -15,6 +15,12 @@ function MainContent() {
     await invoke("open_ruffle");
   }
 
+  const scan_directory = async () => {
+    const i = await invoke("scan_directory");
+
+    console.error(i);
+  }
+
   return (
     <div>
       <div className="top-level-nav">
@@ -51,7 +57,7 @@ function MainContent() {
             </tr>
             <tr>
               <td><img src="public/AVM1.png" /></td>
-              <td><button onClick={() => greet()}>Red Ball</button></td>
+              <td><button onClick={() => scan_directory()}>Red Ball</button></td>
               <td>Game (Select)</td>
               <td>123 kb</td>
               <td>April 20, 2024</td>
