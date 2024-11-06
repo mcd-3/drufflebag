@@ -1,0 +1,10 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_2" height="66.1016" width="65.88973" y="-1.31563" x="-0.52114" stroke="#000" fill="#e82c2c"/>
+  <rect id="svg_3" height="0.21186" width="0.21186" y="25.37925" x="114.94479" stroke="#000" fill="#884D58"/>
+  <text transform="rotate(-31.0377, 21.6445, 21.8811) matrix(0.78442, 0, 0, 0.950676, -0.786831, 5.95775)" xml:space="preserve" text-anchor="start" font-family="sans-serif" font-size="24" stroke-width="0" id="svg_4" y="24.77554" x="2.79461" stroke="#000" fill="#ffffff">AVM</text>
+  <text font-weight="bold" transform="matrix(1.79285, 0, 0, 1.805, -29.4623, -29.8882)" xml:space="preserve" text-anchor="start" font-family="sans-serif" font-size="24" stroke-width="0" id="svg_6" y="48.11086" x="36.4936" stroke="#000" fill="#ffffff">1</text>
+ </g>
+</svg>

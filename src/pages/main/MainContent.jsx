@@ -40,7 +40,7 @@ function MainContent() {
           </thead>
           <tbody>
             <tr>
-              <td><img src="public/AVM1.png" /></td>
+              <td><img src="public/avm1.svg" width={32} height={32} /></td>
               <td><button onClick={() => greet()}>Duck Life</button></td>
               <td>Game (Select)</td>
               <td>253 kb</td>
@@ -48,7 +48,7 @@ function MainContent() {
               <td>ducklife.com</td>
             </tr>
             <tr>
-              <td><img src="public/AVM2.png" /></td>
+              <td><img src="public/avm2.svg"  width={32} height={32} /></td>
               <td><button onClick={() => greet()}>That Gravity Game</button></td>
               <td>Game (Select)</td>
               <td>543 kb</td>
@@ -56,7 +56,7 @@ function MainContent() {
               <td>moegames.com</td>
             </tr>
             <tr>
-              <td><img src="public/AVM1.png" /></td>
+              <td><img src="public/avm1.svg"  width={32} height={32} /></td>
               <td><button onClick={() => scan_directory()}>Red Ball</button></td>
               <td>Game (Select)</td>
               <td>123 kb</td>
