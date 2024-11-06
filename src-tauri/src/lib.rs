@@ -71,9 +71,7 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![greet])
-        .invoke_handler(tauri::generate_handler![open_ruffle])
-        .invoke_handler(tauri::generate_handler![scan_directory])
+        .invoke_handler(tauri::generate_handler![open_ruffle, scan_directory])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
