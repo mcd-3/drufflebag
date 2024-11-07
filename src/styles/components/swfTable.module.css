@@ -44,12 +44,32 @@
 
 .swfTable-root > table > tbody > tr > td {
     padding-left: 4px;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .swfTable-root > table > tbody > tr:nth-child(2n) {
     background-color: rgb(231, 231, 231);
 }
 
+/* Table Header Sizes */
+.swfTable-root > table > thead > tr > th:nth-child(1) {
+    width: 38px;
+}
+
+.swfTable-root > table > thead > tr > th:nth-child(3) {
+    width: 96px;
+}
+
+.swfTable-root > table > thead > tr > th:nth-child(4) {
+    width: 72px;
+}
+
+.swfTable-root > table > thead > tr > th:nth-child(5) {
+    width: 118px;
+}
 
 /* TODO: Uncomment when light/dark switch is implemented */
 /* @media (prefers-color-scheme: dark) {

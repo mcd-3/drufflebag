@@ -57,9 +57,9 @@ function MainContent() {
                 console.log(swf)
                 return (
                   <tr>
-                    <td><img src="public/avm1.svg" width={32} height={32} /></td>
+                    <td><img src="public/avm_unknown.svg" width={32} height={32} /></td>
                     <td>{swf.path.split('/').pop()}</td>
-                    <td>Game (Select)</td>
+                    <td>Animation</td>
                     <td>{formatBytes(swf.size)}</td>
                     <td>June 23, 2024</td>
                     <td>ducklife.com</td>
