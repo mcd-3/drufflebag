@@ -25,7 +25,7 @@ function MainContent() {
 
     const kilo = 1024;
     const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+    const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
 
     const sizesIndex = Math.floor(Math.log(bytes) / Math.log(kilo));
 
