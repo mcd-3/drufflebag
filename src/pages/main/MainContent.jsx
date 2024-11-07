@@ -9,6 +9,8 @@ function MainContent() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
 
+  const [swfFiles, setSwfFiles] = useState([]);
+
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
     // setGreetMsg(await invoke("greet", { name }));
@@ -16,9 +18,9 @@ function MainContent() {
   }
 
   const scan_directory = async () => {
-    const i = await invoke("scan_directory");
-
-    console.error(i);
+    const files = await invoke("scan_directory");
+    setSwfFiles(files);
+    // console.error(i);
   }
 
   return (
@@ -39,14 +41,19 @@ function MainContent() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><img src="public/avm1.svg" width={32} height={32} /></td>
-              <td><button onClick={() => greet()}>Duck Life</button></td>
-              <td>Game (Select)</td>
-              <td>253 kb</td>
-              <td>June 23, 2024</td>
-              <td>ducklife.com</td>
-            </tr>
+            {swfFiles.map((swf) => {
+              return (
+                <tr>
+                  <td><img src="public/avm1.svg" width={32} height={32} /></td>
+                  <td>{swf.split('/').pop()}</td>
+                  <td>Game (Select)</td>
+                  <td>253 kb</td>
+                  <td>June 23, 2024</td>
+                  <td>ducklife.com</td>
+                </tr>
+              )
+            })
+            }
             <tr>
               <td><img src="public/avm2.svg"  width={32} height={32} /></td>
               <td><button onClick={() => greet()}>That Gravity Game</button></td>
