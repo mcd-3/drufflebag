@@ -10,6 +10,7 @@ function MainContent() {
   const [name, setName] = useState("");
 
   const [swfFiles, setSwfFiles] = useState([]);
+  const [selectedSwfPath, setSelectedSwfPath] = useState("");
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -37,6 +38,7 @@ function MainContent() {
       <div className="top-level-nav">
         <TopBar 
           setSwfFiles={setSwfFiles}
+          selectedSwfPath={selectedSwfPath}
         />
       </div>
       <div className="swf-content-table">
@@ -54,9 +56,8 @@ function MainContent() {
           <tbody>
             {
               swfFiles.map((swf) => {
-                console.log(swf)
                 return (
-                  <tr>
+                  <tr onClick={() => { setSelectedSwfPath(swf.path) }}>
                     <td><img src="public/avm_unknown.svg" width={32} height={32} /></td>
                     <td>{swf.path.split('/').pop()}</td>
                     <td>Animation</td>

@@ -14,9 +14,9 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-async fn open_ruffle(app: tauri::AppHandle) {
+fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
     tauri::WebviewWindowBuilder::new(&app, "Ruffle", tauri::WebviewUrl::App("ruffle.html".into()))
-        .title("hey")
+        .title(swf_name)
         .build()
         .unwrap();
 }

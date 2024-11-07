@@ -9,14 +9,21 @@ import styles from './../styles/components/topBar.module.css';
  * @returns {}
  */
 const TopBar = ({
-  setSwfFiles
+  setSwfFiles,
+  selectedSwfPath
 }) => {
   const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
+  const [ruffleOpen, setRuffleOpen] = useState(false);
 
   // TODO: Move this function
   const getAssetPath = assetFileName => {
     return `src/assets/${assetFileName}`;
   };
+
+  function launch_ruffle(swfName) {
+    invoke("open_ruffle", { swfName });
+    setRuffleOpen(true);
+  }
 
   return (
     <div className={styles["topBar-root"]}>
@@ -44,14 +51,10 @@ const TopBar = ({
       <div className={styles["topBar-control-column"]}>
         <IconButton
           className={styles["topBar-pause-button"]}
-          text="Play"
-          src={getAssetPath('play.svg')}
-          disabled={true} />
-        <IconButton
-          className={styles["topBar-stop-button"]}
-          text="Stop"
-          src={getAssetPath('square.svg')}
-          disabled={true} />
+          text={ruffleOpen ? 'Stop' : 'Play'}
+          src={ruffleOpen ? getAssetPath('square.svg') : getAssetPath('play.svg')}
+          onClick={() => { launch_ruffle(selectedSwfPath) }}
+          disabled={selectedSwfPath == "" ? true : false} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-spoof-column"]}>
