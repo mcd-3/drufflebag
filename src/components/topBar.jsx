@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
@@ -10,6 +11,8 @@ import styles from './../styles/components/topBar.module.css';
 const TopBar = ({
   setSwfFiles
 }) => {
+  const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
+
   // TODO: Move this function
   const getAssetPath = assetFileName => {
     return `src/assets/${assetFileName}`;
@@ -37,9 +40,15 @@ const TopBar = ({
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-spoof-column"]}>
-        <input className={styles["topBar-spoof-checkbox"]} type='checkbox'/>
+        <input className={styles["topBar-spoof-checkbox"]} type='checkbox' onChange={(e) => { setGlobalSpoofEnabled(e.target.checked)}}/>
         <img className={styles["topBar-spoof-icon"]} src={getAssetPath('globe-demo.svg')}/>
-        <input className={styles["topBar-spoof-url-textbox"]} type='text' placeholder='Global Spoof Url...' alt="Global Spoof Url" />
+        <input
+          className={styles["topBar-spoof-url-textbox"]}
+          type='text'
+          placeholder='Global Spoof Url...'
+          alt="Global Spoof Url"
+          disabled={!globalSpoofEnabled}
+        />
       </div>
     </div>
   );

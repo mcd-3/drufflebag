@@ -111,6 +111,10 @@
     margin-right: 12px;
 }
 
+.topBar-spoof-url-textbox:disabled {
+    background-color: #e0e0e0;
+}
+
 .topBar-spoof-checkbox,
 .topBar-spoof-icon,
 .topBar-spoof-url-textbox {
