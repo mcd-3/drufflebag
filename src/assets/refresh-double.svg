@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24px"
+   height="24px"
+   stroke-width="1.5"
+   viewBox="0 0 24 24"
+   fill="none"
+   color="#000000"
+   version="1.1"
+   id="svg122"
+   sodipodi:docname="refresh-double.svg"
+   inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs126" />
+  <sodipodi:namedview
+     id="namedview124"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="25.897786"
+     inkscape:cx="9.5181882"
+     inkscape:cy="12.182509"
+     inkscape:window-width="1390"
+     inkscape:window-height="1035"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg122" />
+  <path
+     d="m 20.006347,8.4086096 c -1.315645,-3.0560433 -4.320094,-5.1917457 -7.81612,-5.1917457 -4.4207017,0 -8.055564,3.4150265 -8.4833022,7.7876191"
+     stroke="#000000"
+     stroke-width="1.28834"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path114" />
+  <path
+     d="m 16.45303,8.4086096 h 3.751193 c 0.282532,0 0.511526,-0.2324432 0.511526,-0.5191746 V 4.0821549"
+     stroke="#000000"
+     stroke-width="1.28834"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path116" />
+  <path
+     d="m 4.4163605,15.330938 c 1.3155771,3.056035 4.3200771,5.191746 7.8160675,5.191746 4.420694,0 8.0556,-3.415044 8.483321,-7.787619"
+     stroke="#000000"
+     stroke-width="1.28834"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path118" />
+  <path
+     d="M 7.9696428,15.330938 H 4.218451 c -0.2825073,0 -0.5115262,0.232417 -0.5115262,0.519175 v 3.80728"
+     stroke="#000000"
+     stroke-width="1.28834"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path120" />
+</svg>
