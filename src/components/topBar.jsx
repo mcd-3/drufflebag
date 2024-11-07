@@ -1,3 +1,4 @@
+import { invoke } from "@tauri-apps/api/core";
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -6,7 +7,9 @@ import styles from './../styles/components/topBar.module.css';
  *
  * @returns {}
  */
-const TopBar = () => {
+const TopBar = ({
+  setSwfFiles
+}) => {
   // TODO: Move this function
   const getAssetPath = assetFileName => {
     return `src/assets/${assetFileName}`;
@@ -16,7 +19,15 @@ const TopBar = () => {
     <div className={styles["topBar-root"]}>
       <div className={styles["topBar-file-column"]}>
         <IconButton className={styles["topBar-open-button"]} text="Open" src={getAssetPath('folder-demo.svg')} onClick={ () => { console.error('asd'); } }/>
-        <IconButton className={styles["topBar-refresh-button"]} text="Refresh" src={getAssetPath('folder-demo.svg')} onClick={ () => { console.error('sdf'); } }/>
+        <IconButton
+          className={styles["topBar-refresh-button"]}
+          text="Refresh"
+          src={getAssetPath('folder-demo.svg')}
+          onClick={async () => {
+            const files = await invoke("scan_directory");
+            setSwfFiles(files);
+          }}
+        />
         <IconButton className={styles["topBar-settings-button"]} text="Settings" src={getAssetPath('folder-demo.svg')} onClick={ () => { console.error('dfg'); } }/>
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>

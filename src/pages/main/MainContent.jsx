@@ -26,7 +26,9 @@ function MainContent() {
   return (
     <div>
       <div className="top-level-nav">
-        <TopBar />
+        <TopBar 
+          setSwfFiles={setSwfFiles}
+        />
       </div>
       <div className="swf-content-table">
         <SwfTable>
@@ -64,7 +66,7 @@ function MainContent() {
             </tr>
             <tr>
               <td><img src="public/avm1.svg"  width={32} height={32} /></td>
-              <td><button onClick={() => scan_directory()}>Red Ball</button></td>
+              <td><button onClick={() => greet()}>Red Ball</button></td>
               <td>Game (Select)</td>
               <td>123 kb</td>
               <td>April 20, 2024</td>
