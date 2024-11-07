@@ -42,7 +42,7 @@ function MainContent() {
                 return (
                   <tr>
                     <td><img src="public/avm1.svg" width={32} height={32} /></td>
-                    <td>{swf.split('/').pop()}</td>
+                    <td>{swf.path.split('/').pop()}</td>
                     <td>Game (Select)</td>
                     <td>253 kb</td>
                     <td>June 23, 2024</td>

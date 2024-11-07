@@ -6,6 +6,7 @@ mod data {
 use std::{ffi::OsStr, path::Path};
 use data::migrations::MigrationsHistory;
 use tauri_plugin_dialog::DialogExt;
+use serde_json::{json, Result, Value};
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -21,10 +22,10 @@ async fn open_ruffle(app: tauri::AppHandle) {
 }
 
 #[tauri::command]
-async fn scan_directory(app: tauri::AppHandle) -> Vec<String> {
+async fn scan_directory(app: tauri::AppHandle) -> Vec<Value> {
     let directory_path = app.dialog().file().blocking_pick_folder().unwrap();
 
-    let mut swf_files: Vec<String> = Vec::new();
+    let mut swf_files: Vec<Value> = Vec::new();
     let directory_path_str = directory_path.to_string();
 
     let entries = std::fs::read_dir(&directory_path_str).unwrap();
@@ -44,7 +45,11 @@ async fn scan_directory(app: tauri::AppHandle) -> Vec<String> {
                     Some(ext_str) => {
                         if ext_str == "swf" {
                             let full_path_str = format!("{}/{:?}", &directory_path_str, filename).replace("\"", "");
-                            swf_files.push(full_path_str);
+                            let swf_json = json!({
+                                "path": full_path_str,
+                            });
+
+                            swf_files.push(swf_json);
                         }
                     },
                     None => println!(""),
