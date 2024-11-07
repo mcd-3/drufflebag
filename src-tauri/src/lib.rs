@@ -47,6 +47,7 @@ async fn scan_directory(app: tauri::AppHandle) -> Vec<Value> {
                             let full_path_str = format!("{}/{:?}", &directory_path_str, filename).replace("\"", "");
                             let swf_json = json!({
                                 "path": full_path_str,
+                                "size": entry.metadata().unwrap().len(),
                             });
 
                             swf_files.push(swf_json);

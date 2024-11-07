@@ -17,6 +17,21 @@ function MainContent() {
     await invoke("open_ruffle");
   }
 
+  const formatBytes = (bytes, decimals = 2) => {
+    // This should never be less than 0, but check just in case
+    if (bytes <= 0) {
+      return '0 Bytes'
+    }
+
+    const kilo = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+
+    const sizesIndex = Math.floor(Math.log(bytes) / Math.log(kilo));
+
+    return `${parseFloat((bytes / Math.pow(kilo, sizesIndex)).toFixed(dm))} ${sizes[sizesIndex]}`;
+}
+
   return (
     <div>
       <div className="top-level-nav">
@@ -39,12 +54,13 @@ function MainContent() {
           <tbody>
             {
               swfFiles.map((swf) => {
+                console.log(swf)
                 return (
                   <tr>
                     <td><img src="public/avm1.svg" width={32} height={32} /></td>
                     <td>{swf.path.split('/').pop()}</td>
                     <td>Game (Select)</td>
-                    <td>253 kb</td>
+                    <td>{formatBytes(swf.size)}</td>
                     <td>June 23, 2024</td>
                     <td>ducklife.com</td>
                   </tr>
