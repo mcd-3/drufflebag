@@ -21,6 +21,16 @@
     border-radius: 3px;
 }
 
+.iconButton-button:disabled {
+    background-color: #ffffff00;
+    border: none;
+    cursor: default;
+}
+
+.iconButton-button:disabled > .icon {
+    filter: brightness(0) saturate(100%) invert(78%) sepia(14%) saturate(0%) hue-rotate(266deg) brightness(96%) contrast(83%);
+}
+
 .icon {
     display: block;
     margin-left: auto;

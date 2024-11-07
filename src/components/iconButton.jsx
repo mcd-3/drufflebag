@@ -13,11 +13,12 @@ const IconButton = ({
   text,
   src,
   className,
+  disabled = false,
   onClick = () => {},
 }) => {
   return (
     <div className={className}>
-      <button onClick={() => onClick()} className={styles['iconButton-button']}>
+      <button onClick={() => onClick()} className={styles['iconButton-button']} disabled={disabled}>
         <img className={styles.icon} src={src}/>
         <p className={styles.text}>{text}</p>
       </button>

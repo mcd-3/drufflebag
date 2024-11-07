@@ -45,11 +45,13 @@ const TopBar = ({
         <IconButton
           className={styles["topBar-pause-button"]}
           text="Play"
-          src={getAssetPath('play.svg')} />
+          src={getAssetPath('play.svg')}
+          disabled={true} />
         <IconButton
           className={styles["topBar-stop-button"]}
           text="Stop"
-          src={getAssetPath('square.svg')} />
+          src={getAssetPath('square.svg')}
+          disabled={true} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-spoof-column"]}>
