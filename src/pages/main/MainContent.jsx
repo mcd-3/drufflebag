@@ -17,12 +17,6 @@ function MainContent() {
     await invoke("open_ruffle");
   }
 
-  const scan_directory = async () => {
-    const files = await invoke("scan_directory");
-    setSwfFiles(files);
-    // console.error(i);
-  }
-
   return (
     <div>
       <div className="top-level-nav">
@@ -43,18 +37,19 @@ function MainContent() {
             </tr>
           </thead>
           <tbody>
-            {swfFiles.map((swf) => {
-              return (
-                <tr>
-                  <td><img src="public/avm1.svg" width={32} height={32} /></td>
-                  <td>{swf.split('/').pop()}</td>
-                  <td>Game (Select)</td>
-                  <td>253 kb</td>
-                  <td>June 23, 2024</td>
-                  <td>ducklife.com</td>
-                </tr>
-              )
-            })
+            {
+              swfFiles.map((swf) => {
+                return (
+                  <tr>
+                    <td><img src="public/avm1.svg" width={32} height={32} /></td>
+                    <td>{swf.split('/').pop()}</td>
+                    <td>Game (Select)</td>
+                    <td>253 kb</td>
+                    <td>June 23, 2024</td>
+                    <td>ducklife.com</td>
+                  </tr>
+                )
+              })
             }
             <tr>
               <td><img src="public/avm2.svg"  width={32} height={32} /></td>
