@@ -109,6 +109,16 @@
     height: 24px;
     width: 100%;
     margin-right: 12px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    font-size: 12px;
+    border: 1px solid rgb(182, 182, 182);
+    border-radius: 2px;
+}
+
+.topBar-spoof-url-textbox::placeholder {
+    font-style: italic;
 }
 
 .topBar-spoof-url-textbox:disabled {
@@ -124,6 +134,10 @@
 
 /* TODO: Uncomment when light/dark switch is implemented */
 /* @media (prefers-color-scheme: dark) {
+    .topBar-spoof-url-textbox {
+        border: 1px solid rgb(38, 38, 38);
+    }
+
     .topBar-spoof-url-textbox:disabled {
         background-color: #4e4e4e;
     }
