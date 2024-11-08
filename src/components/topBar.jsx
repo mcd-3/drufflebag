@@ -74,7 +74,13 @@ const TopBar = ({
           className={styles["topBar-pause-button"]}
           text={ruffleOpen ? 'Stop' : 'Play'}
           src={ruffleOpen ? getAssetPath('square.svg') : getAssetPath('play.svg')}
-          onClick={() => { launch_ruffle(selectedSwfPath) }}
+          onClick={() => {
+            if (ruffleOpen) {
+              setRuffleOpen(false);
+            } else {
+              launch_ruffle(selectedSwfPath);
+            }
+          }}
           disabled={selectedSwfPath == "" ? true : false} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
