@@ -33,14 +33,17 @@ const TopBar = ({
           text="Open"
           src={getAssetPath('folder.svg')}
           onClick={async () => {
-            const files = await invoke("scan_directory");
+            const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
             setSwfFiles(files);
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}
           text="Refresh"
           src={getAssetPath('refresh-double.svg')}
-          onClick={() => { console.error('dfg'); }} />
+          onClick={async () => {
+            const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
+            setSwfFiles(files);
+          }} />
         <IconButton
           className={styles["topBar-settings-button"]}
           text="Settings"

@@ -5,7 +5,7 @@ mod data {
 
 use std::{ffi::OsStr, path::Path};
 use data::migrations::MigrationsHistory;
-use tauri_plugin_dialog::DialogExt;
+use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Result, Value};
 
 #[tauri::command]
@@ -22,8 +22,12 @@ fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
 }
 
 #[tauri::command]
-async fn scan_directory(app: tauri::AppHandle) -> Vec<Value> {
-    let directory_path = app.dialog().file().blocking_pick_folder().unwrap();
+async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> Vec<Value> {
+    let directory_path = if cached_directory_path == "" {
+        app.dialog().file().blocking_pick_folder().unwrap()
+    } else {
+        FilePath::from(Path::new(&cached_directory_path))
+    };
 
     let mut swf_files: Vec<Value> = Vec::new();
     let directory_path_str = directory_path.to_string();
@@ -32,7 +36,6 @@ async fn scan_directory(app: tauri::AppHandle) -> Vec<Value> {
 
     // TODO: Make this multi-threaded for better performance
     // TODO: Read the file and get the AVM version and file size
-    // TODO: Return array of JSON objects { path: str, size: ?, avm: int }
     for entry in entries {
         match entry {
             Ok(entry) => {
