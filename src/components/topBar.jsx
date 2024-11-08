@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { BroadcastChannel } from 'broadcast-channel';
+import { CACHED_DIRECTORY_KEY } from './../utils/localStorageKeys.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -13,8 +14,6 @@ const TopBar = ({
   setSwfFiles,
   selectedSwfPath
 }) => {
-  const CACHED_DIRECTORY_KEY = "cachedSwfDirectory";
-
   const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
