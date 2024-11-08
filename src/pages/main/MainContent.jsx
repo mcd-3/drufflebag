@@ -31,7 +31,7 @@ function MainContent() {
     const sizesIndex = Math.floor(Math.log(bytes) / Math.log(kilo));
 
     return `${parseFloat((bytes / Math.pow(kilo, sizesIndex)).toFixed(dm))} ${sizes[sizesIndex]}`;
-}
+  }
 
   return (
     <div>
