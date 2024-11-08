@@ -22,7 +22,7 @@ fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
 }
 
 #[tauri::command]
-async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> Vec<Value> {
+async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
         app.dialog().file().blocking_pick_folder().unwrap()
     } else {
@@ -65,7 +65,12 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
         }
     }
 
-    swf_files
+    let return_json = json!({
+        "parent_dir": directory_path_str,
+        "swfs": swf_files
+    });
+
+    return_json
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

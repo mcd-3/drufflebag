@@ -12,6 +12,8 @@ const TopBar = ({
   setSwfFiles,
   selectedSwfPath
 }) => {
+  const CACHED_DIRECTORY_KEY = "cachedSwfDirectory";
+
   const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
@@ -34,15 +36,23 @@ const TopBar = ({
           src={getAssetPath('folder.svg')}
           onClick={async () => {
             const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
-            setSwfFiles(files);
+            if (files.swfs.length > 0) {
+              localStorage.setItem(CACHED_DIRECTORY_KEY, files.parent_dir);
+            }
+            setSwfFiles(files.swfs);
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}
           text="Refresh"
           src={getAssetPath('refresh-double.svg')}
           onClick={async () => {
-            const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
-            setSwfFiles(files);
+            const directory = localStorage.getItem(CACHED_DIRECTORY_KEY);
+            if (!directory) {
+              // TODO: Show a warning alert
+              return;
+            }
+            const files = await invoke("scan_directory", { cachedDirectoryPath: directory });
+            setSwfFiles(files.swfs);
           }} />
         <IconButton
           className={styles["topBar-settings-button"]}
