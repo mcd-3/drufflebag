@@ -11,29 +11,42 @@ function EmulationContent() {
     script.src = "ruffle-core/ruffle.js";
     script.async = true;
 
+    script.onload = () => {
+      window.RufflePlayer = window.RufflePlayer || {};
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+
+      player.config = {
+        autoplay: "auto",
+        // and so on...
+      }
+
+      const container = document.getElementById("ruffle-container");
+      container.appendChild(player);
+
+      // TODO: There's a bug where a duplicate instance of Ruffle is created
+      //        Remove it manually for now until the bug is found and fixed
+      try {
+        const duplicate = document.getElementsByTagName('ruffle-player-1');
+        console.log(duplicate);
+        duplicate[0].parentNode.removeChild(duplicate[0])
+      } catch (e) { }
+
+      player.load("/the-worlds-hardest-game.swf");
+    };
+
     document.body.appendChild(script);
-  }
 
-  const play = () => {
-    window.RufflePlayer = window.RufflePlayer || {};
-    window.addEventListener("load", (event) => {
-        const ruffle = window.RufflePlayer.newest();
-        const player = ruffle.createPlayer();
-
-        player.config = {
-          autoplay: "auto",
-          // and so on...
-        }
-
-        const container = document.getElementById("ruffle-container");
-        container.appendChild(player);
-        player.load("/the-worlds-hardest-game.swf");
-    });
+    return script;
   }
 
   useEffect(() => {
-    mountRuffle();
-    play();
+    const ruffleScript = mountRuffle();
+
+    return () => {
+      // Remove script tag from body
+      document.body.removeChild(ruffleScript);
+    };
   }, []);
 
   return (
