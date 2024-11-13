@@ -1,12 +1,15 @@
 import { BroadcastChannel } from 'broadcast-channel';
 
+const GLOBAL_BC = "drufflebag_channel";
+const EVENT_CLOSE_EMULATION = "close_emulation";
+
 /**
  * Gets the global BroadcastChannel used within the application
  *
  * @returns {BroadcastChannel} Global BroadcastChannel 
  */
 const getBroadcastChannel = () => {
-  return new BroadcastChannel("drufflebag_channel");
+  return new BroadcastChannel(GLOBAL_BC);
 };
 
 /**
@@ -26,7 +29,7 @@ const closeBroadcastChanel = ({ broadcastChannel }) => {
  */
 const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
   broadcastChannel.onmessage = (event) => {
-    if (event == "close_ruffle") {
+    if (event == EVENT_CLOSE_EMULATION) {
       onEmulatorClose();
     }
   };
