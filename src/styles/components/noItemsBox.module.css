@@ -18,12 +18,13 @@
 }
 
 .noItemsBox-icon {
-    padding-top: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     filter: brightness(0) saturate(100%) invert(38%) sepia(24%) saturate(0%) hue-rotate(169deg) brightness(91%) contrast(90%);;
 }
 
 .noItemsBox-subtext {
-    padding-top: 32px;
+    padding-top: 16px;
     padding-bottom: 32px;
     color: rgb(97, 97, 97);
 }
