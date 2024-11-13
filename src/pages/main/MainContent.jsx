@@ -4,6 +4,7 @@ import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
 import SwfTable from "../../components/swfTable";
+import NoItemsBox from "../../components/noItemsBox";
 import {
   createColumnHelper,
   flexRender,
@@ -33,7 +34,12 @@ function MainContent() {
         />
       </div>
       <div className="swf-content-table">
-        <SwfTable swfFiles={swfFiles} setSelectedSwfPath={setSelectedSwfPath}/>
+        {swfFiles.length > 0 
+          ?
+            <SwfTable swfFiles={swfFiles} setSelectedSwfPath={setSelectedSwfPath}/>
+          :
+            <NoItemsBox />
+        }
       </div>
     </div>
   );
