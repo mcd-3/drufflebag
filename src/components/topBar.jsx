@@ -26,7 +26,6 @@ const TopBar = ({
   });
 
   const writeJsonCache = async (swfFiles) => {
-    console.log(swfFiles);
     await invoke("cache_swfs", { swfs: swfFiles });
   }
 
@@ -62,6 +61,7 @@ const TopBar = ({
             }
             const files = await invoke("scan_directory", { cachedDirectoryPath: directory });
             setSwfFiles(files.swfs);
+            writeJsonCache(files.swfs);
           }} />
         <IconButton
           className={styles["topBar-settings-button"]}
