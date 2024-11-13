@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { formatBytes } from './../../utils/bytes.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -16,21 +17,6 @@ function MainContent() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
     // setGreetMsg(await invoke("greet", { name }));
     await invoke("open_ruffle");
-  }
-
-  const formatBytes = (bytes, decimals = 2) => {
-    // This should never be less than 0, but check just in case
-    if (bytes <= 0) {
-      return '0 Bytes'
-    }
-
-    const kilo = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
-
-    const sizesIndex = Math.floor(Math.log(bytes) / Math.log(kilo));
-
-    return `${parseFloat((bytes / Math.pow(kilo, sizesIndex)).toFixed(dm))} ${sizes[sizesIndex]}`;
   }
 
   return (
