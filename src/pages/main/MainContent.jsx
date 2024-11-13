@@ -1,16 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
 import SwfTable from "../../components/swfTable";
 import NoItemsBox from "../../components/noItemsBox";
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
 
 function MainContent() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -24,6 +18,20 @@ function MainContent() {
     // setGreetMsg(await invoke("greet", { name }));
     await invoke("open_ruffle");
   }
+
+  useEffect(() => {
+    invoke('get_cached_swfs').then((cache, err) => {
+      if (!err && cache.length > 0) {
+        setSwfFiles(cache);
+      } else {
+        setSwfFiles([]);
+      }
+    });
+
+    return () => {
+
+    };
+  }, []);
 
   return (
     <div>

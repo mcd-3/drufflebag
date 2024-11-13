@@ -26,8 +26,19 @@ async fn cache_swfs(swfs: Vec<Value>) {
 }
 
 #[tauri::command]
-async fn get_cached_swfs() {
-
+async fn get_cached_swfs() -> Vec<Value> {
+    let path = Path::new("./.cached_swf.json");
+    if path.exists() {
+        let file = File::open(path)
+            .expect("file should open read only");
+        let json: serde_json::Value =
+            serde_json::from_reader(file).unwrap();
+        println!("{}", json);
+        json.as_array().unwrap().to_vec()
+    } else {
+        // File does not exist so nothing is cached
+        Vec::new()
+    }
 }
 
 #[tauri::command]
@@ -102,7 +113,7 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![open_ruffle, scan_directory, cache_swfs])
+        .invoke_handler(tauri::generate_handler![open_ruffle, scan_directory, cache_swfs, get_cached_swfs])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
