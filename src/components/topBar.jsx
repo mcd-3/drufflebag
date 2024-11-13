@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { getBroadcastChannel, injectOnEmulatorClose } from './../utils/broadcast.js';
+import { getAssetPath } from './../utils/assets.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -23,11 +24,6 @@ const TopBar = ({
       setRuffleOpen(false);
     }
   });
-
-  // TODO: Move this function
-  const getAssetPath = assetFileName => {
-    return `src/assets/${assetFileName}`;
-  };
 
   function launch_ruffle(swfName) {
     invoke("open_ruffle", { swfName });
