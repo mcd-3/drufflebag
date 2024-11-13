@@ -32,7 +32,6 @@ const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
   };
 }
 
-
 export {
   getBroadcastChannel,
   closeBroadcastChanel,
