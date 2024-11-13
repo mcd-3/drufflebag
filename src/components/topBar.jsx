@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { BroadcastChannel } from 'broadcast-channel';
+import { getBroadcastChannel, injectOnEmulatorClose } from './../utils/broadcast.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -17,12 +17,12 @@ const TopBar = ({
   const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
-  const bc = new BroadcastChannel("drufflebag_channel");
-  bc.onmessage = (event) => {
-    if (event == "close_ruffle") {
+  injectOnEmulatorClose({
+    broadcastChannel: getBroadcastChannel(),
+    onEmulatorClose: () => {
       setRuffleOpen(false);
     }
-  };
+  });
 
   // TODO: Move this function
   const getAssetPath = assetFileName => {

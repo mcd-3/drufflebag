@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
-import { BroadcastChannel } from 'broadcast-channel';
 import "./../../styles/Emulation.css";
 
 function EmulationContent() {
-  const bc = new BroadcastChannel("drufflebag_channel");
-
   const mountRuffle = () => {
     const script = document.createElement("script");
 
