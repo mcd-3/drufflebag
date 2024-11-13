@@ -71,6 +71,10 @@
     width: 118px;
 }
 
+.active {
+    background-color: red !important;
+}
+
 /* TODO: Uncomment when light/dark switch is implemented */
 /* @media (prefers-color-scheme: dark) {
     .swfTable-root > table > thead {

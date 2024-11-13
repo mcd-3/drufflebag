@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from '../styles/components/swfTable.module.css';
 import { formatBytes } from './../utils/bytes.js';
 import {
@@ -8,6 +9,8 @@ import {
 } from '@tanstack/react-table'
 
 const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
+  const [activeIndex, setActiveIndex] = useState();
+
   const columnHelper = createColumnHelper()
 
   const columns = [
@@ -68,7 +71,13 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id} onClick={() => setSelectedSwfPath(row.original.path)}>
+            <tr key={row.id} className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]} onClick={
+              () => {
+                setSelectedSwfPath(row.original.path);
+                setActiveIndex(row.id);
+                console.log(row)
+              }
+            }>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
