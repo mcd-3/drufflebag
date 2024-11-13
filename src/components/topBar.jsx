@@ -25,6 +25,11 @@ const TopBar = ({
     }
   });
 
+  const writeJsonCache = async (swfFiles) => {
+    console.log(swfFiles);
+    await invoke("cache_swfs", { swfs: swfFiles });
+  }
+
   function launch_ruffle(swfName) {
     invoke("open_ruffle", { swfName });
     setRuffleOpen(true);
@@ -43,6 +48,7 @@ const TopBar = ({
               localStorage.setItem(CACHED_DIRECTORY_KEY, files.parent_dir);
             }
             setSwfFiles(files.swfs);
+            writeJsonCache(files.swfs);
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}
