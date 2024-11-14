@@ -3,7 +3,7 @@ mod data {
     pub mod migrations;
 }
 
-use std::{ffi::OsStr, path::Path};
+use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
 use data::migrations::MigrationsHistory;
 use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Result, Value};
@@ -11,6 +11,34 @@ use serde_json::{json, Result, Value};
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+#[tauri::command]
+async fn cache_swfs(swfs: Vec<Value>) {
+    let path = Path::new("./.cached_swf.json");
+    if path.exists() {
+        // Delete the existing file first if it exists
+        std::fs::remove_file(path).unwrap();
+    }
+    let file = File::create(path).unwrap();
+    let mut writer = BufWriter::new(file);
+    serde_json::to_writer(&mut writer, &swfs).unwrap();
+}
+
+#[tauri::command]
+async fn get_cached_swfs() -> Vec<Value> {
+    let path = Path::new("./.cached_swf.json");
+    if path.exists() {
+        let file = File::open(path)
+            .expect("file should open read only");
+        let json: serde_json::Value =
+            serde_json::from_reader(file).unwrap();
+        println!("{}", json);
+        json.as_array().unwrap().to_vec()
+    } else {
+        // File does not exist so nothing is cached
+        Vec::new()
+    }
 }
 
 #[tauri::command]
@@ -85,7 +113,7 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![open_ruffle, scan_directory])
+        .invoke_handler(tauri::generate_handler![open_ruffle, scan_directory, cache_swfs, get_cached_swfs])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

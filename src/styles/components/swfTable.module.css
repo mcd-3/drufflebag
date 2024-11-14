@@ -39,7 +39,7 @@
 }
 
 .swfTable-root > table > tbody > tr {
-    height: 36px;
+    height: 38px;
 }
 
 .swfTable-root > table > tbody > tr > td {
@@ -48,6 +48,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.swfTable-root > table > tbody > tr > td > img {
+    display: block;
+    margin-right: auto;
 }
 
 .swfTable-root > table > tbody > tr:nth-child(2n) {
@@ -69,6 +74,11 @@
 
 .swfTable-root > table > thead > tr > th:nth-child(5) {
     width: 118px;
+}
+
+.active {
+    background-color: rgb(12, 97, 255) !important;
+    color: white;
 }
 
 /* TODO: Uncomment when light/dark switch is implemented */

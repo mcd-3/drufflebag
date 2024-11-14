@@ -27,3 +27,4 @@ dist-ssr
 # Project specific files
 ruffle-core/*
 *.swf
+.cached_swf.json
