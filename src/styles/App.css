@@ -127,7 +127,7 @@ body {
 }
 
 .swf-content-table {
-  overflow: auto;
+  overflow-y: auto;
   position: absolute;
   top: 64px;
   bottom: 0px;
