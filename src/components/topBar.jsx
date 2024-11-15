@@ -110,7 +110,9 @@ const TopBar = ({
           className={styles["topBar-spoof-checkbox"]}
           type='checkbox'
           checked={globalSpoof.isEnabled}
-          onChange={(e) => { setGlobalSpoof({ url: globalSpoof.url, isEnabled: e.target.checked}); console.log(e.target.checked) }}/>
+          onChange={(e) => {
+            setGlobalSpoof({ url: globalSpoof.url, isEnabled: e.target.checked});
+          }}/>
         <img className={styles["topBar-spoof-icon"]} src={getAssetPath('globe.svg')}/>
         <input
           className={styles["topBar-spoof-url-textbox"]}
@@ -119,7 +121,9 @@ const TopBar = ({
           alt="Global Spoof Url"
           disabled={!globalSpoof.isEnabled}
           value={globalSpoof.url}
-          onChange={(e) => { setGlobalSpoof({ url: e.target.value, isEnabled: globalSpoof.isEnabled }) }}
+          onChange={(e) => {
+            setGlobalSpoof({ url: e.target.value, isEnabled: globalSpoof.isEnabled })
+          }}
         />
       </div>
     </div>
