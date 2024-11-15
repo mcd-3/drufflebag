@@ -41,7 +41,7 @@ function MainContent() {
           selectedSwfPath={selectedSwfPath}
         />
       </div>
-      <div className="swf-content-table">
+      <div className={`${swfFiles.length > 0 ? "has-items" : "no-items"} swf-content-table`}>
         {swfFiles.length > 0 
           ?
             <SwfTable swfFiles={swfFiles} setSelectedSwfPath={setSelectedSwfPath}/>

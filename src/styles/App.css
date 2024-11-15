@@ -118,4 +118,28 @@ button {
 body {
   margin: 0 0 0 0;
   font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+.top-level-nav {
+  height: 64px;
+  margin-bottom: 64px;
+}
+
+.swf-content-table {
+  position: absolute;
+  top: 72px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+.has-items {
+  overflow-y: auto;
+}
+
+.no-items {
+  overflow-y: hidden;
 }
