@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { getBroadcastChannel, injectOnEmulatorClose } from './../utils/broadcast.js';
+import { setCachedDirectory, getCachedDirectory } from './../utils/storage.js';
 import { getAssetPath } from './../utils/assets.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
@@ -44,7 +45,7 @@ const TopBar = ({
           onClick={async () => {
             const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
             if (files.swfs.length > 0) {
-              localStorage.setItem(CACHED_DIRECTORY_KEY, files.parent_dir);
+              setCachedDirectory(files.parent_dir);
             }
             setSwfFiles(files.swfs);
             writeJsonCache(files.swfs);
@@ -54,7 +55,7 @@ const TopBar = ({
           text="Refresh"
           src={getAssetPath('refresh-double.svg')}
           onClick={async () => {
-            const directory = localStorage.getItem(CACHED_DIRECTORY_KEY);
+            const directory = getCachedDirectory();
             if (!directory) {
               // TODO: Show a warning alert
               return;
