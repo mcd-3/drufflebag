@@ -6,6 +6,14 @@
     display: block;
 }
 
+.centered {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .row {
     width: 100%;
     text-align: center;
@@ -13,18 +21,16 @@
 }
 
 .noItemsBox-header {
-    padding-top: 32px;
-    color: rgb(97, 97, 97)
+    color: rgb(133, 133, 133)
 }
 
 .noItemsBox-icon {
     padding-top: 16px;
     padding-bottom: 16px;
-    filter: brightness(0) saturate(100%) invert(38%) sepia(24%) saturate(0%) hue-rotate(169deg) brightness(91%) contrast(90%);;
+    filter: brightness(0) saturate(100%) invert(57%) sepia(1%) saturate(0%) hue-rotate(176deg) brightness(91%) contrast(87%);
 }
 
 .noItemsBox-subtext {
-    padding-top: 16px;
-    padding-bottom: 32px;
-    color: rgb(97, 97, 97);
+    color: rgb(133, 133, 133);
+    font-style: italic;
 }
