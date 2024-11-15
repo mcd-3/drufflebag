@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { getBroadcastChannel, injectOnEmulatorClose } from './../utils/broadcast.js';
-import { setCachedDirectory, getCachedDirectory } from './../utils/storage.js';
+import {
+  setCachedDirectory,
+  getCachedDirectory,
+  setGlobalSpoofUrl,
+  getGlobalSpoofUrl
+} from './../utils/storage.js';
 import { getAssetPath } from './../utils/assets.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
@@ -15,7 +20,7 @@ const TopBar = ({
   setSwfFiles,
   selectedSwfPath
 }) => {
-  const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
+  const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
   injectOnEmulatorClose({
@@ -24,6 +29,17 @@ const TopBar = ({
       setRuffleOpen(false);
     }
   });
+
+  useEffect(() => {
+    const globalSpoofStored = getGlobalSpoofUrl();
+
+    if (globalSpoofStored) {
+      setGlobalSpoof({
+        isEnabled: globalSpoofStored.isEnabled,
+        url: globalSpoofStored.urlSpoof,
+      });
+    }
+  }, [])
 
   const writeJsonCache = async (swfFiles) => {
     await invoke("cache_swfs", { swfs: swfFiles });
@@ -80,20 +96,30 @@ const TopBar = ({
               setRuffleOpen(false);
             } else {
               launch_ruffle(selectedSwfPath);
+              setGlobalSpoofUrl({
+                isEnabled: globalSpoof.isEnabled,
+                urlSpoof: globalSpoof.url,
+              });
             }
           }}
           disabled={selectedSwfPath == "" ? true : false} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-spoof-column"]}>
-        <input className={styles["topBar-spoof-checkbox"]} type='checkbox' onChange={(e) => { setGlobalSpoofEnabled(e.target.checked)}}/>
+        <input
+          className={styles["topBar-spoof-checkbox"]}
+          type='checkbox'
+          checked={globalSpoof.isEnabled}
+          onChange={(e) => { setGlobalSpoof({ url: globalSpoof.url, isEnabled: e.target.checked}); console.log(e.target.checked) }}/>
         <img className={styles["topBar-spoof-icon"]} src={getAssetPath('globe.svg')}/>
         <input
           className={styles["topBar-spoof-url-textbox"]}
           type='text'
           placeholder='Global Spoof Url...'
           alt="Global Spoof Url"
-          disabled={!globalSpoofEnabled}
+          disabled={!globalSpoof.isEnabled}
+          value={globalSpoof.url}
+          onChange={(e) => { setGlobalSpoof({ url: e.target.value, isEnabled: globalSpoof.isEnabled }) }}
         />
       </div>
     </div>
