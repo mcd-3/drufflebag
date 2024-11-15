@@ -15,7 +15,6 @@ const TopBar = ({
   setSwfFiles,
   selectedSwfPath
 }) => {
-  const CACHED_DIRECTORY_KEY = "cachedSwfDirectory";
   const [globalSpoofEnabled, setGlobalSpoofEnabled] = useState(false);
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
