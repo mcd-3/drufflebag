@@ -1,102 +1,20 @@
-/* Table + Root Styles */
-.swfTable-root {
-    display: flex;
-    width: 100%;
-}
-
-.swfTable-root > table {
-    text-align: start;
+table {
+    min-height: 300px;
+    height: 100%;
     width: 100%;
     border-collapse: collapse;
 }
 
-/* Table Header Styles */
-.swfTable-root > table > thead {
-    text-align: left;
-    background-color: rgb(73, 73, 73);
-    font-weight: bold;
-    font-size: 12px;
+thead {
+    top: 0;
+    position: sticky;
 }
 
-.swfTable-root > table > thead > tr > th {
-    padding-left: 4px;
-    padding-bottom: 4px;
-    padding-top: 4px;
-    border-left: solid 2px rgb(175, 175, 175);
-    color: white;
-    height: 20px;
+td {
+    padding: 5px;
+    margin: 0px;
+    border: 1px solid gray;
 }
-
-.swfTable-root > table > thead > tr > th:nth-child(1) {
-    border-left: none;
+tr:last-child td {
+    border-bottom: none;
 }
-
-/* Table Body Styles */
-.swfTable-root > table > tbody {
-    text-align: left;
-    background-color: rgb(255, 255, 255);
-    font-size: 12px;
-}
-
-.swfTable-root > table > tbody > tr {
-    height: 38px;
-}
-
-.swfTable-root > table > tbody > tr > td {
-    padding-left: 4px;
-    max-width: 100px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.swfTable-root > table > tbody > tr > td > img {
-    display: block;
-    margin-right: auto;
-}
-
-.swfTable-root > table > tbody > tr:nth-child(2n) {
-    background-color: rgb(231, 231, 231);
-}
-
-/* Table Header Sizes */
-.swfTable-root > table > thead > tr > th:nth-child(1) {
-    width: 38px;
-}
-
-.swfTable-root > table > thead > tr > th:nth-child(3) {
-    width: 96px;
-}
-
-.swfTable-root > table > thead > tr > th:nth-child(4) {
-    width: 72px;
-}
-
-.swfTable-root > table > thead > tr > th:nth-child(5) {
-    width: 118px;
-}
-
-.active {
-    background-color: rgb(12, 97, 255) !important;
-    color: white;
-}
-
-/* TODO: Uncomment when light/dark switch is implemented */
-/* @media (prefers-color-scheme: dark) {
-    .swfTable-root > table > thead {
-        text-align: left;
-        background-color: rgb(29, 29, 29);
-    }
-
-    .swfTable-root > table > thead > tr > th {
-        border-left: solid 2px rgb(90, 90, 90);
-    }
-
-    .swfTable-root > table > tbody {
-        background-color: rgb(35, 35, 35);
-    }
-
-    .swfTable-root > table > tbody > tr:nth-child(2n) {
-        background-color: rgb(49, 49, 49);
-    }
-} */
