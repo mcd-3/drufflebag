@@ -88,8 +88,7 @@
 
 .swfTable-root > tbody > tr > td {
     padding-left: 4px;
-    height: 40px;
-    max-height: 40px;
+    max-height: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
