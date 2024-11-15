@@ -23,7 +23,7 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
       header: 'Name',
     }),
     columnHelper.accessor('type', {
-      cell: info => 'Game',
+      cell: info => 'Animation',
       header: 'Type',
     }),
     columnHelper.accessor('size', {
