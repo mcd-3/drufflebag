@@ -51,7 +51,7 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
   })
 
   return (
-    <table>
+    <table className={styles['swfTable-root']}>
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
