@@ -3,7 +3,8 @@
   "identifier": "default",
   "description": "Capability for the main window",
   "windows": [
-    "main"
+    "main",
+    "Ruffle"
   ],
   "permissions": [
     "core:default",
@@ -11,6 +12,7 @@
     "sql:default",
     "sql:allow-execute",
     "dialog:default",
-    "dialog:allow-open"
+    "dialog:allow-open",
+    "core:window:allow-set-size"
   ]
 }

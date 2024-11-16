@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import "./../../styles/Emulation.css";
 
 function EmulationContent() {
@@ -16,7 +17,6 @@ function EmulationContent() {
       player.config = {
         autoplay: "auto",
         splashScreen: false,
-        // and so on...
       }
 
       const container = document.getElementById("ruffle-container");
@@ -31,6 +31,13 @@ function EmulationContent() {
       } catch (e) { }
 
       player.load("/the-worlds-hardest-game.swf");
+
+      player.addEventListener('loadedmetadata', () => {
+        console.info(player.metadata);
+        if (player.metadata.width && player.metadata.height) {
+          getCurrentWindow().setSize(new LogicalSize(player.metadata.width, player.metadata.height));
+        }
+      })
     };
 
     document.body.appendChild(script);
