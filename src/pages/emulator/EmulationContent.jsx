@@ -15,6 +15,7 @@ function EmulationContent() {
 
       player.config = {
         autoplay: "auto",
+        splashScreen: false,
         // and so on...
       }
 
