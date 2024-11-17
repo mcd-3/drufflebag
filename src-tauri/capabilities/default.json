@@ -13,6 +13,7 @@
     "sql:allow-execute",
     "dialog:default",
     "dialog:allow-open",
-    "core:window:allow-set-size"
+    "core:window:allow-set-size",
+    "fs:allow-copy-file"
   ]
 }

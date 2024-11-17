@@ -104,6 +104,13 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
     return_json
 }
 
+#[tauri::command]
+fn copy_to_public(swf_absolute_path: &str) {
+    let pwd = std::env::current_dir().unwrap();
+    println!("{}", pwd.into_os_string().into_string().unwrap());
+    std::fs::copy(swf_absolute_path, "./../public/play.temp.swf");
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let db_migrations = MigrationsHistory::migrations();
@@ -116,7 +123,14 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![open_ruffle, open_settings, scan_directory, cache_swfs, get_cached_swfs])
+        .invoke_handler(tauri::generate_handler![
+            open_ruffle,
+            open_settings,
+            scan_directory,
+            cache_swfs,
+            get_cached_swfs,
+            copy_to_public
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

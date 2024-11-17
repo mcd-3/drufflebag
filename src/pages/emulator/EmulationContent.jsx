@@ -30,7 +30,7 @@ function EmulationContent() {
         duplicate[0].parentNode.removeChild(duplicate[0])
       } catch (e) { }
 
-      player.load("/the-worlds-hardest-game.swf");
+      player.load("/public/play.temp.swf");
 
       player.addEventListener('loadedmetadata', () => {
         console.info(player.metadata);
