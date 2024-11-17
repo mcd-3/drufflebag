@@ -6,7 +6,10 @@ import "./../../styles/Emulation.css";
 
 function EmulationContent() {
   const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
-    const confirmed = await confirm('Are you sure?');
+    const confirmed = await confirm(
+      'Any unsaved changes will be lost.',
+      { title: 'Stop emulation?', kind: 'warning' }
+    );
     if (!confirmed) {
       event.preventDefault();
     } else {
