@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
-import { getBroadcastChannel, evtCloseEmulation, closeBroadcastChanel } from './../../utils/broadcast.js';
+import {
+  getBroadcastChannel,
+  evtCloseEmulation,
+  closeBroadcastChanel,
+  evtUpdatePlayButton,
+  injectOnEmulatorClose,
+} from './../../utils/broadcast.js';
 import "./../../styles/Emulation.css";
 
 function EmulationContent() {
@@ -15,7 +21,22 @@ function EmulationContent() {
     } else {
       const broadcastChannel = getBroadcastChannel();
       evtCloseEmulation({ broadcastChannel });
+      evtUpdatePlayButton({ broadcastChannel: getBroadcastChannel() });
       closeBroadcastChanel({ broadcastChannel });
+    }
+  });
+
+  injectOnEmulatorClose({
+    broadcastChannel: getBroadcastChannel(),
+    onEmulatorClose: async () => {
+      const confirmed = await confirm(
+        'Any unsaved changes will be lost.',
+        { title: 'Stop emulation?', kind: 'warning' }
+      );
+      if (confirmed) {
+        evtUpdatePlayButton({ broadcastChannel: getBroadcastChannel() });
+        getCurrentWindow().destroy();
+      }
     }
   });
 

@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { getBroadcastChannel, injectOnEmulatorClose } from './../utils/broadcast.js';
+import {
+  getBroadcastChannel,
+  injectOnUpdatePlayButton,
+  evtCloseEmulation,
+} from './../utils/broadcast.js';
 import {
   setCachedDirectory,
   getCachedDirectory,
@@ -23,9 +27,9 @@ const TopBar = ({
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
-  injectOnEmulatorClose({
+  injectOnUpdatePlayButton({
     broadcastChannel: getBroadcastChannel(),
-    onEmulatorClose: () => {
+    onUpdatePlayButton: () => {
       setRuffleOpen(false);
     }
   });
@@ -98,7 +102,7 @@ const TopBar = ({
           src={ruffleOpen ? getAssetPath('square.svg') : getAssetPath('play.svg')}
           onClick={() => {
             if (ruffleOpen) {
-              setRuffleOpen(false);
+              evtCloseEmulation({ broadcastChannel: getBroadcastChannel() })
             } else {
               launch_ruffle(selectedSwfPath);
               setGlobalSpoofUrl({
