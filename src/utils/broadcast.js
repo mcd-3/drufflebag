@@ -22,6 +22,15 @@ const closeBroadcastChanel = ({ broadcastChannel }) => {
 }
 
 /**
+ * Posts the "close emulation" event
+ *
+ * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ */
+const evtCloseEmulation = ({ broadcastChannel }) => {
+  broadcastChannel.postMessage(EVENT_CLOSE_EMULATION);
+};
+
+/**
  * Set a listener and callback for the "emulator close" event on a BroadcastChannel
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
@@ -38,5 +47,6 @@ const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
 export {
   getBroadcastChannel,
   closeBroadcastChanel,
+  evtCloseEmulation,
   injectOnEmulatorClose,
 };

@@ -1,8 +1,21 @@
 import { useEffect } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
+import { confirm } from '@tauri-apps/plugin-dialog';
+import { getBroadcastChannel, evtCloseEmulation, closeBroadcastChanel } from './../../utils/broadcast.js';
 import "./../../styles/Emulation.css";
 
 function EmulationContent() {
+  const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
+    const confirmed = await confirm('Are you sure?');
+    if (!confirmed) {
+      event.preventDefault();
+    } else {
+      const broadcastChannel = getBroadcastChannel();
+      evtCloseEmulation({ broadcastChannel });
+      closeBroadcastChanel({ broadcastChannel });
+    }
+  });
+
   const mountRuffle = () => {
     const script = document.createElement("script");
 
@@ -51,6 +64,8 @@ function EmulationContent() {
     return () => {
       // Remove script tag from body
       document.body.removeChild(ruffleScript);
+      // you need to call unlisten if your handler goes out of scope e.g. the component is unmounted
+      unlisten.then(() => {});
     };
   }, []);
 
