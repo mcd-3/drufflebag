@@ -38,7 +38,7 @@ async fn get_cached_swfs() -> Vec<Value> {
 
 #[tauri::command]
 fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
-    tauri::WebviewWindowBuilder::new(&app, "Ruffle", tauri::WebviewUrl::App("ruffle.html".into()))
+    tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
         .title(swf_name)
         .build()
         .unwrap();
