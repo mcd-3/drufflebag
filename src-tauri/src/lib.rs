@@ -82,6 +82,7 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
                             let swf_json = json!({
                                 "path": full_path_str,
                                 "size": entry.metadata().unwrap().len(),
+                                "avm": 0,
                             });
 
                             swf_files.push(swf_json);
