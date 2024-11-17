@@ -9,11 +9,6 @@ use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Result, Value};
 
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
-#[tauri::command]
 async fn cache_swfs(swfs: Vec<Value>) {
     let path = Path::new("./.cached_swf.json");
     if path.exists() {
