@@ -45,6 +45,14 @@ fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
 }
 
 #[tauri::command]
+fn open_settings(app: tauri::AppHandle) {
+    tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
+    .title("Settings")
+    .build()
+    .unwrap();
+}
+
+#[tauri::command]
 async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
         app.dialog().file().blocking_pick_folder().unwrap()
@@ -108,7 +116,7 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![open_ruffle, scan_directory, cache_swfs, get_cached_swfs])
+        .invoke_handler(tauri::generate_handler![open_ruffle, open_settings, scan_directory, cache_swfs, get_cached_swfs])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

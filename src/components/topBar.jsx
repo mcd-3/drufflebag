@@ -50,6 +50,10 @@ const TopBar = ({
     setRuffleOpen(true);
   }
 
+  const openSettings = () => {
+    invoke("open_settings");
+  };
+
   return (
     <div className={styles["topBar-root"]}>
       <div className={styles["topBar-file-column"]}>
@@ -83,7 +87,7 @@ const TopBar = ({
           className={styles["topBar-settings-button"]}
           text="Settings"
           src={getAssetPath('settings.svg')}
-          onClick={ () => { console.error('dfg'); }} />
+          onClick={ () => { openSettings() }} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-control-column"]}>
