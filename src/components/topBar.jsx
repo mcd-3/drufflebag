@@ -45,7 +45,7 @@ const TopBar = ({
     await invoke("cache_swfs", { swfs: swfFiles });
   }
 
-  function launch_ruffle(swfName) {
+  const launch_ruffle = (swfName) => {
     invoke("open_ruffle", { swfName });
     setRuffleOpen(true);
   }
