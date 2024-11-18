@@ -28,7 +28,6 @@ async fn get_cached_swfs() -> Vec<Value> {
             .expect("file should open read only");
         let json: serde_json::Value =
             serde_json::from_reader(file).unwrap();
-        println!("{}", json);
         json.as_array().unwrap().to_vec()
     } else {
         // File does not exist so nothing is cached
@@ -107,8 +106,6 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
 
 #[tauri::command]
 fn copy_to_public(swf_absolute_path: &str) {
-    let pwd = std::env::current_dir().unwrap();
-    println!("{}", pwd.into_os_string().into_string().unwrap());
     std::fs::copy(swf_absolute_path, "./../public/play.temp.swf");
 }
 
