@@ -24,17 +24,18 @@ const getSWFByHash = async (hash) => {
 }
 
 /**
- * Insert a swf object into the database. Checks if it already exists first
+ * Insert a swf object into the database.
  *
  * @param {object} swf - SWF file object to insert 
  */
 const insertSWF = async (swf) => {
     try {
         return await db.execute(
-            'INSERT into swf_table (id, name, md5_hash, spoofed_url, last_played_date, file_size_bytes, type_id, status_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [null, swf.path.split('/').pop(), swf.md5_hash, null, null, swf.size, null, null]
+            'INSERT into swf_table (id, name, md5_hash, spoofed_url, last_played_date, file_size_bytes, type_id, status_id, avm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [null, swf.path.split('/').pop(), swf.md5_hash, null, null, swf.size, null, null, null]
         );
     } catch (e) {
+        console.log('Entry already exists. Skipping...');
         return {};
     }
 };
@@ -42,6 +43,16 @@ const insertSWF = async (swf) => {
 const updateSWF = async (swf) => {
     // Update by MD5 hash
     // No checks to see if it exists
+    try {
+        // return await db.execute(
+        //     'UPDATE swf_table SET title = ?, status = ? WHERE id = ?',
+        //     [todos.title, todos.status, todos.id]
+        // )
+    } catch (e) {
+        console.log('Could not update the following:');
+        console.log(swf);
+        console.error(e);
+    }
 }
 
 

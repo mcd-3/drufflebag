@@ -36,9 +36,8 @@ impl MigrationsHistory {
                 version: 5,
                 description: "insert_avm",
                 sql: "
-                    INSERT into avm_table (id, version) VALUES (1, 0);
-                    INSERT into avm_table (id, version) VALUES (2, 1);
-                    INSERT into avm_table (id, version) VALUES (3, 2);
+                    INSERT into avm_table (id, version) VALUES (1, 1);
+                    INSERT into avm_table (id, version) VALUES (2, 2);
                 ",
                 kind: MigrationKind::Up
             },
