@@ -19,6 +19,12 @@ impl MigrationsHistory {
             },
             Migration {
                 version: 3,
+                description: "create_avm_table",
+                sql: "CREATE TABLE avm_table (id INTEGER PRIMARY KEY, version INTEGER)",
+                kind: MigrationKind::Up,
+            },
+            Migration {
+                version: 4,
                 description: "insert_swf_types",
                 sql: "
                     INSERT into swf_type_table (id, type) VALUES (1, 'Game');
@@ -27,7 +33,17 @@ impl MigrationsHistory {
                 kind: MigrationKind::Up
             },
             Migration {
-                version: 4,
+                version: 5,
+                description: "insert_avm",
+                sql: "
+                    INSERT into avm_table (id, version) VALUES (1, 0);
+                    INSERT into avm_table (id, version) VALUES (2, 1);
+                    INSERT into avm_table (id, version) VALUES (3, 2);
+                ",
+                kind: MigrationKind::Up
+            },
+            Migration {
+                version: 6,
                 description: "insert_swf_status",
                 sql: "
                     INSERT into swf_status_table (id, status) VALUES (1, 'Playable');
@@ -39,7 +55,7 @@ impl MigrationsHistory {
                 kind: MigrationKind::Up
             },
             Migration {
-                version: 5,
+                version: 7,
                 description: "create_swf_table",
                 sql: "
                     CREATE TABLE swf_table (
@@ -51,12 +67,17 @@ impl MigrationsHistory {
                         file_size_bytes INTEGER,
                         type_id INTEGER,
                         status_id INTEGER,
+                        avm_id INTEGER,
                         FOREIGN KEY (type_id) 
                             REFERENCES swf_type_table (id) 
                                 ON DELETE CASCADE 
                                 ON UPDATE NO ACTION,
                         FOREIGN KEY (status_id) 
                             REFERENCES swf_status_table (id) 
+                                ON DELETE CASCADE 
+                                ON UPDATE NO ACTION
+                        FOREIGN KEY (avm_id) 
+                            REFERENCES avm_table (id) 
                                 ON DELETE CASCADE 
                                 ON UPDATE NO ACTION
                     );",
