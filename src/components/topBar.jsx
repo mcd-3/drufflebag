@@ -11,6 +11,7 @@ import {
   setGlobalSpoofUrl,
   getGlobalSpoofUrl
 } from './../utils/storage.js';
+import { insertSWF } from './../utils/database.js';
 import { getAssetPath } from './../utils/assets.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
@@ -59,6 +60,18 @@ const TopBar = ({
     invoke("open_settings");
   };
 
+  const scanDirectory = async () => {
+    const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
+    if (files.swfs.length > 0) {
+      setCachedDirectory(files.parent_dir);
+      writeJsonCache(files.swfs);
+      for await (const swf of files.swfs) {
+        await insertSWF(swf);
+      }
+    }
+    setSwfFiles(files.swfs);
+  }
+
   return (
     <div className={styles["topBar-root"]}>
       <div className={styles["topBar-file-column"]}>
@@ -67,12 +80,13 @@ const TopBar = ({
           text="Open"
           src={getAssetPath('folder.svg')}
           onClick={async () => {
-            const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
-            if (files.swfs.length > 0) {
-              setCachedDirectory(files.parent_dir);
-            }
-            setSwfFiles(files.swfs);
-            writeJsonCache(files.swfs);
+            scanDirectory();
+            // const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
+            // if (files.swfs.length > 0) {
+            //   setCachedDirectory(files.parent_dir);
+            // }
+            // setSwfFiles(files.swfs);
+            // writeJsonCache(files.swfs);
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}

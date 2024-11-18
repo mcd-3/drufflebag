@@ -45,16 +45,20 @@ impl MigrationsHistory {
                     CREATE TABLE swf_table (
                         id INTEGER PRIMARY KEY,
                         name TEXT,
-                        md5_hash TEXT,
+                        md5_hash TEXT UNIQUE,
                         spoofed_url TEXT,
                         last_played_date DATE,
                         file_size_bytes INTEGER,
-                        CONSTRAINT type
-                            FOREIGN KEY (id)
-                            REFERENCES swf_type_table(id),
-                        CONSTRAINT status
-                            FOREIGN KEY (id)
-                            REFERENCES swf_status_table(id)
+                        type_id INTEGER,
+                        status_id INTEGER,
+                        FOREIGN KEY (type_id) 
+                            REFERENCES swf_type_table (id) 
+                                ON DELETE CASCADE 
+                                ON UPDATE NO ACTION,
+                        FOREIGN KEY (status_id) 
+                            REFERENCES swf_status_table (id) 
+                                ON DELETE CASCADE 
+                                ON UPDATE NO ACTION
                     );",
                 kind: MigrationKind::Up,
             },
