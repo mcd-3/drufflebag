@@ -5,6 +5,7 @@ mod data {
 
 use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
 use data::migrations::MigrationsHistory;
+use chksum_md5 as md5;
 use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Result, Value};
 
@@ -78,9 +79,15 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
                     Some(ext_str) => {
                         if ext_str == "swf" {
                             let full_path_str = format!("{}/{:?}", &directory_path_str, filename).replace("\"", "");
+
+                            // MD5 is not considered secure, but it should be ok for our purposes
+                            let file_to_hash = File::open(&full_path_str).unwrap();
+                            let digest = md5::chksum(&file_to_hash).unwrap();
+
                             let swf_json = json!({
                                 "path": full_path_str,
                                 "size": entry.metadata().unwrap().len(),
+                                "md5_hash": digest.to_hex_lowercase(),
                                 "avm": 0,
                             });
 
