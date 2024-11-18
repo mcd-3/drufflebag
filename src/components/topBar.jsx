@@ -51,7 +51,7 @@ const TopBar = ({
 
   const launch_ruffle = (swfName) => {
     invoke("copy_to_public", { swfAbsolutePath: swfName });
-    invoke("open_ruffle", { swfName });
+    invoke("open_ruffle", { swfName: swfName.split('/').pop() });
     setRuffleOpen(true);
   }
 
