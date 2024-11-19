@@ -11,7 +11,8 @@ import {
   setGlobalSpoofUrl,
   getGlobalSpoofUrl
 } from './../utils/storage.js';
-import { insertSWF } from './../utils/database.js';
+import { insertSWF, getSWFByHash } from './../utils/database.js';
+import { makeSwfJSON } from './../utils/swf.js';
 import { getAssetPath } from './../utils/assets.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
@@ -63,11 +64,48 @@ const TopBar = ({
   const scanDirectory = async () => {
     const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
     if (files.swfs.length > 0) {
-      setCachedDirectory(files.parent_dir);
-      writeJsonCache(files.swfs);
+      const cacheToWrite = [];
+
       for await (const swf of files.swfs) {
-        await insertSWF(swf);
+        const swfResult = await getSWFByHash(`${swf['md5_hash']}`);
+        let swfJSON;
+
+        console.log(swfResult);
+
+        if (swfResult.length == 0) {
+          swfJSON = makeSwfJSON({
+            avm: 0,
+            name: swf.path.split('/').pop(),
+            path: swf.path,
+            md5_hash: swf['md5_hash'],
+            type: null,
+            size: swf.size,
+            lp: null,
+            status: null,
+            url: ''
+          });
+
+          await insertSWF(swfJSON);
+        } else {
+          const firstResult = swfResult[0];
+          swfJSON = makeSwfJSON({
+            avm: !firstResult['avm_id'] ? 0 : firstResult['avm_id'],
+            name: firstResult.name,
+            path: swf.path,
+            md5_hash: firstResult['md5_hash'],
+            type: !firstResult['type_id'] ? "" : firstResult['type_id'],
+            size: firstResult['file_size_bytes'],
+            lp: !firstResult['last_played_date'] ? "" : firstResult['last_played_date'],
+            status: !firstResult['status_id'] ? "" : firstResult['status_id'],
+            url: !firstResult['spoofed_url'] ? "" : firstResult['spoofed_url'],
+          })
+        }
+        
+        cacheToWrite.push(swfJSON);
       }
+
+      setCachedDirectory(files.parent_dir);
+      writeJsonCache(cacheToWrite);
     }
     setSwfFiles(files.swfs);
   }

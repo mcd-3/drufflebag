@@ -17,11 +17,11 @@ const getDB = async () => {
  * @param {string} hash - MD5 hash of a swf file 
  */
 const getSWFByHash = async (hash) => {
-    return await db.execute(
-        'SELECT * FROM swf_table WHERE md5_hash = ?',
+    return await db.select(
+        "SELECT * FROM swf_table WHERE md5_hash = ?",
         [hash]
     )
-}
+};
 
 /**
  * Insert a swf object into the database.
