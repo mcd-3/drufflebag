@@ -70,8 +70,6 @@ const TopBar = ({
         const swfResult = await getSWFByHash(`${swf['md5_hash']}`);
         let swfJSON;
 
-        console.log(swfResult);
-
         if (swfResult.length == 0) {
           swfJSON = makeSwfJSON({
             avm: 0,
