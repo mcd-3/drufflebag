@@ -61,8 +61,8 @@ const TopBar = ({
     invoke("open_settings");
   };
 
-  const scanDirectory = async () => {
-    const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
+  const scanDirectory = async (cachedDirectoryPath = "") => {
+    const files = await invoke("scan_directory", { cachedDirectoryPath });
     if (files.swfs.length > 0) {
       const cacheToWrite = [];
 
@@ -130,9 +130,7 @@ const TopBar = ({
               // TODO: Show a warning alert
               return;
             }
-            const files = await invoke("scan_directory", { cachedDirectoryPath: directory });
-            setSwfFiles(files.swfs);
-            writeJsonCache(files.swfs);
+            scanDirectory(directory);
           }} />
         <IconButton
           className={styles["topBar-settings-button"]}
