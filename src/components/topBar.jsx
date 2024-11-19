@@ -119,12 +119,6 @@ const TopBar = ({
           src={getAssetPath('folder.svg')}
           onClick={async () => {
             scanDirectory();
-            // const files = await invoke("scan_directory", { cachedDirectoryPath: "" });
-            // if (files.swfs.length > 0) {
-            //   setCachedDirectory(files.parent_dir);
-            // }
-            // setSwfFiles(files.swfs);
-            // writeJsonCache(files.swfs);
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}
