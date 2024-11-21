@@ -1,7 +1,10 @@
+import "./../../styles/Settings.css";
+import Header from './../../components/header.jsx';
+
 function SettingsContent() {
   return (
     <div>
-        <p>Settings coming soon!</p>
+        <Header>Settings</Header>
         <h2>Experimental Features</h2>
         <p>These features may not work as intended...Enable at your own risk!</p>
         <div>
