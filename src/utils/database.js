@@ -1,7 +1,5 @@
 import Database from '@tauri-apps/plugin-sql'
 
-const db = await Database.load('sqlite:drufflebag_sql.db');
-
 /**
  * Gets the SQLite DB instance for the app
  *
@@ -17,6 +15,7 @@ const getDB = async () => {
  * @param {string} hash - MD5 hash of a swf file 
  */
 const getSWFByHash = async (hash) => {
+    const db = await getDB();
     return await db.select(
         "SELECT * FROM swf_table WHERE md5_hash = ?",
         [hash]
@@ -29,6 +28,7 @@ const getSWFByHash = async (hash) => {
  * @param {object} swf - SWF file object to insert 
  */
 const insertSWF = async (swf) => {
+    const db = await getDB();
     try {
         return await db.execute(
             'INSERT into swf_table (id, name, md5_hash, spoofed_url, last_played_date, file_size_bytes, type_id, status_id, avm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
