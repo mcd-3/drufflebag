@@ -21,7 +21,7 @@ function EmulationContent() {
     } else {
       const broadcastChannel = getBroadcastChannel();
       evtCloseEmulation({ broadcastChannel });
-      evtUpdatePlayButton({ broadcastChannel: getBroadcastChannel() });
+      evtUpdatePlayButton({ broadcastChannel });
       closeBroadcastChanel({ broadcastChannel });
     }
   });
