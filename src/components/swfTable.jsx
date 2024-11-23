@@ -94,7 +94,6 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
             () => {
               setSelectedSwfPath(row.original.path);
               setActiveIndex(row.id);
-              console.log(row)
             }
           }>
             {row.getVisibleCells().map(cell => (

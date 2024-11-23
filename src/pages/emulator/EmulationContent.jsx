@@ -66,7 +66,6 @@ function EmulationContent() {
       //        Remove it manually for now until the bug is found and fixed
       try {
         const duplicate = document.getElementsByTagName('ruffle-player-1');
-        console.log(duplicate);
         duplicate[0].parentNode.removeChild(duplicate[0])
       } catch (e) { }
 
