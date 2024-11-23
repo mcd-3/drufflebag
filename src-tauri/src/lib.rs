@@ -117,7 +117,7 @@ fn copy_to_public(swf_absolute_path: &str) {
 }
 
 #[tauri::command]
-async fn get_swf_hash(app: tauri::AppHandle, swf_absolute_path: String) -> String {
+async fn get_swf_hash(swf_absolute_path: String) -> String {
     // TODO: This code is reused in scan_directory
     //       Move it to a proper non-tauri function
     let file_to_hash = File::open(&swf_absolute_path).unwrap();
@@ -125,6 +125,8 @@ async fn get_swf_hash(app: tauri::AppHandle, swf_absolute_path: String) -> Strin
 
     digest.to_hex_lowercase()
 }
+
+// async fn update_cache_by_swf_hash()
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
