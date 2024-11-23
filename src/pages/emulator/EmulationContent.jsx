@@ -8,6 +8,7 @@ import {
   evtUpdatePlayButton,
   injectOnEmulatorClose,
 } from './../../utils/broadcast.js';
+import { updateSWFDateAVMByHash } from './../../utils/database.js';
 import "./../../styles/Emulation.css";
 
 function EmulationContent() {
@@ -74,6 +75,16 @@ function EmulationContent() {
         if (player.metadata.width && player.metadata.height) {
           getCurrentWindow().setSize(new LogicalSize(player.metadata.width, player.metadata.height));
         }
+
+        // Check if isActionScript3 exists and what it's set to
+        const avmInt = player.metadata.isActionScript3 ? 2 : 1;
+        const timestamp = Math.floor(Date.now() / 1000);
+
+        // updateSWFDateAVMByHash({
+        //   hash: '4390bffe189a3fdac4e62b4b6b414397',
+        //   avm: avmInt,
+        //   date: timestamp
+        // });
       })
     };
 

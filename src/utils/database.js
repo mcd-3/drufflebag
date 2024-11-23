@@ -40,6 +40,19 @@ const insertSWF = async (swf) => {
     }
 };
 
+const updateSWFDateAVMByHash = async ({ hash, date, avm }) => {
+    const db = await getDB();
+    try {
+        return await db.execute(
+            'UPDATE swf_table SET last_played_date = ?, avm_id = ? WHERE md5_hash = ?',
+            [date, avm, hash]
+        );
+    } catch (e) {
+        console.log(`Could not update the following hash: ${hash}`);
+        console.error(e);
+    }
+}
+
 const updateSWF = async (swf) => {
     // Update by MD5 hash
     // No checks to see if it exists
@@ -56,4 +69,4 @@ const updateSWF = async (swf) => {
 }
 
 
-export { getSWFByHash, insertSWF };
+export { getSWFByHash, insertSWF, updateSWFDateAVMByHash };
