@@ -9,7 +9,8 @@ import {
   setCachedDirectory,
   getCachedDirectory,
   setGlobalSpoofUrl,
-  getGlobalSpoofUrl
+  getGlobalSpoofUrl,
+  setCurrentlyPlayingSwfPath,
 } from './../utils/storage.js';
 import { insertSWF, getSWFByHash } from './../utils/database.js';
 import { makeSwfJSON } from './../utils/swf.js';
@@ -146,6 +147,7 @@ const TopBar = ({
             if (ruffleOpen) {
               evtCloseEmulation({ broadcastChannel: getBroadcastChannel() })
             } else {
+              setCurrentlyPlayingSwfPath(selectedSwfPath);
               launch_ruffle(selectedSwfPath);
               setGlobalSpoofUrl({
                 isEnabled: globalSpoof.isEnabled,

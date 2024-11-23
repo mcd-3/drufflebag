@@ -3,7 +3,7 @@ mod data {
     pub mod migrations;
 }
 
-use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
+use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path, io::Error};
 use data::migrations::MigrationsHistory;
 use chksum_md5 as md5;
 use tauri_plugin_dialog::{DialogExt, FilePath};
@@ -116,6 +116,16 @@ fn copy_to_public(swf_absolute_path: &str) {
     std::fs::copy(swf_absolute_path, "./../public/play.temp.swf");
 }
 
+#[tauri::command]
+async fn get_swf_hash(app: tauri::AppHandle, swf_absolute_path: String) -> String {
+    // TODO: This code is reused in scan_directory
+    //       Move it to a proper non-tauri function
+    let file_to_hash = File::open(&swf_absolute_path).unwrap();
+    let digest = md5::chksum(&file_to_hash).unwrap();
+
+    digest.to_hex_lowercase()
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let db_migrations = MigrationsHistory::migrations();
@@ -134,7 +144,8 @@ pub fn run() {
             scan_directory,
             cache_swfs,
             get_cached_swfs,
-            copy_to_public
+            copy_to_public,
+            get_swf_hash,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

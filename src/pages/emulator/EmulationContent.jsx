@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
+import { invoke } from "@tauri-apps/api/core";
 import {
   getBroadcastChannel,
   evtCloseEmulation,
@@ -8,6 +9,7 @@ import {
   evtUpdatePlayButton,
   injectOnEmulatorClose,
 } from './../../utils/broadcast.js';
+import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
 import { updateSWFDateAVMByHash } from './../../utils/database.js';
 import "./../../styles/Emulation.css";
 
@@ -61,12 +63,12 @@ function EmulationContent() {
       container.appendChild(player);
 
       // TODO: There's a bug where a duplicate instance of Ruffle is created
-      //        Remove it manually for now until the bug is found and fixed
-      try {
-        const duplicate = document.getElementsByTagName('ruffle-player-1');
-        console.log(duplicate);
-        duplicate[0].parentNode.removeChild(duplicate[0])
-      } catch (e) { }
+      // //        Remove it manually for now until the bug is found and fixed
+      // try {
+      //   const duplicate = document.getElementsByTagName('ruffle-player-1');
+      //   console.log(duplicate);
+      //   duplicate[0].parentNode.removeChild(duplicate[0])
+      // } catch (e) { }
 
       player.load("/public/play.temp.swf");
 
@@ -80,11 +82,17 @@ function EmulationContent() {
         const avmInt = player.metadata.isActionScript3 ? 2 : 1;
         const timestamp = Math.floor(Date.now() / 1000);
 
-        // updateSWFDateAVMByHash({
-        //   hash: '4390bffe189a3fdac4e62b4b6b414397',
-        //   avm: avmInt,
-        //   date: timestamp
-        // });
+        // Asynchronously update the cache and DB to have the correct AVM version & date last played
+        invoke(
+          "get_swf_hash",
+          { swfAbsolutePath: getCurrentlyPlayingSwfPath() }
+        ).then((hash) => {
+          updateSWFDateAVMByHash({
+            hash,
+            avm: avmInt,
+            date: timestamp
+          });
+        });
       })
     };
 

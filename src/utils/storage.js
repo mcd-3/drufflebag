@@ -1,5 +1,6 @@
 const CACHED_DIRECTORY_KEY = "cachedSwfDirectory";
 const GLOBAL_URL_SPOOF_KEY = "globalSpoofUrlJSON";
+const CURRENTLY_PLAYING_SWF = "currentlyPlayingSwf";
 
 const setCachedDirectory = (cachedDirectory) => {
   localStorage.setItem(CACHED_DIRECTORY_KEY, cachedDirectory);
@@ -22,9 +23,19 @@ const getGlobalSpoofUrl = () => {
   );
 };
 
+const setCurrentlyPlayingSwfPath = (path) => {
+  localStorage.setItem(CURRENTLY_PLAYING_SWF, path);
+};
+
+const getCurrentlyPlayingSwfPath = () => {
+  return localStorage.getItem(CURRENTLY_PLAYING_SWF);
+};
+
 export {
   setCachedDirectory,
   getCachedDirectory,
   setGlobalSpoofUrl,
   getGlobalSpoofUrl,
+  setCurrentlyPlayingSwfPath,
+  getCurrentlyPlayingSwfPath,
 };
