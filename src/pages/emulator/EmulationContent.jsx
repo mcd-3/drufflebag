@@ -72,7 +72,6 @@ function EmulationContent() {
       player.load("/public/play.temp.swf");
 
       player.addEventListener('loadedmetadata', () => {
-        console.info(player.metadata);
         if (player.metadata.width && player.metadata.height) {
           getCurrentWindow().setSize(new LogicalSize(player.metadata.width, player.metadata.height));
         }
