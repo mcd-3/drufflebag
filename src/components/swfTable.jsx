@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from '../styles/components/swfTable.module.css';
 import { formatBytes } from './../utils/bytes.js';
+import { getDateFromTimestamp } from './../utils/date.js';
 import {
   createColumnHelper,
   flexRender,
@@ -31,7 +32,6 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
               avmVersion = "_unknown";
               break;
           }
-          console.log(info.getValue());
         }
 
         return <img src={`public/avm${avmVersion}.svg`} width={32} height={32} />
@@ -43,7 +43,7 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
       header: 'Name',
     }),
     columnHelper.accessor('type', {
-      cell: info => 'Animation',
+      cell: info => '---',
       header: 'Type',
     }),
     columnHelper.accessor('size', {
@@ -51,15 +51,15 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
       header: 'Size',
     }),
     columnHelper.accessor('lp', {
-      cell: info => "June 23, 2024",
+      cell: info => info.getValue() ? getDateFromTimestamp(info.getValue()) : "---",
       header: 'Last Played',
     }),
     columnHelper.accessor('status', {
-      cell: info => "Playable",
+      cell: info => "---",
       header: 'Status',
     }),
     columnHelper.accessor('url', {
-      cell: info => "https://ducklife.com",
+      cell: info => "",
       header: 'URL Spoof',
     }),
   ];
