@@ -18,7 +18,8 @@
     "@tauri-apps/plugin-sql": "^2.0.1",
     "broadcast-channel": "^7.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-tabs": "^6.0.2"
   },
   "devDependencies": {
     "@tauri-apps/cli": ">=2.0.0",
