@@ -14,7 +14,10 @@ function SettingsContent() {
 
           <TabPanel>
             <div className='panel-container'>
-              <p>Themes</p>
+              <br />
+              <div className='inner-panel-container'>
+                <Header>Themes</Header>
+              </div>
             </div>
           </TabPanel>
           <TabPanel>

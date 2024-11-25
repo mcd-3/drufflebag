@@ -25,6 +25,13 @@ footer {
     overflow-y: auto;
 }
 
+.inner-panel-container {
+    background-color: #f1f1f1;
+    margin-right: 8px;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+}
+
 /* React Tabs */
 /* This is the recommended way to add custom styles: https://www.npmjs.com/package/react-tabs#custom-style */
 .react-tabs {
