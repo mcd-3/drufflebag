@@ -42,7 +42,7 @@ footer {
 
 .footer-button {
     border: 1px solid #767676;
-    background-color: #ffffff00;
+    background-color: #00000000;
     border-radius: 4px;
     padding: 8px 8px 8px 8px;
     font-size: 0.8em;
@@ -50,6 +50,11 @@ footer {
 
 .footer-button:hover {
     border: 1px solid #b1b1b1;
+}
+
+.footer-button:active {
+    border: 1px solid #393939;
+    background-color: #5d5d5d;
 }
 
 .footer-button-save {
