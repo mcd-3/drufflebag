@@ -10,7 +10,6 @@ footer {
     padding-bottom: 8px;
     margin-top: auto;
     height: 40px;
-    background-color: red;
 }
 
 #root, #root > div {
@@ -32,6 +31,10 @@ footer {
     border-radius: 2px;
     padding-left: 8px;
     padding-right: 8px;
+}
+
+.footer-container {
+    margin-left: auto;
 }
 
 /* React Tabs */

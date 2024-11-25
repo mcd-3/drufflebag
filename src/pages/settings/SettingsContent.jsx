@@ -38,9 +38,11 @@ function SettingsContent() {
           </TabPanel>
         </Tabs>
         <footer>
-          <button onClick={() => { console.log('Reset!') }} >Reset to Default</button>
-          <button onClick={() => { console.log('Saved!') }} >Save</button>
-          <button onClick={() => { console.log('Cancelled!') }} >Cancel</button>
+          <div className='footer-container'>
+            <button onClick={() => { console.log('Reset!') }} >Reset to Default</button>
+            <button onClick={() => { console.log('Saved!') }} >Save</button>
+            <button onClick={() => { console.log('Cancelled!') }} >Cancel</button>
+          </div>
         </footer>
     </div>
   );
