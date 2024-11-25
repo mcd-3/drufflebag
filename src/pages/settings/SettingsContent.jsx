@@ -18,6 +18,13 @@ function SettingsContent() {
               <div className='inner-panel-container'>
                 <Header>Themes</Header>
                 <p>This is where you can change your app's theme</p>
+                <select>
+                  <option>System (default)</option>
+                  <option>Light</option>
+                  <option>Dark</option>
+                  <option>Ruffled</option>
+                  <option>Flashy</option>
+                </select>
               </div>
             </div>
           </TabPanel>
