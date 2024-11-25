@@ -7,6 +7,11 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.panel-container {
+    height: 100%;
+    margin: 0px 8px 4px 8px;
+}
+
 /* React Tabs */
 /* This is the recommended way to add custom styles: https://www.npmjs.com/package/react-tabs#custom-style */
 .react-tabs {

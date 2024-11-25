@@ -10,22 +10,15 @@ function SettingsContent() {
           <TabList>
             <Tab>Application</Tab>
             <Tab>Emulation</Tab>
-            <Tab>Experimental</Tab>
           </TabList>
 
           <TabPanel>
-            <p>Themes</p>
+            <div className='panel-container'>
+              <p>Themes</p>
+            </div>
           </TabPanel>
           <TabPanel>
             <p>Scale</p>
-          </TabPanel>
-          <TabPanel>
-            <p>These features may not work as intended...Enable at your own risk!</p>
-            <div>
-              <input type="checkbox" id="url_spoof_enabled" name="url_spoof_enabled" />
-              <label htmlFor="url_spoof_enabled">URL Spoof Enabled</label>
-              < br/>
-            </div>
           </TabPanel>
         </Tabs>
         <footer>
