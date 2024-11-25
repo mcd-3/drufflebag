@@ -30,6 +30,8 @@ footer {
     margin-right: 8px;
     border: 1px solid #d0d0d0;
     border-radius: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 /* React Tabs */

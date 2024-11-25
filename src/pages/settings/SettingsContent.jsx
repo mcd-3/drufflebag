@@ -17,11 +17,24 @@ function SettingsContent() {
               <br />
               <div className='inner-panel-container'>
                 <Header>Themes</Header>
+                <p>This is where you can change your app's theme</p>
               </div>
             </div>
           </TabPanel>
           <TabPanel>
-            <p>Scale</p>
+            <div className='panel-container'>
+                <br />
+                <div className='inner-panel-container'>
+                  <Header>Scale</Header>
+                  <p>Scale the emulation display</p>
+                </div>
+                < br/>
+                <div className='inner-panel-container'>
+                  <Header>Start Up</Header>
+                  <p>Enable the Ruffle splashscreen</p>
+                  <p>Enable autoplay</p>
+                </div>
+              </div>
           </TabPanel>
         </Tabs>
         <footer>
