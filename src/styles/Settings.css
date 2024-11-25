@@ -1,15 +1,28 @@
-html {
-    height: 100%;
-}
-
 body {
     margin: 0 0 0 0;
     font-family: 'Inter', sans-serif;
+    height: 100vh;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 8px;
+    margin-top: auto;
+    height: 40px;
+    background-color: red;
+}
+
+#root, #root > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .panel-container {
     height: 100%;
-    margin: 0px 8px 4px 8px;
+    margin: 0px 0px 4px 8px;
+    overflow-y: auto;
 }
 
 /* React Tabs */
@@ -17,6 +30,7 @@ body {
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
     margin: 8px 8px 8px 8px;
+    height: calc(100vh - 106px)
 }
   
 .react-tabs__tab-list {
