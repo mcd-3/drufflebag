@@ -38,6 +38,54 @@ footer {
     margin-right: 8px;
 }
 
+/* Footer Button Styles */
+
+.footer-button {
+    border: 1px solid #767676;
+    background-color: #ffffff00;
+    border-radius: 4px;
+    padding: 8px 8px 8px 8px;
+    font-size: 0.8em;
+}
+
+.footer-button:hover {
+    border: 1px solid #b1b1b1;
+}
+
+.footer-button-save {
+    border-color: rgb(0, 50, 177);
+    background-color: rgb(25, 82, 226);
+    color: white;   
+}
+
+.footer-button-save:hover {
+    border-color: rgb(0, 65, 231);
+    background-color: rgb(61, 116, 254);
+    color: white;   
+}
+
+.footer-button-save:active {
+    border-color: rgb(0, 47, 167);
+    background-color: rgb(0, 45, 159);
+    color: white;   
+}
+
+.footer-button-danger {
+    border-color: rgb(223, 0, 0);
+    background-color: rgb(255, 81, 81);
+    color: white;
+}
+
+.footer-button-danger:hover {
+    border-color: rgb(255, 65, 65);
+    background-color: rgb(255, 147, 147);
+}
+
+.footer-button-danger:active {
+    border-color: rgb(201, 0, 0);
+    background-color: rgb(186, 0, 0);
+}
+
 /* React Tabs */
 /* This is the recommended way to add custom styles: https://www.npmjs.com/package/react-tabs#custom-style */
 .react-tabs {

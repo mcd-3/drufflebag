@@ -46,9 +46,9 @@ function SettingsContent() {
         </Tabs>
         <footer>
           <div className='footer-container'>
-            <button onClick={() => { console.log('Reset!') }} >Reset to Default</button>
-            <button onClick={() => { console.log('Saved!') }} >Save</button>
-            <button onClick={() => { console.log('Cancelled!') }} >Cancel</button>
+            <button className='footer-button footer-button-save' onClick={() => { console.log('Saved!') }} >Save</button>
+            <button className='footer-button' onClick={() => { console.log('Cancelled!') }} >Cancel</button>
+            <button className='footer-button footer-button-danger' onClick={() => { console.log('Reset!') }} >Reset to Default</button>
           </div>
         </footer>
     </div>
