@@ -17,14 +17,16 @@ function SettingsContent() {
               <br />
               <div className='inner-panel-container'>
                 <Header>Themes</Header>
-                <p>This is where you can change your app's theme</p>
-                <select>
-                  <option>System (default)</option>
-                  <option>Light</option>
-                  <option>Dark</option>
-                  <option>Ruffled</option>
-                  <option>Flashy</option>
-                </select>
+                <div className='row'>
+                  <select>
+                    <option>System (default)</option>
+                    <option>Light</option>
+                    <option>Dark</option>
+                    <option>Ruffled</option>
+                    <option>Flashy</option>
+                  </select>
+                  <span>Application Theme</span>
+                </div>
               </div>
             </div>
           </TabPanel>
@@ -33,13 +35,26 @@ function SettingsContent() {
                 <br />
                 <div className='inner-panel-container'>
                   <Header>Scale</Header>
-                  <p>Scale the emulation display</p>
+                  <div className='row'>
+                    <select>
+                      <option>1x</option>
+                      <option>1.5x</option>
+                      <option>2x</option>
+                    </select>
+                    <span>Emulation window scale size</span>
+                  </div>
                 </div>
                 < br/>
                 <div className='inner-panel-container'>
                   <Header>Start Up</Header>
-                  <p>Enable the Ruffle splashscreen</p>
-                  <p>Enable autoplay</p>
+                  <div className='row'>
+                    <input type='checkbox' />
+                    <span>Enable the Ruffle splashscreen</span>
+                  </div>
+                  <div className='row'>
+                    <input type='checkbox' />
+                    <span>Enable autoplay</span>
+                  </div>
                 </div>
               </div>
           </TabPanel>

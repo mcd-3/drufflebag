@@ -18,6 +18,23 @@ footer {
     height: 100%;
 }
 
+.row {
+    height: 32px;
+    padding-bottom: 4px;
+}
+
+.row > input[type=checkbox] {
+    margin-right: 24px;
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+}
+
+.row > select {
+    margin-right: 24px;
+    vertical-align: middle; 
+}
+
 .panel-container {
     height: 100%;
     margin: 0px 0px 4px 8px;
