@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "./../../styles/Settings.css";
-// import 'react-tabs/style/react-tabs.css';
 import Header from './../../components/header.jsx';
+import { getSettingsJSON } from './../../utils/settings.js';
 
 function SettingsContent() {
+  const config = getSettingsJSON();
+
   return (
     <div>
       <Tabs>
@@ -66,7 +69,12 @@ function SettingsContent() {
             </div>
             <div>
               <button className='footer-button' onClick={() => { console.log('Cancelled!') }} >Cancel</button>
-              <button className='footer-button footer-button-save' onClick={() => { console.log('Saved!') }} >Save</button>
+              <button
+                className='footer-button footer-button-save'
+                onClick={() => {
+                  console.log(config)
+                }}
+              >Save</button>
             </div>
           </div>
         </footer>
