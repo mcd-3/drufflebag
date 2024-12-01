@@ -82,7 +82,7 @@ function SettingsContent() {
                         });
                       }}
                     />
-                    <span>Enable the Ruffle splashscreen</span>
+                    <span>Enable the Ruffle splash screen</span>
                   </div>
                   <div className='row'>
                     <input
