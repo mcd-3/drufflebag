@@ -6,6 +6,7 @@ import { getSettingsJSON } from './../../utils/settings.js';
 
 function SettingsContent() {
   const config = getSettingsJSON();
+  const [settings, setSettings] = useState(config);
 
   return (
     <div>
@@ -51,11 +52,23 @@ function SettingsContent() {
                 <div className='inner-panel-container'>
                   <Header>Start Up</Header>
                   <div className='row'>
-                    <input type='checkbox' />
+                    <input
+                      type='checkbox'
+                      checked={settings.splashscreenEnabled}
+                      onChange={(evt) => {
+                        setSettings({...settings, splashscreenEnabled: evt.target.checked});
+                      }}
+                    />
                     <span>Enable the Ruffle splashscreen</span>
                   </div>
                   <div className='row'>
-                    <input type='checkbox' />
+                    <input
+                      type='checkbox'
+                      checked={settings.autoplayEnabled}
+                      onChange={(evt) => {
+                        setSettings({...settings, autoplayEnabled: evt.target.checked});
+                      }}
+                    />
                     <span>Enable autoplay</span>
                   </div>
                 </div>
@@ -72,7 +85,8 @@ function SettingsContent() {
               <button
                 className='footer-button footer-button-save'
                 onClick={() => {
-                  console.log(config)
+                  console.log(settings);
+                  console.log(config);
                 }}
               >Save</button>
             </div>
