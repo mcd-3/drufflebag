@@ -1,6 +1,6 @@
 use tauri_plugin_sql::{Migration, MigrationKind};
 
-pub struct MigrationsHistory { }
+pub struct MigrationsHistory {}
 
 impl MigrationsHistory {
     pub fn migrations() -> Vec<Migration> {
@@ -30,7 +30,7 @@ impl MigrationsHistory {
                     INSERT into swf_type_table (id, type) VALUES (1, 'Game');
                     INSERT into swf_type_table (id, type) VALUES (2, 'Animation');
                 ",
-                kind: MigrationKind::Up
+                kind: MigrationKind::Up,
             },
             Migration {
                 version: 5,
@@ -39,7 +39,7 @@ impl MigrationsHistory {
                     INSERT into avm_table (id, version) VALUES (1, 1);
                     INSERT into avm_table (id, version) VALUES (2, 2);
                 ",
-                kind: MigrationKind::Up
+                kind: MigrationKind::Up,
             },
             Migration {
                 version: 6,
@@ -51,7 +51,7 @@ impl MigrationsHistory {
                     INSERT into swf_status_table (id, status) VALUES (4, 'Boots');
                     INSERT into swf_status_table (id, status) VALUES (5, 'Nothing');
                 ",
-                kind: MigrationKind::Up
+                kind: MigrationKind::Up,
             },
             Migration {
                 version: 7,

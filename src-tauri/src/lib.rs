@@ -3,11 +3,11 @@ mod data {
     pub mod migrations;
 }
 
-use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path, io::Error};
-use data::migrations::MigrationsHistory;
 use chksum_md5 as md5;
-use tauri_plugin_dialog::{DialogExt, FilePath};
+use data::migrations::MigrationsHistory;
 use serde_json::{json, Result, Value};
+use std::{ffi::OsStr, fs::File, io::BufWriter, io::Error, path::Path};
+use tauri_plugin_dialog::{DialogExt, FilePath};
 
 #[tauri::command]
 async fn cache_swfs(swfs: Vec<Value>) {
@@ -25,10 +25,8 @@ async fn cache_swfs(swfs: Vec<Value>) {
 async fn get_cached_swfs() -> Vec<Value> {
     let path = Path::new("./.cached_swf.json");
     if path.exists() {
-        let file = File::open(path)
-            .expect("file should open read only");
-        let json: serde_json::Value =
-            serde_json::from_reader(file).unwrap();
+        let file = File::open(path).expect("file should open read only");
+        let json: serde_json::Value = serde_json::from_reader(file).unwrap();
         json.as_array().unwrap().to_vec()
     } else {
         // File does not exist so nothing is cached
@@ -38,15 +36,23 @@ async fn get_cached_swfs() -> Vec<Value> {
 
 #[tauri::command]
 fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
-    tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
-        .title(swf_name)
-        .build()
-        .unwrap();
+    tauri::WebviewWindowBuilder::new(
+        &app,
+        "emulator",
+        tauri::WebviewUrl::App("ruffle.html".into()),
+    )
+    .title(swf_name)
+    .build()
+    .unwrap();
 }
 
 #[tauri::command]
 fn open_settings(app: tauri::AppHandle) {
-    tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
+    tauri::WebviewWindowBuilder::new(
+        &app,
+        "settings",
+        tauri::WebviewUrl::App("settings.html".into()),
+    )
     .title("Settings")
     .build()
     .unwrap();
@@ -71,14 +77,13 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
         match entry {
             Ok(entry) => {
                 let filename = entry.file_name();
-                let extension = Path::new(&filename)
-                    .extension()
-                    .and_then(OsStr::to_str);
+                let extension = Path::new(&filename).extension().and_then(OsStr::to_str);
 
                 match extension {
                     Some(ext_str) => {
                         if ext_str == "swf" {
-                            let full_path_str = format!("{}/{:?}", &directory_path_str, filename).replace("\"", "");
+                            let full_path_str =
+                                format!("{}/{:?}", &directory_path_str, filename).replace("\"", "");
 
                             // MD5 is not considered secure, but it should be ok for our purposes
                             let file_to_hash = File::open(&full_path_str).unwrap();
@@ -93,7 +98,7 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
 
                             swf_files.push(swf_json);
                         }
-                    },
+                    }
                     None => println!(""),
                 }
             }
@@ -133,6 +138,7 @@ pub fn run() {
     let db_migrations = MigrationsHistory::migrations();
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(
             tauri_plugin_sql::Builder::new()

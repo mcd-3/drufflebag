@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { exists, BaseDirectory } from '@tauri-apps/plugin-fs';
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
 import "./../../styles/App.css";
 
@@ -10,6 +11,18 @@ import NoItemsBox from "../../components/noItemsBox";
 function MainContent() {
   const [swfFiles, setSwfFiles] = useState([]);
   const [selectedSwfPath, setSelectedSwfPath] = useState("");
+
+  useEffect(() => {
+    const checkEmulatorExists = async () => {
+      const tokenExists = await exists('ruffle-core', {
+        baseDir: BaseDirectory.AppData,
+      });
+
+      console.log(tokenExists);
+    };
+
+    checkEmulatorExists();
+  }, []);
 
   useEffect(() => {
     invoke('get_cached_swfs').then((cache, err) => {
