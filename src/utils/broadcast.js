@@ -4,6 +4,7 @@ const GLOBAL_BC = "drufflebag_channel";
 const EVENT_CLOSE_EMULATION = "close_emulation";
 const EVENT_PLAY_BUTTON_CHANGE = "update_play_button";
 const EVENT_CACHE_REFRESH = "cache_refresh";
+const EVENT_UPDATE_SWF_BY_HASH = "update_swf_by_hash";
 
 /**
  * Gets the global BroadcastChannel used within the application
@@ -21,7 +22,7 @@ const getBroadcastChannel = () => {
  */
 const closeBroadcastChanel = ({ broadcastChannel }) => {
   broadcastChannel.close();
-}
+};
 
 /**
  * Posts the "close emulation" event
@@ -48,7 +49,17 @@ const evtUpdatePlayButton = ({ broadcastChannel }) => {
  */
 const evtCacheRefresh = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_CACHE_REFRESH);
-}
+};
+
+/**
+ * Posts the "update swf by hash" event
+ *
+ * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @param {string} hash - Swf hash
+ */
+const evtUpdateSwfByHash = ({broadcastChannel, hash, avm, date}) => {
+  broadcastChannel.postMessage(`${EVENT_UPDATE_SWF_BY_HASH}:::${hash}:::${avm}:::${date}`);
+};
 
 /**
  * Set a listener and callback for the "emulator close" event on a BroadcastChannel
@@ -62,7 +73,7 @@ const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
       onEmulatorClose();
     }
   };
-}
+};
 
 /**
  * Set a listener and callback for the "update play button" event on a BroadcastChannel
@@ -76,7 +87,7 @@ const injectOnUpdatePlayButton = ({ broadcastChannel, onUpdatePlayButton }) => {
       onUpdatePlayButton();
     }
   };
-}
+};
 
 /**
  * Set a listener and callback for the "cache refresh" event on a BroadcastChannel
@@ -90,7 +101,23 @@ const injectOnCacheRefresh = ({ broadcastChannel, onCacheRefresh }) => {
       onCacheRefresh();
     }
   };
-}
+};
+
+/**
+ * Set a listener and callback for the "update swf by hash" event on a BroadcastChannel
+ *
+ * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
+ * @param {callback} onUpdateSwfByHash - Callback function to execute when swf in cache needs to be updated
+ */
+const injectOnUpdateSwfByHash = ({ broadcastChannel, onUpdateSwfByHash }) => {
+  broadcastChannel.onmessage = (event) => {
+    if (event.startsWith(EVENT_UPDATE_SWF_BY_HASH)) {
+      const paramArray = event.split(':::');
+      paramArray.shift();
+      onUpdateSwfByHash(paramArray);
+    }
+  };
+};
 
 export {
   getBroadcastChannel,
@@ -98,7 +125,9 @@ export {
   evtCloseEmulation,
   evtUpdatePlayButton,
   evtCacheRefresh,
+  evtUpdateSwfByHash,
   injectOnEmulatorClose,
   injectOnUpdatePlayButton,
   injectOnCacheRefresh,
+  injectOnUpdateSwfByHash,
 };

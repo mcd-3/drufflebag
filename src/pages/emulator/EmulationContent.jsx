@@ -7,6 +7,7 @@ import {
   evtCloseEmulation,
   closeBroadcastChanel,
   evtUpdatePlayButton,
+  evtUpdateSwfByHash,
   injectOnEmulatorClose,
 } from './../../utils/broadcast.js';
 import { getSettingsJSON } from './../../utils/settings.js';
@@ -85,10 +86,20 @@ function EmulationContent() {
           "get_swf_hash",
           { swfAbsolutePath: getCurrentlyPlayingSwfPath() }
         ).then((hash) => {
+          const avm = player.metadata.isActionScript3 ? 2 : 1;
+          const date = Math.floor(Date.now() / 1000);
+
           updateSWFDateAVMByHash({
             hash,
-            avm: player.metadata.isActionScript3 ? 2 : 1,
-            date: Math.floor(Date.now() / 1000),
+            avm,
+            date,
+          });
+
+          evtUpdateSwfByHash({
+            broadcastChannel: getBroadcastChannel(),
+            hash,
+            avm,
+            date,
           });
         });
       })
