@@ -136,6 +136,8 @@ function SettingsContent() {
                   }
                 }}
               >Cancel</button>
+              {/* This span is just for spacing between the buttons */}
+              <span>  </span>
               <button
                 className='footer-button footer-button-save'
                 onClick={() => {
