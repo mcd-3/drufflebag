@@ -54,7 +54,10 @@ function SettingsContent() {
                   <div className='row'>
                     <select
                       onChange={(evt) => {
-                        setSettings({...settings, emulationScale: parseFloat(evt.target.value)})
+                        setSettings({
+                          ...settings,
+                          emulationScale: parseFloat(evt.target.value)
+                        });
                       }}
                       value={settings.emulationScale}
                     >
@@ -73,7 +76,10 @@ function SettingsContent() {
                       type='checkbox'
                       checked={settings.splashscreenEnabled}
                       onChange={(evt) => {
-                        setSettings({...settings, splashscreenEnabled: evt.target.checked});
+                        setSettings({
+                          ...settings,
+                          splashscreenEnabled: evt.target.checked
+                        });
                       }}
                     />
                     <span>Enable the Ruffle splashscreen</span>
@@ -83,7 +89,10 @@ function SettingsContent() {
                       type='checkbox'
                       checked={settings.autoplayEnabled}
                       onChange={(evt) => {
-                        setSettings({...settings, autoplayEnabled: evt.target.checked});
+                        setSettings({
+                          ...settings,
+                          autoplayEnabled: evt.target.checked
+                        });
                       }}
                     />
                     <span>Enable autoplay</span>
