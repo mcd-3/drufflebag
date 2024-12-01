@@ -22,12 +22,17 @@ function SettingsContent() {
               <div className='inner-panel-container'>
                 <Header>Themes</Header>
                 <div className='row'>
-                  <select>
-                    <option>System (default)</option>
-                    <option>Light</option>
-                    <option>Dark</option>
-                    <option>Ruffled</option>
-                    <option>Flashy</option>
+                  <select
+                    onChange={(evt) => {
+                      setSettings({...settings, theme: evt.target.value})
+                    }}
+                    value={settings.theme}
+                  >
+                    <option value={'system'}>System (default)</option>
+                    <option value={'light'}>Light</option>
+                    <option value={'dark'}>Dark</option>
+                    <option value={'ruffled'}>Ruffled</option>
+                    <option value={'flashy'}>Flashy</option>
                   </select>
                   <span>Application Theme</span>
                 </div>
@@ -40,10 +45,15 @@ function SettingsContent() {
                 <div className='inner-panel-container'>
                   <Header>Scale</Header>
                   <div className='row'>
-                    <select>
-                      <option>1x</option>
-                      <option>1.5x</option>
-                      <option>2x</option>
+                    <select
+                      onChange={(evt) => {
+                        setSettings({...settings, emulationScale: parseFloat(evt.target.value)})
+                      }}
+                      value={settings.emulationScale}
+                    >
+                      <option value={1}>1x</option>
+                      <option value={1.5}>1.5x</option>
+                      <option value={2}>2x</option>
                     </select>
                     <span>Emulation window scale size</span>
                   </div>
