@@ -59,6 +59,18 @@ fn open_settings(app: tauri::AppHandle) {
 }
 
 #[tauri::command]
+fn open_no_emulator(app: tauri::AppHandle) {
+    tauri::WebviewWindowBuilder::new(
+        &app,
+        "no-emulator",
+        tauri::WebviewUrl::App("no-emulator.html".into()),
+    )
+    .title("Emulator not Found")
+    .build()
+    .unwrap();
+}
+
+#[tauri::command]
 async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
         app.dialog().file().blocking_pick_folder().unwrap()
@@ -154,6 +166,7 @@ pub fn run() {
             get_cached_swfs,
             copy_to_public,
             get_swf_hash,
+            open_no_emulator,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

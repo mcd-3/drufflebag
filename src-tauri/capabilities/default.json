@@ -5,7 +5,8 @@
   "windows": [
     "main",
     "emulator",
-    "settings"
+    "settings",
+    "no-emulator"
   ],
   "permissions": [
     "core:default",
@@ -20,7 +21,14 @@
     "fs:default",
     {
       "identifier": "fs:scope",
-      "allow": [{ "path": "$APPDATA" }, { "path": "$APPDATA/**" }]
+      "allow": [
+        {
+          "path": "$APPDATA"
+        },
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
     }
   ]
 }

@@ -19,6 +19,10 @@ function MainContent() {
       });
 
       console.log(tokenExists);
+
+      if (!tokenExists) {
+        invoke('open_no_emulator');
+      }
     };
 
     checkEmulatorExists();
