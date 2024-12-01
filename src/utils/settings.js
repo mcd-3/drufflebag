@@ -23,7 +23,12 @@ const saveSettings = ({
   emulationScale,
   splashscreenEnabled
 }) => {
-  console.log({ theme, autoplayEnabled, emulationScale, splashscreenEnabled });
+  setSettings({
+    theme,
+    autoplayEnabled,
+    emulationScale,
+    splashscreenEnabled
+  });
 };
 
 const getSettingsJSON = () => {
@@ -31,6 +36,10 @@ const getSettingsJSON = () => {
 
   if (settings === null) {
     return getDefaultSettings();
+  }
+
+  if (!themes[settings.theme]) {
+    settings.theme = 'system';
   }
 
   return settings;

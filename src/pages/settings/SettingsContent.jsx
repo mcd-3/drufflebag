@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "./../../styles/Settings.css";
 import Header from './../../components/header.jsx';
-import { getSettingsJSON } from './../../utils/settings.js';
+import { getSettingsJSON, getDefaultSettings, saveSettings } from './../../utils/settings.js';
 
 function SettingsContent() {
   const config = getSettingsJSON();
@@ -88,15 +88,28 @@ function SettingsContent() {
         <footer>
           <div className='footer-container'>
             <div>
-              <button className='footer-button footer-button-danger' onClick={() => { console.log('Reset!') }} >Reset to Default</button>
+              <button
+                className='footer-button footer-button-danger'
+                onClick={() => {
+                  // TODO: Add dialog here -> "Are you sure you want to reset?"
+                  setSettings({ ...getDefaultSettings()});
+                  saveSettings(getDefaultSettings());
+                }}
+              >Reset to Default</button>
             </div>
             <div>
-              <button className='footer-button' onClick={() => { console.log('Cancelled!') }} >Cancel</button>
+              <button
+                className='footer-button'
+                onClick={() => {
+                  // TODO: Close window & don't save anything
+                  console.log('Cancelled!')
+                }}
+              >Cancel</button>
               <button
                 className='footer-button footer-button-save'
                 onClick={() => {
-                  console.log(settings);
-                  console.log(config);
+                  // TODO: CLose the settings window once settings are saved
+                  saveSettings(settings);
                 }}
               >Save</button>
             </div>
