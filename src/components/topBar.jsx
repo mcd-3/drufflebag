@@ -64,11 +64,11 @@ const TopBar = ({
 
   const scanDirectory = async (cachedDirectoryPath = "") => {
     const files = await invoke("scan_directory", { cachedDirectoryPath });
+    const cacheToWrite = [];
     if (files.swfs.length > 0) {
-      const cacheToWrite = [];
-
       for await (const swf of files.swfs) {
         const swfResult = await getSWFByHash(`${swf['md5_hash']}`);
+        console.log(swfResult);
         let swfJSON;
 
         if (swfResult.length == 0) {
@@ -106,7 +106,7 @@ const TopBar = ({
       setCachedDirectory(files.parent_dir);
       writeJsonCache(cacheToWrite);
     }
-    setSwfFiles(files.swfs);
+    setSwfFiles(cacheToWrite);
   }
 
   return (
