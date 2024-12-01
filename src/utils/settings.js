@@ -55,4 +55,20 @@ const getThemes = () => {
   };
 };
 
-export { saveSettings, getSettingsJSON, getThemes, getDefaultSettings };
+const compareSettings = (settings1, settings2) => {
+  // TODO: Make this more flexible instead of hardcoding everything
+  return (
+    settings1.theme === settings2.theme
+      && settings1.autoplayEnabled === settings2.autoplayEnabled
+      && settings1.emulationScale === settings2.emulationScale
+      && settings1.splashscreenEnabled === settings2.splashscreenEnabled
+  );
+};
+
+export {
+  saveSettings,
+  getSettingsJSON,
+  getThemes,
+  getDefaultSettings,
+  compareSettings
+};

@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { confirm } from '@tauri-apps/plugin-dialog';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import "./../../styles/Settings.css";
 import Header from './../../components/header.jsx';
-import { getSettingsJSON, getDefaultSettings, saveSettings } from './../../utils/settings.js';
+import {
+  getSettingsJSON,
+  getDefaultSettings,
+  saveSettings,
+  compareSettings,
+} from './../../utils/settings.js';
 
 function SettingsContent() {
   const config = getSettingsJSON();
@@ -90,26 +97,41 @@ function SettingsContent() {
             <div>
               <button
                 className='footer-button footer-button-danger'
-                onClick={() => {
-                  // TODO: Add dialog here -> "Are you sure you want to reset?"
-                  setSettings({ ...getDefaultSettings()});
-                  saveSettings(getDefaultSettings());
+                onClick={async () => {
+                  const confirmed = await confirm(
+                    'Settings will be reverted back to factory settings and saved.',
+                    { title: 'Revert to default settings?', kind: 'warning' }
+                  );
+                  if (confirmed) {
+                    setSettings({ ...getDefaultSettings()});
+                    saveSettings(getDefaultSettings());
+                  }
                 }}
               >Reset to Default</button>
             </div>
             <div>
               <button
                 className='footer-button'
-                onClick={() => {
-                  // TODO: Close window & don't save anything
-                  console.log('Cancelled!')
+                onClick={async () => {
+                  if (!compareSettings(settings, config)) {
+                    const confirmed = await confirm(
+                      'You have unsaved changes',
+                      { title: 'Discard changes?', kind: 'warning' }
+                    );
+
+                    if (confirmed) {
+                      getCurrentWindow().destroy();
+                    }
+                  } else {
+                    getCurrentWindow().destroy();
+                  }
                 }}
               >Cancel</button>
               <button
                 className='footer-button footer-button-save'
                 onClick={() => {
-                  // TODO: CLose the settings window once settings are saved
                   saveSettings(settings);
+                  getCurrentWindow().destroy();
                 }}
               >Save</button>
             </div>
