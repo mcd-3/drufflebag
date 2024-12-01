@@ -9,11 +9,14 @@ import {
   evtUpdatePlayButton,
   injectOnEmulatorClose,
 } from './../../utils/broadcast.js';
+import { getSettingsJSON } from './../../utils/settings.js';
 import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
 import { updateSWFDateAVMByHash } from './../../utils/database.js';
 import "./../../styles/Emulation.css";
 
 function EmulationContent() {
+  const settings = getSettingsJSON();
+
   const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
     const confirmed = await confirm(
       'Any unsaved changes will be lost.',
@@ -55,8 +58,8 @@ function EmulationContent() {
       const player = ruffle.createPlayer();
 
       player.config = {
-        autoplay: "auto",
-        splashScreen: false,
+        autoplay: settings.autoplayEnabled ? "on" : "off",
+        splashScreen: settings.splashscreenEnabled,
       }
 
       const container = document.getElementById("ruffle-container");
@@ -73,7 +76,8 @@ function EmulationContent() {
 
       player.addEventListener('loadedmetadata', () => {
         if (player.metadata.width && player.metadata.height) {
-          getCurrentWindow().setSize(new LogicalSize(player.metadata.width, player.metadata.height));
+          const scale = settings.emulationScale;
+          getCurrentWindow().setSize(new LogicalSize(player.metadata.width * scale, player.metadata.height * scale));
         }
 
         // Asynchronously update the cache and DB to have the correct AVM version & date last played
