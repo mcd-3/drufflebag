@@ -1,6 +1,6 @@
 # Drufflebag [WIP]
 
-A desktop frontend for the Adobe Flash emulator Ruffle. 
+A desktop frontend for the Adobe Flash emulator Ruffle. Plays single-file SWF applications.
 
 ## Recommended IDE Setup
 
