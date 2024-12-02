@@ -158,7 +158,7 @@ const TopBar = ({
           disabled={selectedSwfPath == "" ? true : false} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
-      <div className={styles["topBar-spoof-column"]}>
+      {/* <div className={styles["topBar-spoof-column"]}>
         <input
           className={styles["topBar-spoof-checkbox"]}
           type='checkbox'
@@ -178,7 +178,7 @@ const TopBar = ({
             setGlobalSpoof({ url: e.target.value, isEnabled: globalSpoof.isEnabled })
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

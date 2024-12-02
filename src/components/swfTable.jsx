@@ -58,10 +58,10 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
       cell: info => "---",
       header: 'Status',
     }),
-    columnHelper.accessor('url', {
-      cell: info => "",
-      header: 'URL Spoof',
-    }),
+    // columnHelper.accessor('url', {
+    //   cell: info => "",
+    //   header: 'URL Spoof',
+    // }),
   ];
 
   const table = useReactTable({
