@@ -36,14 +36,34 @@ async fn get_cached_swfs() -> Vec<Value> {
     }
 }
 
+#[cfg(windows)]
 #[tauri::command]
-fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
+async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
     tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
         .title(swf_name)
         .build()
         .unwrap();
 }
 
+#[cfg(not(windows))]
+#[tauri::command]
+async fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
+    tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
+        .title(swf_name)
+        .build()
+        .unwrap();
+}
+
+#[cfg(windows)]
+#[tauri::command]
+async fn open_settings(app: tauri::AppHandle) {
+    tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
+    .title("Settings")
+    .build()
+    .unwrap();
+}
+
+#[cfg(not(windows))]
 #[tauri::command]
 fn open_settings(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
