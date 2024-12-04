@@ -3,11 +3,11 @@ mod data {
     pub mod migrations;
 }
 
-use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path, io::Error};
+use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
 use data::migrations::MigrationsHistory;
 use chksum_md5 as md5;
 use tauri_plugin_dialog::{DialogExt, FilePath};
-use serde_json::{json, Result, Value};
+use serde_json::{json, Value};
 
 #[tauri::command]
 async fn cache_swfs(swfs: Vec<Value>) {
