@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -28,4 +29,13 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
+  build: {
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+          ruffle: resolve(__dirname, 'ruffle.html'),
+          settings: resolve(__dirname, 'settings.html'),
+        },
+      },
+    },
 }));

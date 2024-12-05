@@ -14,7 +14,7 @@ import {
 } from './../utils/storage.js';
 import { insertSWF, getSWFByHash } from './../utils/database.js';
 import { makeSwfJSON } from './../utils/swf.js';
-import { getAssetPath } from './../utils/assets.js';
+import { getAsset } from './../utils/assets.js';
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -115,14 +115,14 @@ const TopBar = ({
         <IconButton
           className={styles["topBar-open-button"]}
           text="Open"
-          src={getAssetPath('folder.svg')}
+          src={getAsset("ICN_FOLDER")}
           onClick={async () => {
             scanDirectory();
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}
           text="Refresh"
-          src={getAssetPath('refresh-double.svg')}
+          src={getAsset("ICN_REFRESH")}
           onClick={async () => {
             const directory = getCachedDirectory();
             if (!directory) {
@@ -134,7 +134,7 @@ const TopBar = ({
         <IconButton
           className={styles["topBar-settings-button"]}
           text="Settings"
-          src={getAssetPath('settings.svg')}
+          src={getAsset("ICN_SETTINGS")}
           onClick={ () => { openSettings() }} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
@@ -142,7 +142,7 @@ const TopBar = ({
         <IconButton
           className={styles["topBar-pause-button"]}
           text={ruffleOpen ? 'Stop' : 'Play'}
-          src={ruffleOpen ? getAssetPath('square.svg') : getAssetPath('play.svg')}
+          src={ruffleOpen ? getAsset("ICN_STOP") : getAsset("ICN_PLAY")}
           onClick={() => {
             if (ruffleOpen) {
               evtCloseEmulation({ broadcastChannel: getBroadcastChannel() })
@@ -166,7 +166,7 @@ const TopBar = ({
           onChange={(e) => {
             setGlobalSpoof({ url: globalSpoof.url, isEnabled: e.target.checked});
           }}/>
-        <img className={styles["topBar-spoof-icon"]} src={getAssetPath('globe.svg')}/>
+        <img className={styles["topBar-spoof-icon"]} src={getAsset("ICN_GLOBE")}/>
         <input
           className={styles["topBar-spoof-url-textbox"]}
           type='text'

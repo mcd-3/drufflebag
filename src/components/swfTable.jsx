@@ -2,12 +2,13 @@ import { useState } from "react";
 import styles from '../styles/components/swfTable.module.css';
 import { formatBytes } from './../utils/bytes.js';
 import { getDateFromTimestamp } from './../utils/date.js';
+import { getAsset } from './../utils/assets.js';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from '@tanstack/react-table'
+} from '@tanstack/react-table';
 
 const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
   const [activeIndex, setActiveIndex] = useState();
@@ -17,24 +18,23 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
   const columns = [
     columnHelper.accessor('avm', {
       cell: info => {
-        let avmVersion = "_unknown";
+        let avmVersion = getAsset('AVM_UNKOWN');
 
         if (info && info.getValue()) {
           switch (info.getValue()) {
             case 1:
-              avmVersion = "1";
+              avmVersion = getAsset('AVM_1');
               break;
             case 2:
-              avmVersion = "2";
+              avmVersion = getAsset('AVM_2');
               break;
             case 0:
             default:
-              avmVersion = "_unknown";
               break;
           }
         }
 
-        return <img src={`public/avm${avmVersion}.svg`} width={32} height={32} />
+        return <img src={avmVersion} width={32} height={32} />
       },
       header: 'AVM',
     }),
