@@ -47,7 +47,7 @@ async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
 
 #[cfg(not(windows))]
 #[tauri::command]
-async fn open_ruffle(app: tauri::AppHandle, swf_name: &str) {
+async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
     tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
         .title(swf_name)
         .build()

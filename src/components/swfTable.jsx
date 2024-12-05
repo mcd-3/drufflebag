@@ -18,7 +18,7 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
   const columns = [
     columnHelper.accessor('avm', {
       cell: info => {
-        let avmVersion = getAsset('AVM_UNKOWN');
+        let avmVersion = getAsset('AVM_UNKNOWN');
 
         if (info && info.getValue()) {
           switch (info.getValue()) {
