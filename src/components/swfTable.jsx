@@ -3,6 +3,8 @@ import styles from '../styles/components/swfTable.module.css';
 import { formatBytes } from './../utils/bytes.js';
 import { getDateFromTimestamp } from './../utils/date.js';
 import { getAsset } from './../utils/assets.js';
+import { useContextMenu } from './../hooks/useContextMenu';
+import ContextMenu from './contextMenu.jsx';
 import {
   createColumnHelper,
   flexRender,
@@ -12,8 +14,17 @@ import {
 
 const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
   const [activeIndex, setActiveIndex] = useState();
+  const { menuVisible, menuItems, menuPosition, showMenu, hideMenu } = useContextMenu();
+  const columnHelper = createColumnHelper();
 
-  const columnHelper = createColumnHelper()
+  const handleContextMenu = (event, rowData) => {
+    event.preventDefault();
+    setActiveIndex(rowData.index);
+    showMenu(event, [
+      { label: 'Edit', action: () => console.log('Edit', rowData) },
+      { label: 'Play SWF', action: () => console.log('Play', rowData) }, 
+    ]);
+  };
 
   const columns = [
     columnHelper.accessor('avm', {
@@ -71,40 +82,48 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
   })
 
   return (
-    <table className={styles['swfTable-root']}>
-      <thead>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map(row => (
-          <tr key={row.id} className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]} onClick={
-            () => {
-              setSelectedSwfPath(row.original.path);
-              setActiveIndex(row.id);
-            }
-          }>
-            {row.getVisibleCells().map(cell => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <table className={styles['swfTable-root']}>
+        <thead>
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map(row => (
+            <tr
+              key={row.id}
+              className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
+              onClick={
+                () => {
+                  setSelectedSwfPath(row.original.path);
+                  setActiveIndex(row.id);
+                }
+              }
+              onContextMenu={(event) => handleContextMenu(event, row)}
+            >
+              {row.getVisibleCells().map(cell => (
+                <td key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {menuVisible && <ContextMenu items={menuItems} position={menuPosition} />}
+    </div>
   );
 };
 
