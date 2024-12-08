@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
+import { writeJsonCache } from './../../utils/invoker.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -34,7 +35,7 @@ function MainContent() {
           newArray[i].avm = parseInt(params[1]);
           newArray[i].lp = params[2];
           setSwfFiles([...newArray]);
-          await invoke("cache_swfs", { swfs: [...newArray] });
+          writeJsonCache([...newArray]);
           break;
         }
       }
