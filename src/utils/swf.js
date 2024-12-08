@@ -1,7 +1,9 @@
 /**
  * Wrapper function that returns a JSON object for a SWF file.
  * Used mostly for the known named parameters.
- * 
+ *
+ * @deprecated
+ *
  * @param {*} param0 
  * @returns {object} SWF file JSON object
  */

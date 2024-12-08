@@ -13,8 +13,8 @@ import {
   setCurrentlyPlayingSwfPath,
 } from './../utils/storage.js';
 import { insertSWF, getSWFByHash } from './../utils/database.js';
-import { makeSwfJSON } from './../utils/swf.js';
 import { getAsset } from './../utils/assets.js';
+import Swf from "../models/swf.js";
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -68,11 +68,10 @@ const TopBar = ({
     if (files.swfs.length > 0) {
       for await (const swf of files.swfs) {
         const swfResult = await getSWFByHash(`${swf['md5_hash']}`);
-        console.log(swfResult);
-        let swfJSON;
+        let swfObj;
 
-        if (swfResult.length == 0) {
-          swfJSON = makeSwfJSON({
+        if (swfResult === null) {
+          swfObj = new Swf({
             avm: 0,
             name: swf.path.split('/').pop(),
             path: swf.path,
@@ -84,23 +83,13 @@ const TopBar = ({
             url: ''
           });
 
-          await insertSWF(swfJSON);
+          await insertSWF(swfObj);
         } else {
-          const firstResult = swfResult[0];
-          swfJSON = makeSwfJSON({
-            avm: !firstResult['avm_id'] ? 0 : firstResult['avm_id'],
-            name: firstResult.name,
-            path: swf.path,
-            md5_hash: firstResult['md5_hash'],
-            type: !firstResult['type_id'] ? "" : firstResult['type_id'],
-            size: firstResult['file_size_bytes'],
-            lp: !firstResult['last_played_date'] ? "" : firstResult['last_played_date'],
-            status: !firstResult['status_id'] ? "" : firstResult['status_id'],
-            url: !firstResult['spoofed_url'] ? "" : firstResult['spoofed_url'],
-          })
+          swfObj = swfResult;
+          swfObj.path = swf.path;
         }
-        
-        cacheToWrite.push(swfJSON);
+
+        cacheToWrite.push(swfObj);
       }
 
       setCachedDirectory(files.parent_dir);
