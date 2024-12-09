@@ -49,8 +49,8 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
       },
       header: 'AVM',
     }),
-    columnHelper.accessor('path', {
-      cell: info => info.getValue().split('/').pop(),
+    columnHelper.accessor('name', {
+      cell: info => info.getValue(),
       header: 'Name',
     }),
     columnHelper.accessor('type', {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { invoke } from "@tauri-apps/api/core";
 import {
   getBroadcastChannel,
   injectOnUpdatePlayButton,
@@ -12,9 +11,16 @@ import {
   getGlobalSpoofUrl,
   setCurrentlyPlayingSwfPath,
 } from './../utils/storage.js';
+import {
+  copyToPublic,
+  openRuffle,
+  openSettings,
+  writeJsonCache,
+  scanDirectory,
+} from './../utils/invoker.js';
 import { insertSWF, getSWFByHash } from './../utils/database.js';
-import { makeSwfJSON } from './../utils/swf.js';
 import { getAsset } from './../utils/assets.js';
+import Swf from "../models/swf.js";
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 
@@ -48,31 +54,22 @@ const TopBar = ({
     }
   }, [])
 
-  const writeJsonCache = async (swfFiles) => {
-    await invoke("cache_swfs", { swfs: swfFiles });
-  }
-
   const launch_ruffle = (swfName) => {
-    invoke("copy_to_public", { swfAbsolutePath: swfName });
-    invoke("open_ruffle", { swfName: swfName.split('/').pop() });
+    copyToPublic(swfName);
+    openRuffle(swfName.split('/').pop());
     setRuffleOpen(true);
   }
 
-  const openSettings = () => {
-    invoke("open_settings");
-  };
-
-  const scanDirectory = async (cachedDirectoryPath = "") => {
-    const files = await invoke("scan_directory", { cachedDirectoryPath });
+  const scanSwfDirectory = async (cachedDirectoryPath = "") => {
+    const files = await scanDirectory(cachedDirectoryPath);
     const cacheToWrite = [];
     if (files.swfs.length > 0) {
       for await (const swf of files.swfs) {
         const swfResult = await getSWFByHash(`${swf['md5_hash']}`);
-        console.log(swfResult);
-        let swfJSON;
+        let swfObj;
 
-        if (swfResult.length == 0) {
-          swfJSON = makeSwfJSON({
+        if (swfResult === null) {
+          swfObj = new Swf({
             avm: 0,
             name: swf.path.split('/').pop(),
             path: swf.path,
@@ -84,23 +81,13 @@ const TopBar = ({
             url: ''
           });
 
-          await insertSWF(swfJSON);
+          await insertSWF(swfObj);
         } else {
-          const firstResult = swfResult[0];
-          swfJSON = makeSwfJSON({
-            avm: !firstResult['avm_id'] ? 0 : firstResult['avm_id'],
-            name: firstResult.name,
-            path: swf.path,
-            md5_hash: firstResult['md5_hash'],
-            type: !firstResult['type_id'] ? "" : firstResult['type_id'],
-            size: firstResult['file_size_bytes'],
-            lp: !firstResult['last_played_date'] ? "" : firstResult['last_played_date'],
-            status: !firstResult['status_id'] ? "" : firstResult['status_id'],
-            url: !firstResult['spoofed_url'] ? "" : firstResult['spoofed_url'],
-          })
+          swfObj = swfResult;
+          swfObj.path = swf.path;
         }
-        
-        cacheToWrite.push(swfJSON);
+
+        cacheToWrite.push(swfObj);
       }
 
       setCachedDirectory(files.parent_dir);
@@ -117,7 +104,7 @@ const TopBar = ({
           text="Open"
           src={getAsset("ICN_FOLDER")}
           onClick={async () => {
-            scanDirectory();
+            scanSwfDirectory();
           }} />
         <IconButton
           className={styles["topBar-refresh-button"]}
@@ -129,7 +116,7 @@ const TopBar = ({
               // TODO: Show a warning alert
               return;
             }
-            scanDirectory(directory);
+            scanSwfDirectory(directory);
           }} />
         <IconButton
           className={styles["topBar-settings-button"]}
