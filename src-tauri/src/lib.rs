@@ -59,6 +59,7 @@ async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
 async fn open_settings(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
     .title("Settings")
+    .inner_size(600.0, 450.0)
     .build()
     .unwrap();
 }
@@ -68,6 +69,7 @@ async fn open_settings(app: tauri::AppHandle) {
 fn open_settings(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
     .title("Settings")
+    .inner_size(600.0, 450.0)
     .build()
     .unwrap();
 }
@@ -133,7 +135,7 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
 
 #[tauri::command]
 fn copy_to_public(swf_absolute_path: &str) {
-    std::fs::copy(swf_absolute_path, "./../public/play.temp.swf");
+    std::fs::copy(swf_absolute_path, "./../public/play.temp.swf").unwrap();
 }
 
 #[tauri::command]

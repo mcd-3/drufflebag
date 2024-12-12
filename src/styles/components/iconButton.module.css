@@ -44,3 +44,13 @@
     margin-bottom: 2px;
     text-align: center;
 }
+
+@media (prefers-color-scheme: dark) {
+    .icon {
+        filter: invert(100%) sepia(0%) saturate(5786%) hue-rotate(314deg) brightness(112%) contrast(77%);
+    }
+
+    .iconButton-button:disabled > .icon {
+        filter: invert(42%) sepia(0%) saturate(0%) hue-rotate(142deg) brightness(98%) contrast(80%);
+    }
+}

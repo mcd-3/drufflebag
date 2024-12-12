@@ -34,3 +34,21 @@
     color: rgb(133, 133, 133);
     font-style: italic;
 }
+
+@media (prefers-color-scheme: dark) {
+    .noItemsBox-container {
+        background-color: rgb(35, 35, 35);
+    }
+
+    .noItemsBox-header {
+        color: rgb(187, 187, 187)
+    }
+
+    .noItemsBox-subtext {
+        color: rgb(187, 187, 187)
+    }
+
+    .noItemsBox-icon {
+        filter: invert(86%) sepia(0%) saturate(868%) hue-rotate(158deg) brightness(94%) contrast(75%);
+    }
+}

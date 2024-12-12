@@ -59,13 +59,13 @@ footer {
 }
 
 /* Footer Button Styles */
-
 .footer-button {
     border: 1px solid #767676;
     background-color: #00000000;
     border-radius: 4px;
     padding: 8px 8px 8px 8px;
     font-size: 0.8em;
+    cursor: pointer;
 }
 
 .footer-button:hover {
@@ -153,16 +153,6 @@ footer {
     outline: none;
 }
 
-/* .react-tabs__tab:focus:after {
-    content: '';
-    position: absolute;
-    height: 5px;
-    left: -4px;
-    right: -4px;
-    bottom: -5px;
-    background: #fff;
-} */
-
 .react-tabs__tab-panel {
     display: none;
 }
@@ -173,4 +163,34 @@ footer {
     height: 100%;
     background-color: #fafafa;
 }
-  
+
+@media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        background: #2f2f2f;
+      }
+      ::-webkit-scrollbar-thumb {
+        width: 8px;
+        background: rgb(66, 66, 66);
+      }
+
+    .footer-button:not(.footer-button-danger):not(.footer-button-save) {
+        color: white;
+    }
+
+    .inner-panel-container {
+        background-color: #191919;
+        border: 1px solid #181818;
+    }
+
+    .react-tabs__tab--selected {
+        background-color: #232323;
+        border-color: #343434;
+        color: white;
+    }
+
+    .react-tabs__tab-panel--selected {
+        border-color: #343434;
+        background-color: #232323;
+    }
+}
