@@ -19,33 +19,8 @@ function SettingsContent() {
     <div>
       <Tabs>
           <TabList>
-            <Tab>Application</Tab>
             <Tab>Emulation</Tab>
           </TabList>
-
-          <TabPanel>
-            <div className='panel-container'>
-              <br />
-              <div className='inner-panel-container'>
-                <Header>Themes</Header>
-                <div className='row'>
-                  <select
-                    onChange={(evt) => {
-                      setSettings({...settings, theme: evt.target.value})
-                    }}
-                    value={settings.theme}
-                  >
-                    <option value={'system'}>System (default)</option>
-                    <option value={'light'}>Light</option>
-                    <option value={'dark'}>Dark</option>
-                    <option value={'ruffled'}>Ruffled</option>
-                    <option value={'flashy'}>Flashy</option>
-                  </select>
-                  <span>Application Theme</span>
-                </div>
-              </div>
-            </div>
-          </TabPanel>
           <TabPanel>
             <div className='panel-container'>
                 <br />
