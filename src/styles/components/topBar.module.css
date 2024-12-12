@@ -83,8 +83,7 @@
     margin-bottom: auto;
 }
 
-/* TODO: Uncomment when light/dark switch is implemented */
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     .topBar-spoof-url-textbox {
         border: 1px solid rgb(38, 38, 38);
     }
@@ -92,4 +91,4 @@
     .topBar-spoof-url-textbox:disabled {
         background-color: #4e4e4e;
     }
-} */
+}

@@ -153,16 +153,6 @@ footer {
     outline: none;
 }
 
-/* .react-tabs__tab:focus:after {
-    content: '';
-    position: absolute;
-    height: 5px;
-    left: -4px;
-    right: -4px;
-    bottom: -5px;
-    background: #fff;
-} */
-
 .react-tabs__tab-panel {
     display: none;
 }
