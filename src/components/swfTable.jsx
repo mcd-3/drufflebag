@@ -121,10 +121,17 @@ const SwfTable = ({
                 className={styles['active']}
               >
                 <td key={row.getVisibleCells()[0].id}>
-                  {flexRender(row.getVisibleCells()[0].column.columnDef.cell, row.getVisibleCells()[0].getContext())}
+                  {flexRender(
+                    row.getVisibleCells()[0].column.columnDef.cell,
+                    row.getVisibleCells()[0].getContext()
+                  )}
                 </td>
                 <td key={row.getVisibleCells()[1].id}>
-                  <input type="text" value={row.getVisibleCells()[1].getValue() }/>
+                  <input
+                    type="text"
+                    value={row.getVisibleCells()[1].getValue()}
+                    onChange={(evt) => { console.log(evt.target.value) }}
+                  />
                 </td>
                 <td key={row.getVisibleCells()[2].id}>
                   <select
@@ -137,10 +144,16 @@ const SwfTable = ({
                   </select>
                 </td>
                 <td key={row.getVisibleCells()[3].id}>
-                  {flexRender(row.getVisibleCells()[3].column.columnDef.cell, row.getVisibleCells()[3].getContext())}
+                  {flexRender(
+                    row.getVisibleCells()[3].column.columnDef.cell,
+                    row.getVisibleCells()[3].getContext()
+                  )}
                 </td>
                 <td key={row.getVisibleCells()[4].id}>
-                  {flexRender(row.getVisibleCells()[4].column.columnDef.cell, row.getVisibleCells()[4].getContext())}
+                  {flexRender(
+                    row.getVisibleCells()[4].column.columnDef.cell,
+                    row.getVisibleCells()[4].getContext()
+                  )}
                 </td>
                 <td key={row.getVisibleCells()[5].id}>
                   <select
