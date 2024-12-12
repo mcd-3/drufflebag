@@ -30,3 +30,15 @@
     color: white;
     background-color: rgb(0, 62, 179);
 }
+
+@media (prefers-color-scheme: dark) {
+    .context-menu {
+        background-color: rgb(87, 87, 87);
+        color: rgb(224, 224, 224);
+        border-color: rgb(48, 48, 48);
+    }
+
+    .divider {
+        border-color: rgb(48, 48, 48);
+    }
+}
