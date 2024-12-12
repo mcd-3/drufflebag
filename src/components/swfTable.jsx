@@ -5,6 +5,7 @@ import { getDateFromTimestamp } from './../utils/date.js';
 import { getAsset } from './../utils/assets.js';
 import { useContextMenu } from './../hooks/useContextMenu';
 import { getStatuses, getTypes, updateSWF } from './../utils/database.js';
+import { writeJsonCache } from './../utils/invoker.js';
 import Swf from "../models/swf.js";
 import ContextMenu from './contextMenu.jsx';
 import {
@@ -16,6 +17,7 @@ import {
 
 const SwfTable = ({
   swfFiles,
+  setSwfFiles,
   setSelectedSwfPath,
   playSwfEvt,
 }) => {
@@ -24,6 +26,9 @@ const SwfTable = ({
   const [editedSwf, setEditedSwf]  = useState(null);
   const { menuVisible, menuItems, menuPosition, showMenu, hideMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
+
+  const statuses = getStatuses();
+  const types = getTypes();
 
   const handleContextMenu = (event, rowData) => {
     event.preventDefault();
@@ -72,10 +77,9 @@ const SwfTable = ({
       header: 'Name',
     }),
     columnHelper.accessor('type', {
-      cell: info => displayFallback({
-        condition: info.getValue() !== null,
-        original: info.getValue()
-      }),
+      cell: info => info.getValue() !== null
+      ? types[info.getValue() - 1].type
+      : '---',
       header: 'Type',
     }),
     columnHelper.accessor('size', {
@@ -90,10 +94,9 @@ const SwfTable = ({
       header: 'Last Played',
     }),
     columnHelper.accessor('status', {
-      cell: info => displayFallback({
-        condition: info.getValue() !== null,
-        original: info.getValue()
-      }),
+      cell: info => info.getValue() !== null
+        ? statuses[info.getValue() - 1].status
+        : '---',
       header: 'Status',
     }),
     // columnHelper.accessor('url', {
@@ -206,6 +209,15 @@ const SwfTable = ({
                 onClick={
                   async () => {
                     if (editedSwf !== null) {
+                      const newArray = [...swfFiles];
+                      for (let i = 0; i < swfFiles.length; i++) {
+                        if (swfFiles[i].md5_hash === editedSwf.md5_hash) {
+                          newArray[i] = editedSwf;
+                          setSwfFiles([...newArray]);
+                          break;
+                        }
+                      }
+                      writeJsonCache(newArray);
                       updateSWF(editedSwf);
                       setEditedSwf(null);
                     }

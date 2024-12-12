@@ -68,6 +68,7 @@ function MainContent() {
           ?
             <SwfTable
               swfFiles={swfFiles}
+              setSwfFiles={setSwfFiles}
               setSelectedSwfPath={setSelectedSwfPath}
               playSwfEvt={launchRuffle}
             />

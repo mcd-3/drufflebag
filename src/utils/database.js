@@ -37,10 +37,10 @@ const getSWFByHash = async (hash) => {
       name: result.name,
       path: "",
       md5_hash: result.md5_hash,
-      type: null,
+      type: result.type_id,
       size: result.file_size_bytes,
       lp: result.last_played_date,
-      status: null,
+      status: result.status_id,
       url: "",
     });
   
