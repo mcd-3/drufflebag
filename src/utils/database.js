@@ -52,6 +52,11 @@ const getSWFByHash = async (hash) => {
   }
 };
 
+/**
+ * Returns all Status objects from Database
+ *
+ * @returns {array} Array of Status objects
+ */
 const getStatuses = () => {
   // Don't get it from DB as it's expensive and not really worth it for most purposes
   return [
@@ -63,6 +68,11 @@ const getStatuses = () => {
   ];
 };
 
+/**
+ * Returns all Type objects from Database
+ *
+ * @returns {array} Array of Type objects
+ */
 const getTypes = () => {
   // Don't get it from DB as it's expensive and not really worth it for most purposes
   return [
@@ -102,14 +112,28 @@ const updateSWFDateAVMByHash = async ({ hash, date, avm }) => {
   }
 }
 
+/**
+ * Updates a Swf object in the database. Finds by MD5 hash.
+ *
+ * @param {Swf} swf - Swf to update
+ * @returns {} Update result
+ */
 const updateSWF = async (swf) => {
-  // Update by MD5 hash
-  // No checks to see if it exists
+  const db = await getDB();
   try {
-    // return await db.execute(
-    //     'UPDATE swf_table SET title = ?, status = ? WHERE id = ?',
-    //     [todos.title, todos.status, todos.id]
-    // )
+    return await db.execute(
+      'UPDATE swf_table SET name = ?, spoofed_url = ?, last_played_date = ?, file_size_bytes = ?, type_id = ?, status_id = ?, avm_id = ? WHERE md5_hash = ?',
+      [
+        swf.name,
+        "",
+        swf.lp,
+        swf.size,
+        swf.type === 0 ? null : swf.type,
+        swf.status === 0 ? null : swf.status,
+        swf.avm === 0 ? null : swf.avm,
+        swf.md5_hash,
+      ]
+    )
   } catch (e) {
     console.log('Could not update the following:');
     console.log(swf);
@@ -123,4 +147,5 @@ export {
   getTypes,
   insertSWF,
   updateSWFDateAVMByHash,
+  updateSWF,
 };

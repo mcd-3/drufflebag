@@ -4,7 +4,7 @@ import { formatBytes } from './../utils/bytes.js';
 import { getDateFromTimestamp } from './../utils/date.js';
 import { getAsset } from './../utils/assets.js';
 import { useContextMenu } from './../hooks/useContextMenu';
-import { getStatuses, getTypes } from './../utils/database.js';
+import { getStatuses, getTypes, updateSWF } from './../utils/database.js';
 import Swf from "../models/swf.js";
 import ContextMenu from './contextMenu.jsx';
 import {
@@ -204,13 +204,9 @@ const SwfTable = ({
                 key={row.id}
                 className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
                 onClick={
-                  () => {
-
-                    if (editedSwf === null) {
-                      console.log('its null');
-                    } else {
-                      console.log('not null');
-                      console.log(editedSwf);
+                  async () => {
+                    if (editedSwf !== null) {
+                      updateSWF(editedSwf);
                       setEditedSwf(null);
                     }
 
