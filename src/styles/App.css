@@ -146,9 +146,11 @@ body {
 
 @media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar {
+    width: 8px;
     background: #2f2f2f;
   }
   ::-webkit-scrollbar-thumb {
+    width: 8px;
     background: rgb(66, 66, 66);
   }
 
