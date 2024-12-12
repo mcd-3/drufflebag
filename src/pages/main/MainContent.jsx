@@ -28,9 +28,11 @@ function MainContent() {
   }, []);
 
   const launchRuffle = (swfPath, swfName) => {
-    copyToPublic(swfPath);
-    openRuffle(swfName);
-    setRuffleOpen(true);
+    if (!ruffleOpen) {
+      copyToPublic(swfPath);
+      openRuffle(swfName);
+      setRuffleOpen(true);
+    }
   };
 
   injectOnUpdateSwfByHash({
