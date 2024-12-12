@@ -38,6 +38,10 @@ const SwfTable = ({
     ]);
   };
 
+  const displayFallback = ({ condition, original }) => {
+    return condition ? original : '---';
+  };
+
   const columns = [
     columnHelper.accessor('avm', {
       cell: info => {
@@ -66,7 +70,10 @@ const SwfTable = ({
       header: 'Name',
     }),
     columnHelper.accessor('type', {
-      cell: info => '---',
+      cell: info => displayFallback({
+        condition: info.getValue() !== null,
+        original: info.getValue()
+      }),
       header: 'Type',
     }),
     columnHelper.accessor('size', {
@@ -74,11 +81,17 @@ const SwfTable = ({
       header: 'Size',
     }),
     columnHelper.accessor('lp', {
-      cell: info => info.getValue() ? getDateFromTimestamp(info.getValue()) : "---",
+      cell: info => displayFallback({
+        condition: info.getValue() !== null,
+        original: getDateFromTimestamp(info.getValue())
+      }),
       header: 'Last Played',
     }),
     columnHelper.accessor('status', {
-      cell: info => "---",
+      cell: info => displayFallback({
+        condition: info.getValue() !== null,
+        original: info.getValue()
+      }),
       header: 'Status',
     }),
     // columnHelper.accessor('url', {
