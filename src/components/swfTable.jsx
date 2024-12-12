@@ -24,7 +24,7 @@ const SwfTable = ({
   const [activeIndex, setActiveIndex] = useState();
   const [editIndex, setEditIndex] = useState();
   const [editedSwf, setEditedSwf]  = useState(null);
-  const { menuVisible, menuItems, menuPosition, showMenu, hideMenu } = useContextMenu();
+  const { menuVisible, menuItems, menuPosition, showMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
 
   const statuses = getStatuses();
@@ -78,7 +78,7 @@ const SwfTable = ({
     }),
     columnHelper.accessor('type', {
       cell: info => info.getValue() !== null
-      ? types[info.getValue() - 1].type
+      ? types[(info.getValue() ? info.getValue() - 1 : 0)].type
       : '---',
       header: 'Type',
     }),
@@ -95,7 +95,7 @@ const SwfTable = ({
     }),
     columnHelper.accessor('status', {
       cell: info => info.getValue() !== null
-        ? statuses[info.getValue() - 1].status
+        ? statuses[(info.getValue() ? info.getValue() - 1 : 0)].status
         : '---',
       header: 'Status',
     }),
