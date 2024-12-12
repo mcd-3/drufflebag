@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
-import { writeJsonCache } from './../../utils/invoker.js';
+import { writeJsonCache, copyToPublic, openRuffle } from './../../utils/invoker.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -11,6 +11,7 @@ import NoItemsBox from "../../components/noItemsBox";
 function MainContent() {
   const [swfFiles, setSwfFiles] = useState([]);
   const [selectedSwfPath, setSelectedSwfPath] = useState("");
+  const [ruffleOpen, setRuffleOpen] = useState(false);
 
   useEffect(() => {
     invoke('get_cached_swfs').then((cache, err) => {
@@ -25,6 +26,12 @@ function MainContent() {
 
     };
   }, []);
+
+  const launchRuffle = (swfPath, swfName) => {
+    copyToPublic(swfPath);
+    openRuffle(swfName);
+    setRuffleOpen(true);
+  };
 
   injectOnUpdateSwfByHash({
     broadcastChannel: getBroadcastChannel(),
@@ -48,12 +55,19 @@ function MainContent() {
         <TopBar 
           setSwfFiles={setSwfFiles}
           selectedSwfPath={selectedSwfPath}
+          ruffleOpen={ruffleOpen}
+          setRuffleOpen={setRuffleOpen}
+          playSwfEvt={launchRuffle}
         />
       </div>
       <div className={`${swfFiles.length > 0 ? "has-items" : "no-items"} swf-content-table`}>
         {swfFiles.length > 0 
           ?
-            <SwfTable swfFiles={swfFiles} setSelectedSwfPath={setSelectedSwfPath}/>
+            <SwfTable
+              swfFiles={swfFiles}
+              setSelectedSwfPath={setSelectedSwfPath}
+              playSwfEvt={launchRuffle}
+            />
           :
             <NoItemsBox />
         }

@@ -12,7 +12,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
+const SwfTable = ({
+  swfFiles,
+  setSelectedSwfPath,
+  playSwfEvt,
+}) => {
   const [activeIndex, setActiveIndex] = useState();
   const { menuVisible, menuItems, menuPosition, showMenu, hideMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
@@ -22,7 +26,7 @@ const SwfTable = ({ swfFiles, setSelectedSwfPath }) => {
     setActiveIndex(rowData.index);
     showMenu(event, [
       { label: 'Edit', action: () => console.log('Edit', rowData) },
-      { label: 'Play SWF', action: () => console.log('Play', rowData) }, 
+      { label: 'Play SWF', action: () => playSwfEvt(rowData.original.path, rowData.original.name) }, 
     ]);
   };
 
