@@ -5,6 +5,7 @@ import { getDateFromTimestamp } from './../utils/date.js';
 import { getAsset } from './../utils/assets.js';
 import { useContextMenu } from './../hooks/useContextMenu';
 import { getStatuses, getTypes } from './../utils/database.js';
+import Swf from "../models/swf.js";
 import ContextMenu from './contextMenu.jsx';
 import {
   createColumnHelper,
@@ -20,6 +21,7 @@ const SwfTable = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState();
   const [editIndex, setEditIndex] = useState();
+  const [editedSwf, setEditedSwf]  = useState(null);
   const { menuVisible, menuItems, menuPosition, showMenu, hideMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
 
@@ -30,7 +32,7 @@ const SwfTable = ({
       {
         label: 'Edit',
         action: () => {
-          console.log('Edit', rowData);
+          setEditedSwf(new Swf(rowData.original));
           setEditIndex(rowData.index);
         }
       },
@@ -142,13 +144,25 @@ const SwfTable = ({
                 <td key={row.getVisibleCells()[1].id}>
                   <input
                     type="text"
-                    value={row.getVisibleCells()[1].getValue()}
-                    onChange={(evt) => { console.log(evt.target.value) }}
+                    value={editedSwf.name}
+                    onChange={(evt) => {
+                      setEditedSwf(
+                        new Swf(
+                          {...editedSwf, name: evt.target.value}
+                        )
+                      )
+                    }}
                   />
                 </td>
                 <td key={row.getVisibleCells()[2].id}>
                   <select
-                    onChange={(evt) => { console.log(evt.target.value.toString()) }}
+                    onChange={(evt) => {
+                      setEditedSwf(
+                        new Swf(
+                          {...editedSwf, type: parseInt(evt.target.value)}
+                        )
+                      )
+                    }}
                   >
                     <option value={0}>---</option>
                     {getTypes().map(typeRes => (
@@ -170,7 +184,13 @@ const SwfTable = ({
                 </td>
                 <td key={row.getVisibleCells()[5].id}>
                   <select
-                    onChange={(evt) => { console.log(evt.target.value.toString()) }}
+                    onChange={(evt) => {
+                      setEditedSwf(
+                        new Swf(
+                          {...editedSwf, status: parseInt(evt.target.value)}
+                        )
+                      )
+                    }}
                   >
                     <option value={0}>---</option>
                     {getStatuses().map(statusRes => (
@@ -185,6 +205,15 @@ const SwfTable = ({
                 className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
                 onClick={
                   () => {
+
+                    if (editedSwf === null) {
+                      console.log('its null');
+                    } else {
+                      console.log('not null');
+                      console.log(editedSwf);
+                      setEditedSwf(null);
+                    }
+
                     setEditIndex();
                     setSelectedSwfPath(row.original.path);
                     setActiveIndex(row.id);
