@@ -4,6 +4,7 @@ import { formatBytes } from './../utils/bytes.js';
 import { getDateFromTimestamp } from './../utils/date.js';
 import { getAsset } from './../utils/assets.js';
 import { useContextMenu } from './../hooks/useContextMenu';
+import { getStatuses, getTypes } from './../utils/database.js';
 import ContextMenu from './contextMenu.jsx';
 import {
   createColumnHelper,
@@ -126,10 +127,13 @@ const SwfTable = ({
                   <input type="text" value={row.getVisibleCells()[1].getValue() }/>
                 </td>
                 <td key={row.getVisibleCells()[2].id}>
-                  <select>
-                    <option>---</option>
-                    <option>Game</option>
-                    <option>Animation</option>
+                  <select
+                    onChange={(evt) => { console.log(evt.target.value.toString()) }}
+                  >
+                    <option value={0}>---</option>
+                    {getTypes().map(typeRes => (
+                      <option value={typeRes.id}>{typeRes.type}</option>
+                    ))}
                   </select>
                 </td>
                 <td key={row.getVisibleCells()[3].id}>
@@ -139,13 +143,13 @@ const SwfTable = ({
                   {flexRender(row.getVisibleCells()[4].column.columnDef.cell, row.getVisibleCells()[4].getContext())}
                 </td>
                 <td key={row.getVisibleCells()[5].id}>
-                  <select>
-                    <option>---</option>
-                    <option>Playable</option>
-                    <option>Issues</option>
-                    <option>Menu</option>
-                    <option>Boots</option>
-                    <option>Nothing</option>
+                  <select
+                    onChange={(evt) => { console.log(evt.target.value.toString()) }}
+                  >
+                    <option value={0}>---</option>
+                    {getStatuses().map(statusRes => (
+                      <option value={statusRes.id}>{statusRes.status}</option>
+                    ))}
                   </select>
                 </td>
               </tr>

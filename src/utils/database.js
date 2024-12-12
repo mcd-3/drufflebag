@@ -1,5 +1,7 @@
 import Database from '@tauri-apps/plugin-sql'
 import Swf from '../models/swf';
+import Status from '../models/status';
+import Type from '../models/type';
 
 /**
  * Gets the SQLite DB instance for the app
@@ -50,6 +52,25 @@ const getSWFByHash = async (hash) => {
   }
 };
 
+const getStatuses = () => {
+  // Don't get it from DB as it's expensive and not really worth it for most purposes
+  return [
+    new Status({ id: 1, status: 'Playable' }),
+    new Status({ id: 2, status: 'Issues' }),
+    new Status({ id: 3, status: 'Menu' }),
+    new Status({ id: 4, status: 'Boots' }),
+    new Status({ id: 5, status: 'Nothing' }),
+  ];
+};
+
+const getTypes = () => {
+  // Don't get it from DB as it's expensive and not really worth it for most purposes
+  return [
+    new Type({ id: 1, type: 'Game' }),
+    new Type({ id: 2, type: 'Animation' }),
+  ];
+};
+
 /**
  * Insert a swf object into the database.
  *
@@ -96,4 +117,10 @@ const updateSWF = async (swf) => {
   }
 }
 
-export { getSWFByHash, insertSWF, updateSWFDateAVMByHash };
+export {
+  getSWFByHash,
+  getStatuses,
+  getTypes,
+  insertSWF,
+  updateSWFDateAVMByHash,
+};
