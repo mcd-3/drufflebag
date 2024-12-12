@@ -29,6 +29,7 @@ function MainContent() {
 
   const launchRuffle = (swfPath, swfName) => {
     if (!ruffleOpen) {
+      setSelectedSwfPath(swfPath);
       copyToPublic(swfPath);
       openRuffle(swfName);
       setRuffleOpen(true);
