@@ -12,8 +12,6 @@ import {
   setCurrentlyPlayingSwfPath,
 } from './../utils/storage.js';
 import {
-  copyToPublic,
-  openRuffle,
   openSettings,
   writeJsonCache,
   scanDirectory,
@@ -31,10 +29,12 @@ import styles from './../styles/components/topBar.module.css';
  */
 const TopBar = ({
   setSwfFiles,
-  selectedSwfPath
+  selectedSwfPath,
+  ruffleOpen,
+  setRuffleOpen,
+  playSwfEvt,
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
-  const [ruffleOpen, setRuffleOpen] = useState(false);
 
   injectOnUpdatePlayButton({
     broadcastChannel: getBroadcastChannel(),
@@ -52,13 +52,7 @@ const TopBar = ({
         url: globalSpoofStored.urlSpoof,
       });
     }
-  }, [])
-
-  const launch_ruffle = (swfName) => {
-    copyToPublic(swfName);
-    openRuffle(swfName.split('/').pop());
-    setRuffleOpen(true);
-  }
+  }, []);
 
   const scanSwfDirectory = async (cachedDirectoryPath = "") => {
     const files = await scanDirectory(cachedDirectoryPath);
@@ -135,7 +129,7 @@ const TopBar = ({
               evtCloseEmulation({ broadcastChannel: getBroadcastChannel() })
             } else {
               setCurrentlyPlayingSwfPath(selectedSwfPath);
-              launch_ruffle(selectedSwfPath);
+              playSwfEvt(selectedSwfPath, selectedSwfPath.split('/').pop())
               setGlobalSpoofUrl({
                 isEnabled: globalSpoof.isEnabled,
                 urlSpoof: globalSpoof.url,
