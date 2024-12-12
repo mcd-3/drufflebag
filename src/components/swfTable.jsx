@@ -18,6 +18,7 @@ const SwfTable = ({
   playSwfEvt,
 }) => {
   const [activeIndex, setActiveIndex] = useState();
+  const [editIndex, setEditIndex] = useState();
   const { menuVisible, menuItems, menuPosition, showMenu, hideMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
 
@@ -25,7 +26,13 @@ const SwfTable = ({
     event.preventDefault();
     setActiveIndex(rowData.index);
     showMenu(event, [
-      { label: 'Edit', action: () => console.log('Edit', rowData) },
+      {
+        label: 'Edit',
+        action: () => {
+          console.log('Edit', rowData);
+          setEditIndex(rowData.index);
+        }
+      },
       { label: 'Play SWF', action: () => playSwfEvt(rowData.original.path, rowData.original.name) }, 
     ]);
   };
@@ -105,25 +112,63 @@ const SwfTable = ({
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr
-              key={row.id}
-              className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
-              onClick={
-                () => {
-                  setSelectedSwfPath(row.original.path);
-                  setActiveIndex(row.id);
-                }
-              }
-              onContextMenu={(event) => handleContextMenu(event, row)}
-            >
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          {table.getRowModel().rows.map(row => {
+            return editIndex == row.id
+            ?
+              <tr
+                key={row.id}
+                className={styles['active']}
+              >
+                <td key={row.getVisibleCells()[0].id}>
+                  {flexRender(row.getVisibleCells()[0].column.columnDef.cell, row.getVisibleCells()[0].getContext())}
                 </td>
-              ))}
-            </tr>
-          ))}
+                <td key={row.getVisibleCells()[1].id}>
+                  <input type="text" value={row.getVisibleCells()[1].getValue() }/>
+                </td>
+                <td key={row.getVisibleCells()[2].id}>
+                  <select>
+                    <option>---</option>
+                    <option>Game</option>
+                    <option>Animation</option>
+                  </select>
+                </td>
+                <td key={row.getVisibleCells()[3].id}>
+                  {flexRender(row.getVisibleCells()[3].column.columnDef.cell, row.getVisibleCells()[3].getContext())}
+                </td>
+                <td key={row.getVisibleCells()[4].id}>
+                  {flexRender(row.getVisibleCells()[4].column.columnDef.cell, row.getVisibleCells()[4].getContext())}
+                </td>
+                <td key={row.getVisibleCells()[5].id}>
+                  <select>
+                    <option>---</option>
+                    <option>Playable</option>
+                    <option>Issues</option>
+                    <option>Menu</option>
+                    <option>Boots</option>
+                    <option>Nothing</option>
+                  </select>
+                </td>
+              </tr>
+            :
+              <tr
+                key={row.id}
+                className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
+                onClick={
+                  () => {
+                    setEditIndex();
+                    setSelectedSwfPath(row.original.path);
+                    setActiveIndex(row.id);
+                  }
+                }
+                onContextMenu={(event) => handleContextMenu(event, row)}
+              >
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+          })}
         </tbody>
       </table>
       {menuVisible && <ContextMenu items={menuItems} position={menuPosition} />}
