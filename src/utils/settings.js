@@ -45,6 +45,9 @@ const getSettingsJSON = () => {
   return settings;
 };
 
+/**
+ * @deprecated
+ */
 const getThemes = () => {
   return {
     system: 'System (default)',
