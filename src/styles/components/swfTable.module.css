@@ -52,7 +52,7 @@
 }
 
 .swfTable-root > thead > tr > th:nth-child(3) {
-    width: 68px;
+    width: 96px;
 }
 
 .swfTable-root > thead > tr > th:nth-child(4) {
@@ -63,7 +63,7 @@
 }
 
 .swfTable-root > thead > tr > th:nth-child(6) {
-    width: 68px;
+    width: 96px;
 }
 
 .active {
@@ -88,6 +88,7 @@
 
 .swfTable-root > tbody > tr > td {
     padding-left: 4px;
+    padding-right: 16px;
     max-height: 4px;
     white-space: nowrap;
     overflow: hidden;
@@ -98,4 +99,16 @@
 .swfTable-root > tbody > tr > td > img {
     display: block;
     margin-right: auto;
+}
+
+.no-margin {
+    margin-left: 0px;
+}
+
+.swfTable-text-input {
+    height: 65%;
+    width: 100%;
+    border: 1px solid #b7b7b7;
+    border-radius: 3px;
+    padding-left: 4px;
 }

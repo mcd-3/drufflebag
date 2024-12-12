@@ -146,6 +146,7 @@ const SwfTable = ({
                 </td>
                 <td key={row.getVisibleCells()[1].id}>
                   <input
+                    className={styles['swfTable-text-input']}
                     type="text"
                     value={editedSwf.name}
                     onChange={(evt) => {
@@ -159,6 +160,7 @@ const SwfTable = ({
                 </td>
                 <td key={row.getVisibleCells()[2].id}>
                   <select
+                    className={styles['no-margin']}
                     onChange={(evt) => {
                       setEditedSwf(
                         new Swf(
@@ -187,6 +189,7 @@ const SwfTable = ({
                 </td>
                 <td key={row.getVisibleCells()[5].id}>
                   <select
+                    className={styles['no-margin']}
                     onChange={(evt) => {
                       setEditedSwf(
                         new Swf(
