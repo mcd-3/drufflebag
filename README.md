@@ -1,7 +1,17 @@
-# Drufflebag [WIP]
+# Drufflebag
 
 A desktop frontend for the Adobe Flash emulator Ruffle. Plays single-file SWF applications.
 
-## Recommended IDE Setup
+## Building
+In the project's root directory, do the following:
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+```
+# To install dependencies:
+npm i
+
+# To start in dev mode:
+npm run tauri dev
+
+# To build a production build:
+npm run tauri build
+```
