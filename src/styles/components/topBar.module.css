@@ -7,8 +7,9 @@
 }
 
 /* Columns */
-.topBar-file-column {
-    width: 200px;
+.topBar-file-column,
+.topBar-more-column {
+    width: 128px;
     float: left;
 }
 
@@ -26,6 +27,7 @@
 .topBar-open-button,
 .topBar-refresh-button,
 .topBar-settings-button,
+.topBar-about-button,
 .topBar-pause-button,
 .topBar-stop-button {
     display: inline-block;

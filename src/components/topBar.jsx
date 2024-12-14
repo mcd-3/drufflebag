@@ -115,11 +115,6 @@ const TopBar = ({
             }
             scanSwfDirectory(directory);
           }} />
-        <IconButton
-          className={styles["topBar-settings-button"]}
-          text="Settings"
-          src={getAsset("ICN_SETTINGS")}
-          onClick={ () => { openSettings() }} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       <div className={styles["topBar-control-column"]}>
@@ -140,6 +135,19 @@ const TopBar = ({
             }
           }}
           disabled={selectedSwfPath == "" ? true : false} />
+      </div>
+      <div className={styles["topBar-vertical-divider"]}></div>
+      <div className={styles["topBar-more-column"]}>
+        <IconButton
+            className={styles["topBar-settings-button"]}
+            text="Settings"
+            src={getAsset("ICN_SETTINGS")}
+            onClick={ () => { openSettings() }} />
+        <IconButton
+          className={styles["topBar-about-button"]}
+          text="About"
+          src={getAsset("ICN_ABOUT")}
+          onClick={ () => { console.log('About') }} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       {/* <div className={styles["topBar-spoof-column"]}>

@@ -6,6 +6,7 @@ import folderSVG from './../assets/folder.svg';
 import globeSVG from './../assets/globe.svg';
 import pauseSVG from './../assets/pause.svg';
 import playSVG from './../assets/play.svg';
+import aboutSVG from './../assets/info-circle.svg';
 import refreshDoubleSVG from './../assets/refresh-double.svg';
 import settingsSVG from './../assets/settings.svg';
 import stopSVG from './../assets/square.svg';
@@ -14,6 +15,7 @@ const assets = {
   "AVM_1": avm1SVG,
   "AVM_2": avm2SVG,
   "AVM_UNKNOWN": avmUnknownSVG,
+  "ICN_ABOUT": aboutSVG,
   "ICN_FOLDER": folderSVG,
   "ICN_FNF": fileNotFoundSVG,
   "ICN_GLOBE": globeSVG,
