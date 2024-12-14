@@ -74,6 +74,26 @@ fn open_settings(app: tauri::AppHandle) {
     .unwrap();
 }
 
+#[cfg(windows)]
+#[tauri::command]
+async fn open_about(app: tauri::AppHandle) {
+    tauri::WebviewWindowBuilder::new(&app, "about", tauri::WebviewUrl::App("about.html".into()))
+    .title("About")
+    .inner_size(400.0, 800.0)
+    .build()
+    .unwrap();
+}
+
+#[cfg(not(windows))]
+#[tauri::command]
+fn open_about(app: tauri::AppHandle) {
+    tauri::WebviewWindowBuilder::new(&app, "about", tauri::WebviewUrl::App("about.html".into()))
+    .title("About")
+    .inner_size(400.0, 800.0)
+    .build()
+    .unwrap();
+}
+
 #[tauri::command]
 async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
@@ -165,6 +185,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             open_ruffle,
             open_settings,
+            open_about,
             scan_directory,
             cache_swfs,
             get_cached_swfs,

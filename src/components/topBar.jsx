@@ -13,6 +13,7 @@ import {
 } from './../utils/storage.js';
 import {
   openSettings,
+  openAbout,
   writeJsonCache,
   scanDirectory,
 } from './../utils/invoker.js';
@@ -147,7 +148,7 @@ const TopBar = ({
           className={styles["topBar-about-button"]}
           text="About"
           src={getAsset("ICN_ABOUT")}
-          onClick={ () => { console.log('About') }} />
+          onClick={ () => { openAbout() }} />
       </div>
       <div className={styles["topBar-vertical-divider"]}></div>
       {/* <div className={styles["topBar-spoof-column"]}>

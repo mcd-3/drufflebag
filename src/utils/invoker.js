@@ -1,10 +1,26 @@
 import { invoke } from "@tauri-apps/api/core";
 
 /**
+ * Open the About window
+ */
+const openAbout = () => {
+  invoke("open_about");
+};
+
+/**
  * Open the settings window
  */
 const openSettings = () => {
   invoke("open_settings");
+};
+
+/**
+ * Opens the Ruffle window
+ *
+ * @param {string} swfName - Name of SWF file to display on title bar
+ */
+const openRuffle = (swfName) => {
+  invoke("open_ruffle", { swfName });  
 };
 
 /**
@@ -26,15 +42,6 @@ const copyToPublic = (swfPath) => {
 };
 
 /**
- * Opens the Ruffle window
- *
- * @param {string} swfName - Name of SWF file to display on title bar
- */
-const openRuffle = (swfName) => {
-  invoke("open_ruffle", { swfName });  
-};
-
-/**
  * Scans a directory for swf files
  *
  * @param {string} directoryPath - Directory path to search
@@ -44,9 +51,9 @@ const scanDirectory = async (directoryPath) => {
   return await invoke("scan_directory", { cachedDirectoryPath: directoryPath });
 };
 
-
 export {
   copyToPublic,
+  openAbout,
   openRuffle,
   openSettings,
   scanDirectory,
