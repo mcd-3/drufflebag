@@ -32,6 +32,7 @@ const TopBar = ({
   selectedSwfPath,
   ruffleOpen,
   setRuffleOpen,
+  setCacheIsLoading,
   playSwfEvt,
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
@@ -55,6 +56,7 @@ const TopBar = ({
   }, []);
 
   const scanSwfDirectory = async (cachedDirectoryPath = "") => {
+    setCacheIsLoading(true);
     const files = await scanDirectory(cachedDirectoryPath);
     const cacheToWrite = [];
     if (files.swfs.length > 0) {
@@ -88,6 +90,7 @@ const TopBar = ({
       writeJsonCache(cacheToWrite);
     }
     setSwfFiles(cacheToWrite);
+    setCacheIsLoading(false);
   }
 
   return (

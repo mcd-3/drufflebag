@@ -9,17 +9,20 @@ import SwfTable from "../../components/swfTable";
 import NoItemsBox from "../../components/noItemsBox";
 
 function MainContent() {
+  const [cacheIsLoading, setCacheIsLoading] = useState(true);
   const [swfFiles, setSwfFiles] = useState([]);
   const [selectedSwfPath, setSelectedSwfPath] = useState("");
   const [ruffleOpen, setRuffleOpen] = useState(false);
 
   useEffect(() => {
+    setCacheIsLoading(true);
     invoke('get_cached_swfs').then((cache, err) => {
       if (!err && cache.length > 0) {
         setSwfFiles(cache);
       } else {
         setSwfFiles([]);
       }
+      setCacheIsLoading(false);
     });
 
     return () => {
@@ -60,11 +63,12 @@ function MainContent() {
           selectedSwfPath={selectedSwfPath}
           ruffleOpen={ruffleOpen}
           setRuffleOpen={setRuffleOpen}
+          setCacheIsLoading={setCacheIsLoading}
           playSwfEvt={launchRuffle}
         />
       </div>
       <div className={`${swfFiles.length > 0 ? "has-items" : "no-items"} swf-content-table`}>
-        {swfFiles.length > 0 
+        {swfFiles.length > 0 && !cacheIsLoading
           ?
             <SwfTable
               swfFiles={swfFiles}
@@ -73,7 +77,7 @@ function MainContent() {
               playSwfEvt={launchRuffle}
             />
           :
-            <NoItemsBox />
+            <NoItemsBox isLoading={cacheIsLoading}/>
         }
       </div>
     </div>
