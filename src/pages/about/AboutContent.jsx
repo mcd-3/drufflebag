@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getVersion } from '@tauri-apps/api/app';
-
 import Header from '../../components/header';
+import "./../../styles/About.css";
 
 function AboutContent() {
   const [appVersion, setAppVersion] = useState();
