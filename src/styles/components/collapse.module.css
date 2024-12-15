@@ -5,6 +5,8 @@
     text-align: start;
     cursor: pointer;
     color: #000;
+    margin-left: none;
+    padding-left: 0;
 }
 
 .collapse-container {
