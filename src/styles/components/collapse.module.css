@@ -9,10 +9,15 @@
     padding-left: 0;
 }
 
-.collapse-container {
+.collapse-header-container {
     display : inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.collapse-content-container {
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .button-text {

@@ -12,12 +12,16 @@ const Collapse = ({
   return (
     <div>
       <button className={styles['collapse-button']} {...getToggleProps()}>
-        <div className={styles['collapse-container']}>
+        <div className={styles['collapse-header-container']}>
           <span className={styles['button-text']}>{isExpanded ? expandedText : collapsedText}</span>
           <img className={styles['collapse-icon']} src={isExpanded ? getAsset('ICN_ARROW_DOWN') : getAsset('ICN_ARROW_RIGHT')}/>
         </div>
       </button>
-      <section {...getCollapseProps()}>{children}</section>
+      <section {...getCollapseProps()}>
+        <div className={styles['collapse-content-container']}>
+          {children}
+        </div>
+      </section>
     </div>
   )
 };
