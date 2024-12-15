@@ -1,3 +1,6 @@
+import aboutSVG from './../assets/info-circle.svg';
+import arrowDownSVG from './../assets/arrow-down-circle.svg';
+import arrowRightSVG from './../assets/arrow-right-circle.svg';
 import avm1SVG from './../../public/avm1.svg';
 import avm2SVG from './../../public/avm2.svg';
 import avmUnknownSVG from './../../public/avm_unknown.svg';
@@ -6,7 +9,6 @@ import folderSVG from './../assets/folder.svg';
 import globeSVG from './../assets/globe.svg';
 import pauseSVG from './../assets/pause.svg';
 import playSVG from './../assets/play.svg';
-import aboutSVG from './../assets/info-circle.svg';
 import refreshDoubleSVG from './../assets/refresh-double.svg';
 import settingsSVG from './../assets/settings.svg';
 import stopSVG from './../assets/square.svg';
@@ -16,6 +18,8 @@ const assets = {
   "AVM_2": avm2SVG,
   "AVM_UNKNOWN": avmUnknownSVG,
   "ICN_ABOUT": aboutSVG,
+  "ICN_ARROW_DOWN": arrowDownSVG,
+  "ICN_ARROW_RIGHT": arrowRightSVG,
   "ICN_FOLDER": folderSVG,
   "ICN_FNF": fileNotFoundSVG,
   "ICN_GLOBE": globeSVG,

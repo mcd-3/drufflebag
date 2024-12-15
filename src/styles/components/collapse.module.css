@@ -1,0 +1,47 @@
+.collapse-button {
+    background: none;
+    border: none;
+    width: 128px;
+    text-align: start;
+    cursor: pointer;
+    color: #000;
+}
+
+.collapse-container {
+    display : inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-text {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    padding-right: 8px;
+}
+
+.collapse-button:hover {
+    filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%) hue-rotate(167deg) brightness(86%) contrast(89%);
+}
+
+.collapse-button:active {
+    filter: brightness(0) saturate(100%) invert(24%) sepia(0%) saturate(0%) hue-rotate(144deg) brightness(98%) contrast(95%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .collapse-button {
+        color: rgb(188, 188, 188);
+    }
+
+    .collapse-icon {
+        filter: brightness(0) saturate(100%) invert(64%) sepia(79%) saturate(0%) hue-rotate(191deg) brightness(112%) contrast(69%);
+    }
+
+    .collapse-button:hover {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(97%) saturate(0%) hue-rotate(153deg) brightness(111%) contrast(101%);
+    }
+
+    .collapse-button:active {
+        filter: brightness(0) saturate(100%) invert(47%) sepia(45%) saturate(0%) hue-rotate(270deg) brightness(83%) contrast(109%);
+    }
+}
