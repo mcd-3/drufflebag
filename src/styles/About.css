@@ -1,3 +1,18 @@
 body {
     font-family: 'Inter', sans-serif;
 }
+
+.centered {
+    text-align: center;
+}
+
+.license-container {
+    font-size: 12px;
+    color: rgb(209, 209, 209);
+    background-color: rgb(40, 40, 40);
+    border: 1px solid rgb(57, 57, 57);
+    border-radius: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family: monospace;
+}
