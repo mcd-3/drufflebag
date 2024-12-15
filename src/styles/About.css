@@ -18,6 +18,11 @@ body {
     font-family: monospace;
 }
 
+h4 {
+    margin-bottom: 4px;
+    margin-top: 12px;
+}
+
 @media (prefers-color-scheme: dark) {
     ::-webkit-scrollbar {
         width: 8px;
