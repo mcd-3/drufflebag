@@ -50,7 +50,7 @@ function AboutContent() {
           is to not accidentally mis-apply the licenses. There are also a lot of licenses,
           and text renders much faster than states.
         */}
-        <Collapse expandedText='3rd Party' collapsedText='3rd Party'>
+        <Collapse expandedText='3rd Party Licenses' collapsedText='3rd Party Licenses'>
           <h4>Ruffle</h4>
           <div className="license-container">
             <p>MIT License</p>
