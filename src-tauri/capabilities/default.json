@@ -5,7 +5,8 @@
   "windows": [
     "main",
     "emulator",
-    "settings"
+    "settings",
+    "about"
   ],
   "permissions": [
     "core:default",
