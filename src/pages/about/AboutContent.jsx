@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getVersion } from '@tauri-apps/api/app';
 
+import Header from '../../components/header';
+
 function AboutContent() {
   const [appVersion, setAppVersion] = useState();
 
@@ -16,6 +18,21 @@ function AboutContent() {
     <div>
         <p>Drufflebag</p>
         <p>Version: { appVersion }</p>
+        <Header>License</Header>
+          <p>MIT license of this project</p>
+        <Header>3rd Party</Header>
+          <ul>
+            <li>Tauri</li>
+            <li>React</li>
+            <li>Tanstack Table</li>
+            <li>BroadcastChannel</li>
+            <li>React Tabs</li>
+            <li>Vite</li>
+            <li>Iconoir</li>
+            <li>Inter Font</li>
+            <li>Serde</li>
+            <li>chksum-md5</li>
+          </ul>
     </div>
   );
 }
