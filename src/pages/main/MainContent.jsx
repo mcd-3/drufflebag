@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { appDataDir } from '@tauri-apps/api/path';
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
 import { writeJsonCache, copyToPublic, openRuffle } from './../../utils/invoker.js';
 import "./../../styles/App.css";
@@ -16,7 +17,9 @@ function MainContent() {
 
   useEffect(() => {
     setCacheIsLoading(true);
-    invoke('get_cached_swfs').then((cache, err) => {
+    appDataDir().then((dir, err) => {
+      return invoke('get_cached_swfs', { appDataDir: dir });
+    }).then((cache, err) => {
       if (!err && cache.length > 0) {
         setSwfFiles(cache);
       } else {

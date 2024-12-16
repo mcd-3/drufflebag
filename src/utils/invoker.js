@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
+import { appDataDir } from '@tauri-apps/api/path';
 
 /**
  * Open the About window
@@ -29,7 +30,11 @@ const openRuffle = (swfName) => {
  * @param {array} swfFiles - Array of swf files 
  */
 const writeJsonCache = async (swfFiles) => {
-  await invoke("cache_swfs", { swfs: swfFiles });
+  const appDataDirPath = await appDataDir();
+  await invoke(
+    "cache_swfs",
+    { swfs: swfFiles, appDataDir: appDataDirPath }
+  );
 };
 
 /**
