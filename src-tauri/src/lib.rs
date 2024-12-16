@@ -9,9 +9,19 @@ use chksum_md5 as md5;
 use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Value};
 
+fn get_full_data_dir_path(app_data_dir: &str) -> String {
+    let mut full_path: String = app_data_dir.to_owned();
+    full_path.push_str("/.cached_swf.json");
+
+    full_path.clone()
+}
+
 #[tauri::command]
-async fn cache_swfs(swfs: Vec<Value>) {
-    let path = Path::new("./.cached_swf.json");
+async fn cache_swfs(swfs: Vec<Value>, app_data_dir: String) {
+    // We pass the data dir here because Tauri's Rust bindings feel unfinished
+    let full_path = get_full_data_dir_path(&app_data_dir);
+
+    let path = Path::new(&full_path);
     if path.exists() {
         // Delete the existing file first if it exists
         std::fs::remove_file(path).unwrap();
@@ -22,8 +32,10 @@ async fn cache_swfs(swfs: Vec<Value>) {
 }
 
 #[tauri::command]
-async fn get_cached_swfs() -> Vec<Value> {
-    let path = Path::new("./.cached_swf.json");
+async fn get_cached_swfs(app_data_dir: String) -> Vec<Value> {
+    // We pass the data dir here because Tauri's Rust bindings feel unfinished
+    let full_path = get_full_data_dir_path(&app_data_dir);
+    let path = Path::new(&full_path);
     if path.exists() {
         let file = File::open(path)
             .expect("file should open read only");
