@@ -7,6 +7,7 @@ import avmUnknownSVG from './../../public/avm_unknown.svg';
 import fileNotFoundSVG from './../assets/file-not-found.svg';
 import folderSVG from './../assets/folder.svg';
 import globeSVG from './../assets/globe.svg';
+import loadingSVG from './../assets/loading.svg';
 import pauseSVG from './../assets/pause.svg';
 import playSVG from './../assets/play.svg';
 import refreshDoubleSVG from './../assets/refresh-double.svg';
@@ -17,9 +18,11 @@ const assets = {
   "AVM_1": avm1SVG,
   "AVM_2": avm2SVG,
   "AVM_UNKNOWN": avmUnknownSVG,
+  "GIF_LOADING": loadingSVG,
   "ICN_ABOUT": aboutSVG,
   "ICN_ARROW_DOWN": arrowDownSVG,
   "ICN_ARROW_RIGHT": arrowRightSVG,
+  "ICN_FILE_NOT_FOUND": fileNotFoundSVG,
   "ICN_FOLDER": folderSVG,
   "ICN_FNF": fileNotFoundSVG,
   "ICN_GLOBE": globeSVG,
