@@ -35,6 +35,7 @@ export default defineConfig(async () => ({
           main: resolve(__dirname, 'index.html'),
           ruffle: resolve(__dirname, 'ruffle.html'),
           settings: resolve(__dirname, 'settings.html'),
+          about: resolve(__dirname, 'about.html'),
         },
       },
     },
