@@ -4,7 +4,6 @@ import { confirm } from '@tauri-apps/plugin-dialog';
 import { invoke, convertFileSrc } from "@tauri-apps/api/core";
 import {
   getBroadcastChannel,
-  evtCloseEmulation,
   closeBroadcastChanel,
   evtUpdatePlayButton,
   evtUpdateSwfByHash,
