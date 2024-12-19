@@ -27,7 +27,6 @@ function EmulationContent() {
       event.preventDefault();
     } else {
       const broadcastChannel = getBroadcastChannel();
-      evtCloseEmulation({ broadcastChannel });
       evtUpdatePlayButton({ broadcastChannel });
       closeBroadcastChanel({ broadcastChannel });
     }
