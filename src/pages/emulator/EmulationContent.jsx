@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
-import { invoke } from "@tauri-apps/api/core";
+import { invoke, convertFileSrc } from "@tauri-apps/api/core";
 import {
   getBroadcastChannel,
   evtCloseEmulation,
@@ -49,8 +49,13 @@ function EmulationContent() {
 
   const mountRuffle = () => {
     const script = document.createElement("script");
+    const swfFilePath = convertFileSrc(
+      getCurrentlyPlayingSwfPath()
+        .replaceAll("\\", "/")
+    );
 
-    script.src = "ruffle-core/ruffle.js";
+    script.src = "https://unpkg.com/@ruffle-rs/ruffle"
+    // script.src = "ruffle-core/ruffle.js";
     script.async = true;
 
     script.onload = () => {
@@ -73,7 +78,7 @@ function EmulationContent() {
         duplicate[0].parentNode.removeChild(duplicate[0])
       } catch (e) { }
 
-      player.load("/public/play.temp.swf");
+      player.load(swfFilePath);
 
       player.addEventListener('loadedmetadata', () => {
         if (player.metadata.width && player.metadata.height) {
