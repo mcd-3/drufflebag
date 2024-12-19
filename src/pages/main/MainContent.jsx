@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { appDataDir } from '@tauri-apps/api/path';
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
-import { writeJsonCache, copyToPublic, openRuffle } from './../../utils/invoker.js';
+import { writeJsonCache, openRuffle } from './../../utils/invoker.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -36,7 +36,6 @@ function MainContent() {
   const launchRuffle = (swfPath, swfName) => {
     if (!ruffleOpen) {
       setSelectedSwfPath(swfPath);
-      copyToPublic(swfPath);
       openRuffle(swfName);
       setRuffleOpen(true);
     }
