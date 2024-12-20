@@ -25,6 +25,13 @@ const openRuffle = (swfName) => {
 };
 
 /**
+ * Exits the application and closes all windows
+ */
+const exitApp = () => {
+  invoke("exit_app");
+}
+
+/**
  * Writes an array of swf files to the cache
  *
  * @param {array} swfFiles - Array of swf files 
@@ -58,6 +65,7 @@ const scanDirectory = async (directoryPath) => {
 
 export {
   copyToPublic,
+  exitApp,
   openAbout,
   openRuffle,
   openSettings,

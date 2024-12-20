@@ -107,6 +107,11 @@ fn open_about(app: tauri::AppHandle) {
 }
 
 #[tauri::command]
+fn exit_app(app: tauri::AppHandle) {
+    app.exit(0);
+}
+
+#[tauri::command]
 async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
         app.dialog().file().blocking_pick_folder().unwrap()
@@ -203,6 +208,7 @@ pub fn run() {
             get_cached_swfs,
             copy_to_public,
             get_swf_hash,
+            exit_app,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

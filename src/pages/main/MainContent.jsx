@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
-import { writeJsonCache, openRuffle } from './../../utils/invoker.js';
+import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -14,6 +15,13 @@ function MainContent() {
   const [swfFiles, setSwfFiles] = useState([]);
   const [selectedSwfPath, setSelectedSwfPath] = useState("");
   const [ruffleOpen, setRuffleOpen] = useState(false);
+
+  const unlisten = getCurrentWindow().onCloseRequested(
+    async (event) => {
+      event.preventDefault();
+      exitApp();
+    }
+  );
 
   useEffect(() => {
     setCacheIsLoading(true);
@@ -29,7 +37,7 @@ function MainContent() {
     });
 
     return () => {
-
+      unlisten.then(() => {});
     };
   }, []);
 
