@@ -17,7 +17,11 @@ import "./../../styles/Emulation.css";
 import { getAsset } from '../../utils/assets.js';
 
 function EmulationContent() {
-  const [hasError, setHasError] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState({
+    topText: "An Error has Occured",
+    bottomText: "Please close this window and try again.",
+  })
 
   const settings = getSettingsJSON();
 
@@ -56,8 +60,22 @@ function EmulationContent() {
         .replaceAll("\\", "/")
     );
 
-    script.src = "https://unpkg.com/@ruffle-rs/ruffle"
-    // script.src = "ruffle-core/ruffle.js";
+    if (settings.onlineModeEnabled) {
+      // Need to check online connectivity first
+      if (!window.navigator.onLine) {
+        setHasError(true);
+        setError({
+          ...error,
+          bottomText: 
+            "You must be connected to the Internet to use Online Mode. "
+            + "You can disable Online Mode in the Settings if this was set by mistake."
+          })
+      } else {
+        script.src = "https://unpkg.com/@ruffle-rs/ruffle"
+      }
+    } else {
+      // script.src = "ruffle-core/ruffle.js";
+    }
     script.async = true;
 
     script.onload = () => {
@@ -135,11 +153,10 @@ function EmulationContent() {
           <div id="ruffle-container" className="container"></div>
         :
           <NoItemsBox
-            topText={"An Error has Occured"}
-            bottomText={"Could not load Ruffle"}
+            topText={error.topText}
+            bottomText={error.bottomText}
             icon={getAsset('ICN_WARNING_TRIANGLE')}
             />
-          
       }
     </div>
   );
