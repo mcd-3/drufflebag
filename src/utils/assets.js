@@ -13,6 +13,7 @@ import playSVG from './../assets/play.svg';
 import refreshDoubleSVG from './../assets/refresh-double.svg';
 import settingsSVG from './../assets/settings.svg';
 import stopSVG from './../assets/square.svg';
+import warningSVG from './../assets/warning-triangle.svg';
 
 const assets = {
   "AVM_1": avm1SVG,
@@ -31,6 +32,7 @@ const assets = {
   "ICN_REFRESH": refreshDoubleSVG,
   "ICN_SETTINGS": settingsSVG,
   "ICN_STOP": stopSVG,
+  "ICN_WARNING_TRIANGLE": warningSVG,
 }
 
 /**

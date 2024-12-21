@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
 import { invoke, convertFileSrc } from "@tauri-apps/api/core";
@@ -12,9 +12,13 @@ import {
 import { getSettingsJSON } from './../../utils/settings.js';
 import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
 import { updateSWFDateAVMByHash } from './../../utils/database.js';
+import NoItemsBox from './../../components/noItemsBox.jsx';
 import "./../../styles/Emulation.css";
+import { getAsset } from '../../utils/assets.js';
 
 function EmulationContent() {
+  const [hasError, setHasError] = useState(true);
+
   const settings = getSettingsJSON();
 
   const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
@@ -125,8 +129,18 @@ function EmulationContent() {
   }, []);
 
   return (
-    <div id="ruffle-container" className="container">
-
+    <div>
+      { !hasError
+        ?
+          <div id="ruffle-container" className="container"></div>
+        :
+          <NoItemsBox
+            topText={"An Error has Occured"}
+            bottomText={"Could not load Ruffle"}
+            icon={getAsset('ICN_WARNING_TRIANGLE')}
+            />
+          
+      }
     </div>
   );
 }
