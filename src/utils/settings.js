@@ -14,6 +14,7 @@ const getDefaultSettings = () => {
     autoplayEnabled: true,
     emulationScale: 1,
     splashscreenEnabled: true,
+    onlineModeEnabled: false,
   };
 }
 
