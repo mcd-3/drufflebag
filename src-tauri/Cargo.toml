@@ -1,8 +1,8 @@
 [package]
 name = "drufflebag"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "0.9.0"
+description = "A desktop frontend for the Adobe Flash emulator Ruffle"
+authors = ["Matthew Carvalho-Dagenais"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
