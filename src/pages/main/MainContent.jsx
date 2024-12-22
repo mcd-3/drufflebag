@@ -4,6 +4,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
 import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
+import { getAsset } from './../../utils/assets.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -87,7 +88,10 @@ function MainContent() {
               playSwfEvt={launchRuffle}
             />
           :
-            <NoItemsBox isLoading={cacheIsLoading}/>
+            <NoItemsBox
+              topText={cacheIsLoading ? "Loading SWF Files..." : "No SWF Files Detected"}
+              bottomText={cacheIsLoading ? "Please Wait" : "Click on \"Open\" to find some"}
+              icon={cacheIsLoading ? getAsset('GIF_LOADING') : getAsset('ICN_FILE_NOT_FOUND')} />
         }
       </div>
     </div>

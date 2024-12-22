@@ -25,6 +25,23 @@ function SettingsContent() {
             <div className='panel-container'>
                 <br />
                 <div className='inner-panel-container'>
+                  <Header>Online Mode</Header>
+                  <div className='row'>
+                    <input
+                        type='checkbox'
+                        checked={settings.onlineModeEnabled}
+                        onChange={(evt) => {
+                          setSettings({
+                            ...settings,
+                            onlineModeEnabled: evt.target.checked
+                          });
+                        }}
+                      />
+                      <span>Use the latest version of Ruffle automatically from the Internet</span>
+                  </div>
+                </div>
+                <br />
+                <div className='inner-panel-container'>
                   <Header>Scale</Header>
                   <div className='row'>
                     <select

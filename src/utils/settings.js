@@ -14,6 +14,7 @@ const getDefaultSettings = () => {
     autoplayEnabled: true,
     emulationScale: 1,
     splashscreenEnabled: true,
+    onlineModeEnabled: false,
   };
 }
 
@@ -21,13 +22,15 @@ const saveSettings = ({
   theme,
   autoplayEnabled,
   emulationScale,
-  splashscreenEnabled
+  splashscreenEnabled,
+  onlineModeEnabled,
 }) => {
   setSettings({
     theme,
     autoplayEnabled,
     emulationScale,
-    splashscreenEnabled
+    splashscreenEnabled,
+    onlineModeEnabled,
   });
 };
 
@@ -65,6 +68,7 @@ const compareSettings = (settings1, settings2) => {
       && settings1.autoplayEnabled === settings2.autoplayEnabled
       && settings1.emulationScale === settings2.emulationScale
       && settings1.splashscreenEnabled === settings2.splashscreenEnabled
+      && settings1.onlineModeEnabled === settings2.onlineModeEnabled
   );
 };
 

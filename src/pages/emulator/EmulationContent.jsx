@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
 import { invoke, convertFileSrc } from "@tauri-apps/api/core";
@@ -12,9 +12,17 @@ import {
 import { getSettingsJSON } from './../../utils/settings.js';
 import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
 import { updateSWFDateAVMByHash } from './../../utils/database.js';
+import NoItemsBox from './../../components/noItemsBox.jsx';
 import "./../../styles/Emulation.css";
+import { getAsset } from '../../utils/assets.js';
 
 function EmulationContent() {
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState({
+    topText: "An Error has Occured",
+    bottomText: "Please close this window and try again.",
+  })
+
   const settings = getSettingsJSON();
 
   const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
@@ -52,8 +60,22 @@ function EmulationContent() {
         .replaceAll("\\", "/")
     );
 
-    script.src = "https://unpkg.com/@ruffle-rs/ruffle"
-    // script.src = "ruffle-core/ruffle.js";
+    if (settings.onlineModeEnabled) {
+      // Need to check online connectivity first
+      if (!window.navigator.onLine) {
+        setHasError(true);
+        setError({
+          ...error,
+          bottomText: 
+            "You must be connected to the Internet to use Online Mode. "
+            + "You can disable Online Mode in the Settings if this was set by mistake."
+          })
+      } else {
+        script.src = "https://unpkg.com/@ruffle-rs/ruffle"
+      }
+    } else {
+      script.src = "public/ruffle-core/ruffle.js";
+    }
     script.async = true;
 
     script.onload = () => {
@@ -125,8 +147,17 @@ function EmulationContent() {
   }, []);
 
   return (
-    <div id="ruffle-container" className="container">
-
+    <div>
+      { !hasError
+        ?
+          <div id="ruffle-container" className="container"></div>
+        :
+          <NoItemsBox
+            topText={error.topText}
+            bottomText={error.bottomText}
+            icon={getAsset('ICN_WARNING_TRIANGLE')}
+            />
+      }
     </div>
   );
 }
