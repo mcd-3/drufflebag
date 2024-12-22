@@ -74,7 +74,7 @@ function EmulationContent() {
         script.src = "https://unpkg.com/@ruffle-rs/ruffle"
       }
     } else {
-      // script.src = "ruffle-core/ruffle.js";
+      script.src = "public/ruffle-core/ruffle.js";
     }
     script.async = true;
 
