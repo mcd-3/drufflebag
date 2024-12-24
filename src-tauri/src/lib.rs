@@ -71,7 +71,7 @@ async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
 async fn open_settings(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
     .title("Settings")
-    .inner_size(600.0, 450.0)
+    .inner_size(625.0, 475.0)
     .build()
     .unwrap();
 }
@@ -81,7 +81,7 @@ async fn open_settings(app: tauri::AppHandle) {
 fn open_settings(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
     .title("Settings")
-    .inner_size(600.0, 450.0)
+    .inner_size(625.0, 475.0)
     .build()
     .unwrap();
 }
@@ -91,7 +91,7 @@ fn open_settings(app: tauri::AppHandle) {
 async fn open_about(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "about", tauri::WebviewUrl::App("about.html".into()))
     .title("About")
-    .inner_size(400.0, 800.0)
+    .inner_size(400.0, 712.0)
     .build()
     .unwrap();
 }
@@ -101,7 +101,7 @@ async fn open_about(app: tauri::AppHandle) {
 fn open_about(app: tauri::AppHandle) {
     tauri::WebviewWindowBuilder::new(&app, "about", tauri::WebviewUrl::App("about.html".into()))
     .title("About")
-    .inner_size(400.0, 800.0)
+    .inner_size(400.0, 712.0)
     .build()
     .unwrap();
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getVersion } from '@tauri-apps/api/app';
+import { getAsset } from './../../utils/assets.js';
 import Header from '../../components/header';
 import Collapse from '../../components/collapse';
 import "./../../styles/About.css";
@@ -17,8 +18,10 @@ function AboutContent() {
 
   return (
     <div>
-        <p className='centered '>Drufflebag</p>
-        <p>Version: { appVersion }</p>
+        <p className='centered big-text'>Drufflebag</p>
+        <img className='centered' src={getAsset('ICN_GLOBE')} height={48} width={48} />
+        <p className='centered medium-text'>By: Matthew Carvalho-Dagenais</p>
+        <p className='end subtext'>Version: { appVersion }</p>
         <Header>License</Header>
         <div className="license-container">
           <p>MIT License</p>
@@ -352,6 +355,7 @@ function AboutContent() {
           </div>
           <br />
         </Collapse>
+        <br />
     </div>
   );
 }
