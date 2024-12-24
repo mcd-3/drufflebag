@@ -33,6 +33,7 @@ const SwfTable = ({
   const handleContextMenu = (event, rowData) => {
     event.preventDefault();
     setActiveIndex(rowData.index);
+    setSelectedSwfPath(rowData.original.path);
     showMenu(event, [
       {
         label: 'Edit',
