@@ -19,7 +19,7 @@ function AboutContent() {
   return (
     <div>
         <p className='centered big-text'>Drufflebag</p>
-        <img className='centered' src={getAsset('ICN_GLOBE')} height={48} width={48} />
+        <img className='centered' src={getAsset('LOGO_DRUFFLEBAG')} height={72} width={72} />
         <p className='centered medium-text'>By: Matthew Carvalho-Dagenais</p>
         <p className='end subtext'>Version: { appVersion }</p>
         <Header>License</Header>

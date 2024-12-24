@@ -4,6 +4,7 @@ import arrowRightSVG from './../assets/arrow-right-circle.svg';
 import avm1SVG from './../../public/avm1.svg';
 import avm2SVG from './../../public/avm2.svg';
 import avmUnknownSVG from './../../public/avm_unknown.svg';
+import drufflebagSVG from './../../public/drufflebag.svg';
 import fileNotFoundSVG from './../assets/file-not-found.svg';
 import folderSVG from './../assets/folder.svg';
 import globeSVG from './../assets/globe.svg';
@@ -33,6 +34,7 @@ const assets = {
   "ICN_SETTINGS": settingsSVG,
   "ICN_STOP": stopSVG,
   "ICN_WARNING_TRIANGLE": warningSVG,
+  "LOGO_DRUFFLEBAG": drufflebagSVG,
 }
 
 /**
