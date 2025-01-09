@@ -45,15 +45,6 @@ const writeJsonCache = async (swfFiles) => {
 };
 
 /**
- * Copies a swf file to this application's 'public' directory
- *
- * @param {string} swfPath - Absolute path to the swf file
- */
-const copyToPublic = (swfPath) => {
-  invoke("copy_to_public", { swfAbsolutePath: swfPath });
-};
-
-/**
  * Scans a directory for swf files
  *
  * @param {string} directoryPath - Directory path to search
@@ -64,7 +55,6 @@ const scanDirectory = async (directoryPath) => {
 };
 
 export {
-  copyToPublic,
   exitApp,
   openAbout,
   openRuffle,
