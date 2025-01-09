@@ -114,13 +114,22 @@ fn exit_app(app: tauri::AppHandle) {
 #[tauri::command]
 async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
-        app.dialog().file().blocking_pick_folder().unwrap()
+        match app.dialog().file().blocking_pick_folder() {
+            Some(fp) => fp,
+            None => FilePath::from(Path::new(""))
+        }
     } else {
         FilePath::from(Path::new(&cached_directory_path))
     };
 
     let mut swf_files: Vec<Value> = Vec::new();
     let directory_path_str = directory_path.to_string();
+
+    if directory_path_str == "" {
+        return json!({
+            "cancelled": true,
+        })
+    }
 
     let entries = std::fs::read_dir(&directory_path_str).unwrap();
 
@@ -164,7 +173,8 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
 
     let return_json = json!({
         "parent_dir": directory_path_str,
-        "swfs": swf_files
+        "swfs": swf_files,
+        "cancelled": false,
     });
 
     return_json

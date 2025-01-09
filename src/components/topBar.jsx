@@ -59,6 +59,12 @@ const TopBar = ({
   const scanSwfDirectory = async (cachedDirectoryPath = "") => {
     setCacheIsLoading(true);
     const files = await scanDirectory(cachedDirectoryPath);
+
+    if (files.cancelled) {
+      setCacheIsLoading(false);
+      return;
+    }
+
     const cacheToWrite = [];
     if (files.swfs.length > 0) {
       for await (const swf of files.swfs) {
