@@ -3,11 +3,16 @@ mod data {
     pub mod migrations;
 }
 
+mod pages {
+    pub mod open;
+}
+
 use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
 use data::migrations::MigrationsHistory;
 use chksum_md5 as md5;
 use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Value};
+use pages::open::{open_ruffle, open_settings, open_about};
 
 fn get_full_data_dir_path(app_data_dir: &str) -> String {
     let mut full_path: String = app_data_dir.to_owned();
@@ -46,64 +51,6 @@ async fn get_cached_swfs(app_data_dir: String) -> Vec<Value> {
         // File does not exist so nothing is cached
         Vec::new()
     }
-}
-
-#[cfg(windows)]
-#[tauri::command]
-async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
-    tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
-        .title(swf_name)
-        .build()
-        .unwrap();
-}
-
-#[cfg(not(windows))]
-#[tauri::command]
-async fn open_ruffle(app: tauri::AppHandle, swf_name: String) {
-    tauri::WebviewWindowBuilder::new(&app, "emulator", tauri::WebviewUrl::App("ruffle.html".into()))
-        .title(swf_name)
-        .build()
-        .unwrap();
-}
-
-#[cfg(windows)]
-#[tauri::command]
-async fn open_settings(app: tauri::AppHandle) {
-    tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
-    .title("Settings")
-    .inner_size(625.0, 475.0)
-    .build()
-    .unwrap();
-}
-
-#[cfg(not(windows))]
-#[tauri::command]
-fn open_settings(app: tauri::AppHandle) {
-    tauri::WebviewWindowBuilder::new(&app, "settings", tauri::WebviewUrl::App("settings.html".into()))
-    .title("Settings")
-    .inner_size(625.0, 475.0)
-    .build()
-    .unwrap();
-}
-
-#[cfg(windows)]
-#[tauri::command]
-async fn open_about(app: tauri::AppHandle) {
-    tauri::WebviewWindowBuilder::new(&app, "about", tauri::WebviewUrl::App("about.html".into()))
-    .title("About")
-    .inner_size(400.0, 712.0)
-    .build()
-    .unwrap();
-}
-
-#[cfg(not(windows))]
-#[tauri::command]
-fn open_about(app: tauri::AppHandle) {
-    tauri::WebviewWindowBuilder::new(&app, "about", tauri::WebviewUrl::App("about.html".into()))
-    .title("About")
-    .inner_size(400.0, 712.0)
-    .build()
-    .unwrap();
 }
 
 #[tauri::command]
