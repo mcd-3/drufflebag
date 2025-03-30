@@ -50,6 +50,26 @@ const SwfTable = ({
     return condition ? original : '---';
   };
 
+  const unfocusEditableRow = (row) => {
+    if (editedSwf !== null) {
+      const newArray = [...swfFiles];
+      for (let i = 0; i < swfFiles.length; i++) {
+        if (swfFiles[i].md5_hash === editedSwf.md5_hash) {
+          newArray[i] = editedSwf;
+          setSwfFiles([...newArray]);
+          break;
+        }
+      }
+      writeJsonCache(newArray);
+      updateSWF(editedSwf);
+      setEditedSwf(null);
+    }
+
+    setEditIndex();
+    setSelectedSwfPath(row.original.path);
+    setActiveIndex(row.id);
+  }
+
   const columns = [
     columnHelper.accessor('avm', {
       cell: info => {
@@ -138,6 +158,11 @@ const SwfTable = ({
               <tr
                 key={row.id}
                 className={styles['active']}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    unfocusEditableRow(row);
+                  }
+                }}
               >
                 <td key={row.getVisibleCells()[0].id}>
                   {flexRender(
@@ -212,23 +237,7 @@ const SwfTable = ({
                 className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
                 onClick={
                   async () => {
-                    if (editedSwf !== null) {
-                      const newArray = [...swfFiles];
-                      for (let i = 0; i < swfFiles.length; i++) {
-                        if (swfFiles[i].md5_hash === editedSwf.md5_hash) {
-                          newArray[i] = editedSwf;
-                          setSwfFiles([...newArray]);
-                          break;
-                        }
-                      }
-                      writeJsonCache(newArray);
-                      updateSWF(editedSwf);
-                      setEditedSwf(null);
-                    }
-
-                    setEditIndex();
-                    setSelectedSwfPath(row.original.path);
-                    setActiveIndex(row.id);
+                    unfocusEditableRow(row);
                   }
                 }
                 onContextMenu={(event) => handleContextMenu(event, row)}
