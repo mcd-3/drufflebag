@@ -12,6 +12,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 
@@ -24,6 +25,7 @@ const SwfTable = ({
   const [activeIndex, setActiveIndex] = useState();
   const [editIndex, setEditIndex] = useState();
   const [editedSwf, setEditedSwf]  = useState(null);
+  const [sorting, setSorting] = useState([]);
   const { menuVisible, menuItems, menuPosition, showMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
 
@@ -68,7 +70,21 @@ const SwfTable = ({
     setEditIndex();
     setSelectedSwfPath(row.original.path);
     setActiveIndex(row.id);
-  }
+  };
+
+  const sortStatuses = (rowA, rowB, _columnId) => {
+    const statusA = rowA.original.status
+    const statusB = rowB.original.status
+    const statusOrder = [
+      statuses[0].id,
+      statuses[1].id,
+      statuses[2].id,
+      statuses[3].id,
+      statuses[4].id,
+      null
+    ];
+    return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB)
+  };
 
   const columns = [
     columnHelper.accessor('avm', {
@@ -119,6 +135,8 @@ const SwfTable = ({
         ? statuses[(info.getValue() ? info.getValue() - 1 : 0)].status
         : '---',
       header: 'Status',
+      sortingFn: sortStatuses,
+      invertSorting: true
     }),
     // columnHelper.accessor('url', {
     //   cell: info => "",
@@ -130,22 +148,32 @@ const SwfTable = ({
     data: swfFiles,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
+  });
 
   return (
     <div>
       <table className={styles['swfTable-root']}>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr 
+              key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id}>
+                <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
+                      {{
+                        asc: ' ▲',
+                        desc: ' ▼',
+                      }[header.column.getIsSorted()] ?? null}
                 </th>
               ))}
             </tr>

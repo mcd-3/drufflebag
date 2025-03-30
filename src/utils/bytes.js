@@ -13,7 +13,7 @@ const formatBytes = (bytes, decimals = 2) => {
 
   const kilo = 1024;
   const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
+  const sizes = ['B', 'Kb', 'Mb', 'Gb', 'Tb'];
 
   const sizesIndex = Math.floor(Math.log(bytes) / Math.log(kilo));
 
