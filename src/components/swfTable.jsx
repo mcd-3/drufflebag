@@ -32,8 +32,6 @@ const SwfTable = ({
   const statuses = getStatuses();
   const types = getTypes();
 
-  const rerender = useReducer(() => ({}), {})[1];
-
   const handleContextMenu = (event, rowData) => {
     event.preventDefault();
     setActiveIndex(rowData.index);
@@ -72,7 +70,21 @@ const SwfTable = ({
     setEditIndex();
     setSelectedSwfPath(row.original.path);
     setActiveIndex(row.id);
-  }
+  };
+
+  const sortStatuses = (rowA, rowB, _columnId) => {
+    const statusA = rowA.original.status
+    const statusB = rowB.original.status
+    const statusOrder = [
+      statuses[0].id,
+      statuses[1].id,
+      statuses[2].id,
+      statuses[3].id,
+      statuses[4].id,
+      null
+    ];
+    return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB)
+  };
 
   const columns = [
     columnHelper.accessor('avm', {
@@ -123,6 +135,8 @@ const SwfTable = ({
         ? statuses[(info.getValue() ? info.getValue() - 1 : 0)].status
         : '---',
       header: 'Status',
+      sortingFn: sortStatuses,
+      invertSorting: true
     }),
     // columnHelper.accessor('url', {
     //   cell: info => "",
@@ -134,17 +148,12 @@ const SwfTable = ({
     data: swfFiles,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(), //client-side sorting
-    onSortingChange: setSorting, //optionally control sorting state in your own scope for easy access
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
     state: {
       sorting,
     },
-    // enableMultiSort: false, //Don't allow shift key to sort multiple columns - default on/true
-    // enableSorting: false, // - default on/true
-    // enableSortingRemoval: false, //Don't allow - default on/true
   });
-
-  console.log(table.getState().sorting);
 
   return (
     <div>
