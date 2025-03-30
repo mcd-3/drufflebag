@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import styles from '../styles/components/swfTable.module.css';
 import { formatBytes } from './../utils/bytes.js';
 import { getDateFromTimestamp } from './../utils/date.js';
@@ -12,6 +12,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 
@@ -24,11 +25,14 @@ const SwfTable = ({
   const [activeIndex, setActiveIndex] = useState();
   const [editIndex, setEditIndex] = useState();
   const [editedSwf, setEditedSwf]  = useState(null);
+  const [sorting, setSorting] = useState([]);
   const { menuVisible, menuItems, menuPosition, showMenu } = useContextMenu();
   const columnHelper = createColumnHelper();
 
   const statuses = getStatuses();
   const types = getTypes();
+
+  const rerender = useReducer(() => ({}), {})[1];
 
   const handleContextMenu = (event, rowData) => {
     event.preventDefault();
@@ -130,22 +134,37 @@ const SwfTable = ({
     data: swfFiles,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+    getSortedRowModel: getSortedRowModel(), //client-side sorting
+    onSortingChange: setSorting, //optionally control sorting state in your own scope for easy access
+    state: {
+      sorting,
+    },
+    // enableMultiSort: false, //Don't allow shift key to sort multiple columns - default on/true
+    // enableSorting: false, // - default on/true
+    // enableSortingRemoval: false, //Don't allow - default on/true
+  });
+
+  console.log(table.getState().sorting);
 
   return (
     <div>
       <table className={styles['swfTable-root']}>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr 
+              key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id}>
+                <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
+                      {{
+                        asc: ' ▲',
+                        desc: ' ▼',
+                      }[header.column.getIsSorted()] ?? null}
                 </th>
               ))}
             </tr>
