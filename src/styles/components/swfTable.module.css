@@ -65,15 +65,19 @@
     background-color: rgb(231, 231, 231);
 }
 
-.swfTable-root > tbody > tr > td {
+.td-row {
     padding-left: 4px;
     padding-right: 16px;
     max-height: 4px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     max-width: 50px;
 }
+
+.text-overflow-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 .swfTable-root > tbody > tr > td > img {
     display: block;

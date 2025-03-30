@@ -145,7 +145,7 @@ const SwfTable = ({
                     row.getVisibleCells()[0].getContext()
                   )}
                 </td>
-                <td key={row.getVisibleCells()[1].id}>
+                <td key={row.getVisibleCells()[1].id} className={styles["td-row"]}>
                   <input
                     className={styles['swfTable-text-input']}
                     type="text"
@@ -159,7 +159,7 @@ const SwfTable = ({
                     }}
                   />
                 </td>
-                <td key={row.getVisibleCells()[2].id}>
+                <td key={row.getVisibleCells()[2].id} className={styles["td-row"]}>
                   <select
                     className={styles['no-margin']}
                     onChange={(evt) => {
@@ -176,19 +176,19 @@ const SwfTable = ({
                     ))}
                   </select>
                 </td>
-                <td key={row.getVisibleCells()[3].id}>
+                <td key={row.getVisibleCells()[3].id} className={styles["td-row"]}>
                   {flexRender(
                     row.getVisibleCells()[3].column.columnDef.cell,
                     row.getVisibleCells()[3].getContext()
                   )}
                 </td>
-                <td key={row.getVisibleCells()[4].id}>
+                <td key={row.getVisibleCells()[4].id} className={styles["td-row"]}>
                   {flexRender(
                     row.getVisibleCells()[4].column.columnDef.cell,
                     row.getVisibleCells()[4].getContext()
                   )}
                 </td>
-                <td key={row.getVisibleCells()[5].id}>
+                <td key={row.getVisibleCells()[5].id} className={styles["td-row"]}>
                   <select
                     className={styles['no-margin']}
                     onChange={(evt) => {
@@ -234,7 +234,7 @@ const SwfTable = ({
                 onContextMenu={(event) => handleContextMenu(event, row)}
               >
                 {row.getVisibleCells().map(cell => (
-                  <td key={cell.id}>
+                  <td key={cell.id} className={`${styles["td-row"]} ${styles["text-overflow-ellipsis"]}`}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
