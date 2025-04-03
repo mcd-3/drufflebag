@@ -3,7 +3,7 @@ name = "drufflebag"
 version = "1.1.0"
 description = "A desktop frontend for the Adobe Flash emulator Ruffle"
 authors = ["Matthew Carvalho-Dagenais"]
-edition = "2021"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -15,16 +15,16 @@ name = "drufflebag_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0", features = [] }
+tauri-build = { version = "2.1.1", features = [] }
 
 [dependencies]
-tauri = { version = "2.0.0", features = ["protocol-asset"] }
-tauri-plugin-shell = "2.0.0"
+tauri = { version = "2.4.1", features = ["protocol-asset"] }
+tauri-plugin-shell = "2.2.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tauri-plugin-sql = { version = "2.0.1", features = ["sqlite"] }
-tauri-plugin-dialog = "2"
-tauri-plugin-fs = "2"
+tauri-plugin-sql = { version = "2.2.0", features = ["sqlite"] }
+tauri-plugin-dialog = "2.2.1"
+tauri-plugin-fs = "2.2.1"
 chksum-md5 = "0.0.0"
 
 [profile.dev.package.objc2]

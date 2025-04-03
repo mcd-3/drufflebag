@@ -4,6 +4,9 @@ A desktop frontend for the Adobe Flash emulator Ruffle. Plays single-file SWF ap
 
 Note: you will need to provide your own SWF files.
 
+## Requirements
+You will need Rust version 2024 installed on your system.
+
 ## Building
 In the project's root directory, do the following:
 
