@@ -8,6 +8,7 @@ import { getStatuses, getTypes, updateSWF } from './../utils/database.js';
 import { writeJsonCache } from './../utils/invoker.js';
 import Swf from "../models/swf.js";
 import ContextMenu from './contextMenu.jsx';
+import { setCurrentlyPlayingSwfPath } from './../utils/storage.js';
 import {
   createColumnHelper,
   flexRender,
@@ -50,7 +51,13 @@ const SwfTable = ({
             setEditIndex(rowData.index);
           }
         },
-        { label: 'Play SWF', action: () => playSwfEvt(rowData.original.path, rowData.original.name) }, 
+        {
+          label: 'Play SWF',
+          action: () => {
+            setCurrentlyPlayingSwfPath(rowData.original.path);
+            playSwfEvt(rowData.original.path, rowData.original.name)
+          }
+        }, 
       ],
       isLastItem() ? 64 : 0
     );
