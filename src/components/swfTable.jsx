@@ -32,20 +32,28 @@ const SwfTable = ({
   const statuses = getStatuses();
   const types = getTypes();
 
+  const isLastItem = () => {
+    return swfFiles.length > 2 && (swfFiles.length - 1) == activeIndex;
+  };
+
   const handleContextMenu = (event, rowData) => {
     event.preventDefault();
     setActiveIndex(rowData.index);
     setSelectedSwfPath(rowData.original.path);
-    showMenu(event, [
-      {
-        label: 'Edit',
-        action: () => {
-          setEditedSwf(new Swf(rowData.original));
-          setEditIndex(rowData.index);
-        }
-      },
-      { label: 'Play SWF', action: () => playSwfEvt(rowData.original.path, rowData.original.name) }, 
-    ]);
+    showMenu(
+      event,
+      [
+        {
+          label: 'Edit',
+          action: () => {
+            setEditedSwf(new Swf(rowData.original));
+            setEditIndex(rowData.index);
+          }
+        },
+        { label: 'Play SWF', action: () => playSwfEvt(rowData.original.path, rowData.original.name) }, 
+      ],
+      isLastItem() ? 64 : 0
+    );
   };
 
   const displayFallback = ({ condition, original }) => {
