@@ -10,8 +10,13 @@ import {
   saveSettings,
   compareSettings,
 } from './../../utils/settings.js';
+import { Locale } from '../../locales/index.js';
 
 function SettingsContent() {
+  const SCALE_1 = 1;
+  const SCALE_1_5 = 1.5;
+  const SCALE_2 = 2;
+
   const config = getSettingsJSON();
   const [settings, setSettings] = useState(config);
 
@@ -19,13 +24,13 @@ function SettingsContent() {
     <div>
       <Tabs>
           <TabList>
-            <Tab>Emulation</Tab>
+            <Tab>{ Locale.TAB_SETTINGS_EMULATION  }</Tab>
           </TabList>
           <TabPanel>
             <div className='panel-container'>
                 <br />
                 <div className='inner-panel-container'>
-                  <Header>Online Mode</Header>
+                  <Header>{ Locale.HEADER_SETTINGS_USE_LATEST_RUFFLE }</Header>
                   <div className='row'>
                     <input
                         type='checkbox'
@@ -37,12 +42,12 @@ function SettingsContent() {
                           });
                         }}
                       />
-                      <span>Use the latest version of Ruffle automatically from the Internet</span>
+                      <span>{ Locale.DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE }</span>
                   </div>
                 </div>
                 <br />
                 <div className='inner-panel-container'>
-                  <Header>Scale</Header>
+                  <Header>{ Locale.HEADER_SETTINGS_SCALE }</Header>
                   <div className='row'>
                     <select
                       onChange={(evt) => {
@@ -53,16 +58,16 @@ function SettingsContent() {
                       }}
                       value={settings.emulationScale}
                     >
-                      <option value={1}>1x</option>
-                      <option value={1.5}>1.5x</option>
-                      <option value={2}>2x</option>
+                      <option value={SCALE_1}>{ Locale.OPTION_SETTINGS_SCALE_1x }</option>
+                      <option value={SCALE_1_5}>{ Locale.OPTION_SETTINGS_SCALE_1_5x }</option>
+                      <option value={SCALE_2}>{ Locale.OPTION_SETTINGS_SCALE_2x}</option>
                     </select>
-                    <span>Emulation window scale size</span>
+                    <span>{ Locale.DESCRIPTION_SETTINGS_SCALE }</span>
                   </div>
                 </div>
                 < br/>
                 <div className='inner-panel-container'>
-                  <Header>Start Up</Header>
+                  <Header>{ Locale.HEADER_SETTINGS_START_UP }</Header>
                   <div className='row'>
                     <input
                       type='checkbox'
@@ -74,7 +79,7 @@ function SettingsContent() {
                         });
                       }}
                     />
-                    <span>Enable the Ruffle splash screen</span>
+                    <span>{ Locale.DESCRIPTION_SETTINGS_START_UP_SPLASH }</span>
                   </div>
                   <div className='row'>
                     <input
@@ -87,7 +92,7 @@ function SettingsContent() {
                         });
                       }}
                     />
-                    <span>Enable autoplay</span>
+                    <span>{ Locale.DESCRIPTION_SETTINGS_START_UP_AUTOPLAY }</span>
                   </div>
                 </div>
               </div>
@@ -100,15 +105,15 @@ function SettingsContent() {
                 className='footer-button footer-button-danger'
                 onClick={async () => {
                   const confirmed = await confirm(
-                    'Settings will be reverted back to factory settings and saved.',
-                    { title: 'Revert to default settings?', kind: 'warning' }
+                    Locale.PROMPT_DESCRIPTION_REVERT_BACK,
+                    { title: Locale.PROMPT_TITLE_REVERT_BACK, kind: 'warning' }
                   );
                   if (confirmed) {
                     setSettings({ ...getDefaultSettings()});
                     saveSettings(getDefaultSettings());
                   }
                 }}
-              >Reset to Default</button>
+              >{ Locale.BUTTON_SETTINGS_RESET_DEFAULT }</button>
             </div>
             <div>
               <button
@@ -116,8 +121,8 @@ function SettingsContent() {
                 onClick={async () => {
                   if (!compareSettings(settings, config)) {
                     const confirmed = await confirm(
-                      'You have unsaved changes',
-                      { title: 'Discard changes?', kind: 'warning' }
+                      Locale.PROMPT_DESCRIPTION_UNSAVED_CHANGES,
+                      { title: Locale.PROMPT_TITLE_UNSAVED_CHANGES, kind: 'warning' }
                     );
 
                     if (confirmed) {
@@ -127,7 +132,7 @@ function SettingsContent() {
                     getCurrentWindow().destroy();
                   }
                 }}
-              >Cancel</button>
+              >{ Locale.BUTTON_SETTINGS_CANCEL }</button>
               {/* This span is just for spacing between the buttons */}
               <span>  </span>
               <button
@@ -136,7 +141,7 @@ function SettingsContent() {
                   saveSettings(settings);
                   getCurrentWindow().destroy();
                 }}
-              >Save</button>
+              >{ Locale.BUTTON_SETTINGS_SAVE }</button>
             </div>
           </div>
         </footer>

@@ -1,0 +1,25 @@
+{
+    "HEADER_SETTINGS_USE_LATEST_RUFFLE": "Use latest Ruffle",
+    "HEADER_SETTINGS_SCALE": "Scale",
+    "HEADER_SETTINGS_START_UP": "Start Up",
+
+    "BUTTON_SETTINGS_RESET_DEFAULT": "Reset to Default",
+    "BUTTON_SETTINGS_CANCEL": "Cancel",
+    "BUTTON_SETTINGS_SAVE": "Save",
+
+    "DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE": "Requires an internet connection",
+    "DESCRIPTION_SETTINGS_SCALE": "Emulation window scale size",
+    "DESCRIPTION_SETTINGS_START_UP_SPLASH": "Enable the Ruffle splash screen",
+    "DESCRIPTION_SETTINGS_START_UP_AUTOPLAY": "Enable autoplay",
+
+    "OPTION_SETTINGS_SCALE_1x": "1x",
+    "OPTION_SETTINGS_SCALE_1_5x": "1.5x",
+    "OPTION_SETTINGS_SCALE_2x": "2x",
+
+    "PROMPT_DESCRIPTION_REVERT_BACK": "Settings will be reverted back to factory settings and saved.",
+    "PROMPT_DESCRIPTION_UNSAVED_CHANGES": "You have unsaved changes",
+    "PROMPT_TITLE_REVERT_BACK": "Revert to default settings?",
+    "PROMPT_TITLE_UNSAVED_CHANGES": "Discard changes?",
+
+    "TAB_SETTINGS_EMULATION": "Emulation"
+}
