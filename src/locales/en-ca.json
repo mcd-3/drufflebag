@@ -1,4 +1,6 @@
 {
+    "HEADER_MAIN_LOADING": "Loading SWF Files...",
+    "HEADER_MAIN_NO_SWF": "No SWF Files Detected",
     "HEADER_SETTINGS_USE_LATEST_RUFFLE": "Use latest Ruffle",
     "HEADER_SETTINGS_SCALE": "Scale",
     "HEADER_SETTINGS_START_UP": "Start Up",
@@ -7,6 +9,8 @@
     "BUTTON_SETTINGS_CANCEL": "Cancel",
     "BUTTON_SETTINGS_SAVE": "Save",
 
+    "DESCRIPTION_MAIN_PLEASE_WAIT": "Please Wait",
+    "DESCRIPTION_MAIN_CLICK_OPEN": "Click on \"Open\" to find some",
     "DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE": "Requires an internet connection",
     "DESCRIPTION_SETTINGS_SCALE": "Emulation window scale size",
     "DESCRIPTION_SETTINGS_START_UP_SPLASH": "Enable the Ruffle splash screen",
