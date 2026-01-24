@@ -16,6 +16,13 @@
     "DESCRIPTION_SETTINGS_START_UP_SPLASH": "Enable the Ruffle splash screen",
     "DESCRIPTION_SETTINGS_START_UP_AUTOPLAY": "Enable autoplay",
 
+    "ICON_BUTTON_ABOUT": "About",
+    "ICON_BUTTON_OPEN": "Open",
+    "ICON_BUTTON_PLAY": "Play",
+    "ICON_BUTTON_REFRESH": "Refresh",
+    "ICON_BUTTON_SETTINGS": "Settings",
+    "ICON_BUTTON_STOP": "Stop",
+
     "OPTION_SETTINGS_SCALE_1x": "1x",
     "OPTION_SETTINGS_SCALE_1_5x": "1.5x",
     "OPTION_SETTINGS_SCALE_2x": "2x",
