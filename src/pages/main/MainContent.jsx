@@ -12,6 +12,13 @@ import SwfTable from "../../components/swfTable";
 import NoItemsBox from "../../components/noItemsBox";
 import { Locale } from "../../locales/index.js";
 
+const {
+  DESCRIPTION_MAIN_CLICK_OPEN,
+  DESCRIPTION_MAIN_PLEASE_WAIT,
+  HEADER_MAIN_LOADING,
+  HEADER_MAIN_NO_SWF,
+} = Locale;
+
 function MainContent() {
   const [cacheIsLoading, setCacheIsLoading] = useState(true);
   const [swfFiles, setSwfFiles] = useState([]);
@@ -90,8 +97,8 @@ function MainContent() {
             />
           :
             <NoItemsBox
-              topText={cacheIsLoading ? Locale.HEADER_MAIN_LOADING : Locale.HEADER_MAIN_NO_SWF}
-              bottomText={cacheIsLoading ? Locale.DESCRIPTION_MAIN_PLEASE_WAIT : Locale.DESCRIPTION_MAIN_CLICK_OPEN}
+              topText={cacheIsLoading ? HEADER_MAIN_LOADING : HEADER_MAIN_NO_SWF}
+              bottomText={cacheIsLoading ? DESCRIPTION_MAIN_PLEASE_WAIT : DESCRIPTION_MAIN_CLICK_OPEN}
               icon={cacheIsLoading ? getAsset('GIF_LOADING') : getAsset('ICN_FILE_NOT_FOUND')} />
         }
       </div>
