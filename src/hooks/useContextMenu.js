@@ -5,9 +5,9 @@ const useContextMenu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
-  const showMenu = useCallback((event, items) => {
+  const showMenu = useCallback((event, items, yOffset = 0) => {
     event.preventDefault();
-    setMenuPosition({ x: event.pageX, y: event.pageY });
+    setMenuPosition({ x: event.pageX, y: event.pageY - yOffset });
     setMenuItems(items);
     setMenuVisible(true);
   }, []);
