@@ -16,6 +16,21 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { Locale } from "./../locales/index.js";
+
+const {
+  CHAR_ARROW_UP,
+  CHAR_ARROW_DOWN,
+  HEADER_AVM,
+  HEADER_LAST_PLAYED,
+  HEADER_NAME,
+  HEADER_SIZE,
+  HEADER_STATUS,
+  HEADER_TYPE,
+  LABEL_EDIT,
+  LABEL_PLAY_SWF,
+  LABEL_OPTION_DEFAULT
+} = Locale;
 
 const SwfTable = ({
   swfFiles,
@@ -45,14 +60,14 @@ const SwfTable = ({
       event,
       [
         {
-          label: 'Edit',
+          label: LABEL_EDIT,
           action: () => {
             setEditedSwf(new Swf(rowData.original));
             setEditIndex(rowData.index);
           }
         },
         {
-          label: 'Play SWF',
+          label: LABEL_PLAY_SWF,
           action: () => {
             setCurrentlyPlayingSwfPath(rowData.original.path);
             playSwfEvt(rowData.original.path, rowData.original.name)
@@ -64,7 +79,7 @@ const SwfTable = ({
   };
 
   const displayFallback = ({ condition, original }) => {
-    return condition ? original : '---';
+    return condition ? original : LABEL_OPTION_DEFAULT;
   };
 
   const unfocusEditableRow = (row) => {
@@ -122,34 +137,34 @@ const SwfTable = ({
 
         return <img src={avmVersion} width={32} height={32} />
       },
-      header: 'AVM',
+      header: HEADER_AVM,
     }),
     columnHelper.accessor('name', {
       cell: info => info.getValue(),
-      header: 'Name',
+      header: HEADER_NAME,
     }),
     columnHelper.accessor('type', {
       cell: info => info.getValue() !== null
       ? types[(info.getValue() ? info.getValue() - 1 : 0)].type
-      : '---',
-      header: 'Type',
+      : LABEL_OPTION_DEFAULT,
+      header: HEADER_TYPE,
     }),
     columnHelper.accessor('size', {
       cell: info => formatBytes(info.getValue()),
-      header: 'Size',
+      header: HEADER_SIZE,
     }),
     columnHelper.accessor('lp', {
       cell: info => displayFallback({
         condition: info.getValue() !== null,
         original: getDateFromTimestamp(info.getValue())
       }),
-      header: 'Last Played',
+      header: HEADER_LAST_PLAYED,
     }),
     columnHelper.accessor('status', {
       cell: info => info.getValue() !== null
         ? statuses[(info.getValue() ? info.getValue() - 1 : 0)].status
-        : '---',
-      header: 'Status',
+        : LABEL_OPTION_DEFAULT,
+      header: HEADER_STATUS,
       sortingFn: sortStatuses,
       invertSorting: true
     }),
@@ -186,8 +201,8 @@ const SwfTable = ({
                         header.getContext()
                       )}
                       {{
-                        asc: ' ▲',
-                        desc: ' ▼',
+                        asc: ` ${CHAR_ARROW_UP}`,
+                        desc: ` ${CHAR_ARROW_DOWN}`,
                       }[header.column.getIsSorted()] ?? null}
                 </th>
               ))}

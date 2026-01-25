@@ -1,13 +1,22 @@
 {
+    "HEADER_AVM": "AVM",
+    "HEADER_LAST_PLAYED": "Last Played",
     "HEADER_MAIN_LOADING": "Loading SWF Files...",
     "HEADER_MAIN_NO_SWF": "No SWF Files Detected",
+    "HEADER_NAME": "Name",
     "HEADER_SETTINGS_USE_LATEST_RUFFLE": "Use latest Ruffle",
     "HEADER_SETTINGS_SCALE": "Scale",
     "HEADER_SETTINGS_START_UP": "Start Up",
+    "HEADER_SIZE": "Size",
+    "HEADER_STATUS": "Status",
+    "HEADER_TYPE": "Type",
 
     "BUTTON_SETTINGS_RESET_DEFAULT": "Reset to Default",
     "BUTTON_SETTINGS_CANCEL": "Cancel",
     "BUTTON_SETTINGS_SAVE": "Save",
+
+    "CHAR_ARROW_UP": "▲",
+    "CHAR_ARROW_DOWN": "▼",
 
     "DESCRIPTION_MAIN_PLEASE_WAIT": "Please Wait",
     "DESCRIPTION_MAIN_CLICK_OPEN": "Click on \"Open\" to find some",
@@ -22,6 +31,12 @@
     "ICON_BUTTON_REFRESH": "Refresh",
     "ICON_BUTTON_SETTINGS": "Settings",
     "ICON_BUTTON_STOP": "Stop",
+
+    "LABEL_COLLAPSE_": "Collapse",
+    "LABEL_EDIT": "Edit",
+    "LABEL_EXPAND": "Expand",
+    "LABEL_OPTION_DEFAULT": "---",
+    "LABEL_PLAY_SWF": "Play SWF",
 
     "OPTION_SETTINGS_SCALE_1x": "1x",
     "OPTION_SETTINGS_SCALE_1_5x": "1.5x",
