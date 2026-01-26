@@ -15,20 +15,29 @@ import { updateSWFDateAVMByHash } from './../../utils/database.js';
 import NoItemsBox from './../../components/noItemsBox.jsx';
 import "./../../styles/Emulation.css";
 import { getAsset } from '../../utils/assets.js';
+import { Locale } from "./../../locales/index.js";
+
+const {
+  HEADER_ERROR,
+  DESCRIPTION_CLOSE_WINDOW,
+  DESCRIPTION_NO_INTERNET,
+  PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST,
+  PROMPT_TITLE_STOP_EMULATION
+} = Locale;
 
 function EmulationContent() {
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState({
-    topText: "An Error has Occured",
-    bottomText: "Please close this window and try again.",
+    topText: HEADER_ERROR,
+    bottomText: DESCRIPTION_CLOSE_WINDOW,
   })
 
   const settings = getSettingsJSON();
 
   const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
     const confirmed = await confirm(
-      'Any unsaved changes will be lost.',
-      { title: 'Stop emulation?', kind: 'warning' }
+      PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST,
+      { title: PROMPT_TITLE_STOP_EMULATION, kind: 'warning' }
     );
     if (!confirmed) {
       event.preventDefault();
@@ -43,8 +52,8 @@ function EmulationContent() {
     broadcastChannel: getBroadcastChannel(),
     onEmulatorClose: async () => {
       const confirmed = await confirm(
-        'Any unsaved changes will be lost.',
-        { title: 'Stop emulation?', kind: 'warning' }
+        PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST,
+        { title: PROMPT_TITLE_STOP_EMULATION, kind: 'warning' }
       );
       if (confirmed) {
         evtUpdatePlayButton({ broadcastChannel: getBroadcastChannel() });
@@ -66,9 +75,7 @@ function EmulationContent() {
         setHasError(true);
         setError({
           ...error,
-          bottomText: 
-            "You must be connected to the Internet to use Online Mode. "
-            + "You can disable Online Mode in the Settings if this was set by mistake."
+          bottomText: DESCRIPTION_NO_INTERNET
           })
       } else {
         script.src = "https://unpkg.com/@ruffle-rs/ruffle"

@@ -1,5 +1,6 @@
 {
     "HEADER_AVM": "AVM",
+    "HEADER_ERROR": "An Error has Occured",
     "HEADER_LAST_PLAYED": "Last Played",
     "HEADER_MAIN_LOADING": "Loading SWF Files...",
     "HEADER_MAIN_NO_SWF": "No SWF Files Detected",
@@ -24,6 +25,8 @@
     "DESCRIPTION_SETTINGS_SCALE": "Emulation window scale size",
     "DESCRIPTION_SETTINGS_START_UP_SPLASH": "Enable the Ruffle splash screen",
     "DESCRIPTION_SETTINGS_START_UP_AUTOPLAY": "Enable autoplay",
+    "DESCRIPTION_CLOSE_WINDOW": "Please close this window and try again.",
+    "DESCRIPTION_NO_INTERNET": "You must be connected to the Internet to use the latest version of Ruffle. You can disable this in the Settings if this was set by mistake.",
 
     "ICON_BUTTON_ABOUT": "About",
     "ICON_BUTTON_OPEN": "Open",
@@ -44,8 +47,10 @@
 
     "PROMPT_DESCRIPTION_REVERT_BACK": "Settings will be reverted back to factory settings and saved.",
     "PROMPT_DESCRIPTION_UNSAVED_CHANGES": "You have unsaved changes",
+    "PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST": "Any unsaved changes will be lost.",
     "PROMPT_TITLE_REVERT_BACK": "Revert to default settings?",
     "PROMPT_TITLE_UNSAVED_CHANGES": "Discard changes?",
+    "PROMPT_TITLE_STOP_EMULATION": "Stop emulation?",
 
     "TAB_SETTINGS_EMULATION": "Emulation"
 }
