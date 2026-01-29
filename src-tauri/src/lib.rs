@@ -7,12 +7,16 @@ mod pages {
     pub mod open;
 }
 
+mod utils {
+    pub mod hash;
+}
+
 use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
 use data::migrations::MigrationsHistory;
-use chksum_md5 as md5;
 use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Value};
 use pages::open::{open_ruffle, open_settings, open_about};
+use utils::hash::get_file_hash;
 
 fn get_full_data_dir_path(app_data_dir: &str) -> String {
     let mut full_path: String = app_data_dir.to_owned();
@@ -93,16 +97,15 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
                 match extension {
                     Some(ext_str) => {
                         if ext_str == "swf" {
-                            let full_path_str = format!("{}/{:?}", &directory_path_str, filename).replace("\"", "");
-
-                            // MD5 is not considered secure, but it should be ok for our purposes
-                            let file_to_hash = File::open(&full_path_str).unwrap();
-                            let digest = md5::chksum(&file_to_hash).unwrap();
+                            let full_path_string = format!(
+                                "{}/{:?}",
+                                &directory_path_str, filename
+                            ).replace("\"", "");
 
                             let swf_json = json!({
-                                "path": full_path_str,
+                                "path": full_path_string,
                                 "size": entry.metadata().unwrap().len(),
-                                "md5_hash": digest.to_hex_lowercase(),
+                                "md5_hash": get_file_hash(&full_path_string),
                                 "avm": 0,
                             });
 
@@ -134,12 +137,7 @@ fn copy_to_public(swf_absolute_path: &str) {
 
 #[tauri::command]
 async fn get_swf_hash(swf_absolute_path: String) -> String {
-    // TODO: This code is reused in scan_directory
-    //       Move it to a proper non-tauri function
-    let file_to_hash = File::open(&swf_absolute_path).unwrap();
-    let digest = md5::chksum(&file_to_hash).unwrap();
-
-    digest.to_hex_lowercase()
+    get_file_hash(&swf_absolute_path)
 }
 
 // async fn update_cache_by_swf_hash()
