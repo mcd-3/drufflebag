@@ -13,10 +13,18 @@ mod utils {
 
 use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
 use data::migrations::MigrationsHistory;
+use tauri::Emitter;
 use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Value};
 use pages::open::{open_ruffle, open_settings, open_about};
 use utils::hash::get_file_hash;
+use serde::Serialize;
+
+// Define a serializable payload struct
+#[derive(Clone, Serialize)]
+struct Payload {
+    count: u32,
+}
 
 fn get_full_data_dir_path(app_data_dir: &str) -> String {
     let mut full_path: String = app_data_dir.to_owned();
@@ -88,6 +96,7 @@ async fn scan_directory(
     let entries = std::fs::read_dir(&directory_path_str).unwrap();
 
     // TODO: Make this multi-threaded for better performance
+    let mut swf_count: u32 = 0;
     for entry in entries {
         match entry {
             Ok(entry) => {
@@ -112,6 +121,8 @@ async fn scan_directory(
                             });
 
                             swf_files.push(swf_json);
+                            swf_count = swf_count + 1;
+                            app.emit("swf-count-update", Payload { count: swf_count });
                         }
                     },
                     None => println!(""),
@@ -144,8 +155,6 @@ fn copy_to_public(swf_absolute_path: &str) {
 async fn get_swf_hash(swf_absolute_path: String) -> String {
     get_file_hash(&swf_absolute_path)
 }
-
-// async fn update_cache_by_swf_hash()
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {

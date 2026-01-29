@@ -20,7 +20,7 @@
     margin: auto;
 }
 
-.noItemsBox-header {
+.noItemsBox-header, .noItemsBox-extra {
     color: rgb(133, 133, 133)
 }
 

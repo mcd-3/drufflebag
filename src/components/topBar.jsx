@@ -44,6 +44,7 @@ const TopBar = ({
   ruffleOpen,
   setRuffleOpen,
   setCacheIsLoading,
+  setSwfFilesScanned,
   playSwfEvt,
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
@@ -68,6 +69,7 @@ const TopBar = ({
 
   const scanSwfDirectory = async (cachedDirectoryPath = "") => {
     setCacheIsLoading(true);
+    setSwfFilesScanned(0);
     const files = await scanDirectory(cachedDirectoryPath);
 
     if (files.cancelled) {

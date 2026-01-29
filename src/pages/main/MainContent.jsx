@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
+import { listen } from '@tauri-apps/api/event';
 import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
 import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
 import { getAsset } from './../../utils/assets.js';
@@ -24,6 +25,7 @@ function MainContent() {
   const [swfFiles, setSwfFiles] = useState([]);
   const [selectedSwfPath, setSelectedSwfPath] = useState("");
   const [ruffleOpen, setRuffleOpen] = useState(false);
+  const [swfFilesScanned, setSwfFilesScanned] = useState(0);
 
   const unlisten = getCurrentWindow().onCloseRequested(
     async (event) => {
@@ -31,6 +33,10 @@ function MainContent() {
       exitApp();
     }
   );
+
+  const unlistenSwfCountUpdate = listen('swf-count-update', (event) => {
+    setSwfFilesScanned(event.payload.count);
+  })
 
   useEffect(() => {
     setCacheIsLoading(true);
@@ -47,6 +53,7 @@ function MainContent() {
 
     return () => {
       unlisten.then(() => {});
+      unlistenSwfCountUpdate.then(() => {});
     };
   }, []);
 
@@ -83,6 +90,7 @@ function MainContent() {
           ruffleOpen={ruffleOpen}
           setRuffleOpen={setRuffleOpen}
           setCacheIsLoading={setCacheIsLoading}
+          setSwfFilesScanned={setSwfFilesScanned}
           playSwfEvt={launchRuffle}
         />
       </div>
@@ -99,6 +107,7 @@ function MainContent() {
             <NoItemsBox
               topText={cacheIsLoading ? HEADER_MAIN_LOADING : HEADER_MAIN_NO_SWF}
               bottomText={cacheIsLoading ? DESCRIPTION_MAIN_PLEASE_WAIT : DESCRIPTION_MAIN_CLICK_OPEN}
+              extraText={cacheIsLoading ? `${swfFilesScanned} SWFs found` : ""}
               icon={cacheIsLoading ? getAsset('GIF_LOADING') : getAsset('ICN_FILE_NOT_FOUND')} />
         }
       </div>
