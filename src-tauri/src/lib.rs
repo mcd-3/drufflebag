@@ -63,7 +63,10 @@ fn exit_app(app: tauri::AppHandle) {
 }
 
 #[tauri::command]
-async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) -> serde_json::Value {
+async fn scan_directory(
+    app: tauri::AppHandle,
+    cached_directory_path: String
+) -> serde_json::Value {
     let directory_path = if cached_directory_path == "" {
         match app.dialog().file().blocking_pick_folder() {
             Some(fp) => fp,
@@ -132,7 +135,10 @@ async fn scan_directory(app: tauri::AppHandle, cached_directory_path: String) ->
 
 #[tauri::command]
 fn copy_to_public(swf_absolute_path: &str) {
-    std::fs::copy(swf_absolute_path, "./../public/play.temp.swf").unwrap();
+    std::fs::copy(
+        swf_absolute_path,
+        "./../public/play.temp.swf"
+    ).unwrap();
 }
 
 #[tauri::command]
