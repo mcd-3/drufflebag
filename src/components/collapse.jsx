@@ -1,7 +1,7 @@
 import { useCollapse } from 'react-collapsed';
 import { getAsset } from './../utils/assets.js';
 import styles from './../styles/components/collapse.module.css';
-import { Locale } from "../../locales/index.js";
+import { Locale } from "./../locales/index.js";
 
 const {
   LABEL_COLLAPSE,
