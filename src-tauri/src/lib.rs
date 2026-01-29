@@ -88,7 +88,6 @@ async fn scan_directory(
     let entries = std::fs::read_dir(&directory_path_str).unwrap();
 
     // TODO: Make this multi-threaded for better performance
-    // TODO: Read the file and get the AVM version and file size
     for entry in entries {
         match entry {
             Ok(entry) => {
