@@ -26,11 +26,6 @@ const {
   PROMPT_TITLE_STOP_EMULATION
 } = Locale;
 
-// Handle URL clicks on the page
-window.open = (url) => {
-    openUrl(url);
-};
-
 function EmulationContent() {
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState({
@@ -53,6 +48,13 @@ function EmulationContent() {
       closeBroadcastChanel({ broadcastChannel });
     }
   });
+
+  // Handle URL clicks on the page
+  window.open = (url) => {
+    if (settings.openUrls) {
+      openUrl(url);
+    }
+  };
 
   injectOnEmulatorClose({
     broadcastChannel: getBroadcastChannel(),
@@ -99,7 +101,7 @@ function EmulationContent() {
       player.config = {
         autoplay: settings.autoplayEnabled ? "on" : "off",
         splashScreen: settings.splashscreenEnabled,
-        openUrlMode: "allow",
+        openUrlMode: settings.openUrls ? "allow" : "deny",
       }
 
       const container = document.getElementById("ruffle-container");

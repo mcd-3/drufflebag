@@ -15,6 +15,7 @@ const getDefaultSettings = () => {
     emulationScale: 1,
     splashscreenEnabled: true,
     onlineModeEnabled: false,
+    openUrls: false,
   };
 }
 
@@ -24,6 +25,7 @@ const saveSettings = ({
   emulationScale,
   splashscreenEnabled,
   onlineModeEnabled,
+  openUrls,
 }) => {
   setSettings({
     theme,
@@ -31,6 +33,7 @@ const saveSettings = ({
     emulationScale,
     splashscreenEnabled,
     onlineModeEnabled,
+    openUrls,
   });
 };
 
@@ -69,6 +72,7 @@ const compareSettings = (settings1, settings2) => {
       && settings1.emulationScale === settings2.emulationScale
       && settings1.splashscreenEnabled === settings2.splashscreenEnabled
       && settings1.onlineModeEnabled === settings2.onlineModeEnabled
+      && settings1.openUrls === settings2.openUrls
   );
 };
 

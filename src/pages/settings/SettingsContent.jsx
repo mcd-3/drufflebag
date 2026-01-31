@@ -16,10 +16,12 @@ const {
   BUTTON_SETTINGS_CANCEL,
   BUTTON_SETTINGS_RESET_DEFAULT,
   BUTTON_SETTINGS_SAVE,
-  DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE,
+  DESCRIPTION_SETTINGS_OPEN_URL,
   DESCRIPTION_SETTINGS_SCALE,
   DESCRIPTION_SETTINGS_START_UP_AUTOPLAY,
   DESCRIPTION_SETTINGS_START_UP_SPLASH,
+  DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE,
+  HEADER_SETTINGS_OPEN_URL,
   HEADER_SETTINGS_SCALE,
   HEADER_SETTINGS_START_UP,
   HEADER_SETTINGS_USE_LATEST_RUFFLE,
@@ -30,7 +32,8 @@ const {
   PROMPT_DESCRIPTION_UNSAVED_CHANGES,
   PROMPT_TITLE_REVERT_BACK,
   PROMPT_TITLE_UNSAVED_CHANGES,
-  TAB_SETTINGS_EMULATION
+  TAB_SETTINGS_EMULATION,
+  TAB_SETTINGS_RUFFLE,
 } = Locale;
 
 function SettingsContent() {
@@ -46,6 +49,7 @@ function SettingsContent() {
       <Tabs>
           <TabList>
             <Tab>{ TAB_SETTINGS_EMULATION  }</Tab>
+            <Tab>{ TAB_SETTINGS_RUFFLE }</Tab>
           </TabList>
           <TabPanel>
             <div className='panel-container'>
@@ -117,6 +121,27 @@ function SettingsContent() {
                   </div>
                 </div>
               </div>
+          </TabPanel>
+          <TabPanel>
+            <div className='panel-container'>
+              <br />
+              <div className='inner-panel-container'>
+                <Header>{ HEADER_SETTINGS_OPEN_URL }</Header>
+                <div className='row'>
+                  <input
+                      type='checkbox'
+                      checked={settings.openUrls}
+                      onChange={(evt) => {
+                        setSettings({
+                          ...settings,
+                          openUrls: evt.target.checked
+                        });
+                      }}
+                    />
+                    <span>{ DESCRIPTION_SETTINGS_OPEN_URL }</span>
+                </div>
+              </div>
+            </div>
           </TabPanel>
         </Tabs>
         <footer>
