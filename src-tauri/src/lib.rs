@@ -122,7 +122,7 @@ async fn scan_directory(
 
                             swf_files.push(swf_json);
                             swf_count = swf_count + 1;
-                            app.emit("swf-count-update", Payload { count: swf_count });
+                            app.emit("swf-count-update", Payload { count: swf_count }).unwrap();
                         }
                     },
                     None => println!(""),
@@ -168,6 +168,7 @@ pub fn run() {
                 .build(),
         )
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             open_ruffle,
             open_settings,

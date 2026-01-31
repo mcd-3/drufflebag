@@ -17,6 +17,8 @@
     "dialog:allow-open",
     "core:window:allow-set-size",
     "core:window:allow-destroy",
-    "fs:allow-copy-file"
+    "fs:allow-copy-file",
+    "opener:allow-open-url",
+    "opener:default"
   ]
 }

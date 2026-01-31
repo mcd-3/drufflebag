@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
 import { invoke, convertFileSrc } from "@tauri-apps/api/core";
+import { openUrl } from '@tauri-apps/plugin-opener';
 import {
   getBroadcastChannel,
   closeBroadcastChanel,
@@ -24,6 +25,11 @@ const {
   PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST,
   PROMPT_TITLE_STOP_EMULATION
 } = Locale;
+
+// Handle URL clicks on the page
+window.open = (url) => {
+    openUrl(url);
+};
 
 function EmulationContent() {
   const [hasError, setHasError] = useState(false);
@@ -93,6 +99,7 @@ function EmulationContent() {
       player.config = {
         autoplay: settings.autoplayEnabled ? "on" : "off",
         splashScreen: settings.splashscreenEnabled,
+        openUrlMode: "allow",
       }
 
       const container = document.getElementById("ruffle-container");
@@ -134,13 +141,13 @@ function EmulationContent() {
             date,
           });
         });
-      })
+      });
     };
 
     document.body.appendChild(script);
 
     return script;
-  }
+  };
 
   useEffect(() => {
     const ruffleScript = mountRuffle();
