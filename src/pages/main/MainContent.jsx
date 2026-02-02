@@ -94,7 +94,9 @@ function MainContent() {
           playSwfEvt={launchRuffle}
         />
       </div>
-      <div className={`${swfFiles.length > 0 ? "has-items" : "no-items"} swf-content-table`}>
+      <div className={
+        `${swfFiles.length > 0 && !cacheIsLoading ? "has-items" : "no-items"} swf-content-table`
+      }>
         {swfFiles.length > 0 && !cacheIsLoading
           ?
             <SwfTable
