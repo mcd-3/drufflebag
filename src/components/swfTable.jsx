@@ -60,19 +60,19 @@ const SwfTable = ({
       event,
       [
         {
+          label: LABEL_PLAY_SWF,
+          action: () => {
+            setCurrentlyPlayingSwfPath(rowData.original.path);
+            playSwfEvt(rowData.original.path, rowData.original.name)
+          }
+        },
+        {
           label: LABEL_EDIT,
           action: () => {
             setEditedSwf(new Swf(rowData.original));
             setEditIndex(rowData.index);
           }
         },
-        {
-          label: LABEL_PLAY_SWF,
-          action: () => {
-            setCurrentlyPlayingSwfPath(rowData.original.path);
-            playSwfEvt(rowData.original.path, rowData.original.name)
-          }
-        }, 
       ],
       isLastItem() ? 64 : 0
     );
