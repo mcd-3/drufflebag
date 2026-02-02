@@ -10,11 +10,9 @@
 }
 
 .menu-item {
-    margin-top: 4px;
-    margin-bottom: 4px;
     padding-left: 4px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     cursor: pointer;
 }
 
