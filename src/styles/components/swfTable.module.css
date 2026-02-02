@@ -104,6 +104,15 @@
     padding-left: 4px;
 }
 
+.swfTable-select-input {
+    height: 75%;
+    width: 100%;
+    border: 1px solid #b7b7b7;
+    border-radius: 3px;
+    padding-left: 4px;
+    font-size: 12px;
+}
+
 @media (prefers-color-scheme: dark) {
     .swfTable-root > thead {
         background-color: rgb(29, 29, 29);
