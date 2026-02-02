@@ -16,11 +16,15 @@ const {
   BUTTON_SETTINGS_CANCEL,
   BUTTON_SETTINGS_RESET_DEFAULT,
   BUTTON_SETTINGS_SAVE,
+  DESCRIPTION_SETTINGS_CONTEXT_MENU,
+  DESCRIPTION_SETTINGS_LETTERBOX,
   DESCRIPTION_SETTINGS_OPEN_URL,
   DESCRIPTION_SETTINGS_SCALE,
   DESCRIPTION_SETTINGS_START_UP_AUTOPLAY,
   DESCRIPTION_SETTINGS_START_UP_SPLASH,
   DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE,
+  HEADER_SETTINGS_CONTEXT_MENU,
+  HEADER_SETTINGS_LETTERBOX,
   HEADER_SETTINGS_OPEN_URL,
   HEADER_SETTINGS_SCALE,
   HEADER_SETTINGS_START_UP,
@@ -139,6 +143,40 @@ function SettingsContent() {
                       }}
                     />
                     <span>{ DESCRIPTION_SETTINGS_OPEN_URL }</span>
+                </div>
+              </div>
+              < br/>
+              <div className='inner-panel-container'>
+                <Header>{ HEADER_SETTINGS_CONTEXT_MENU }</Header>
+                <div className='row'>
+                  <input
+                      type='checkbox'
+                      checked={settings.contextMenuEnabled}
+                      onChange={(evt) => {
+                        setSettings({
+                          ...settings,
+                          contextMenuEnabled: evt.target.checked
+                        });
+                      }}
+                    />
+                    <span>{ DESCRIPTION_SETTINGS_CONTEXT_MENU }</span>
+                </div>
+              </div>
+              < br/>
+              <div className='inner-panel-container'>
+                <Header>{ HEADER_SETTINGS_LETTERBOX }</Header>
+                <div className='row'>
+                  <input
+                      type='checkbox'
+                      checked={settings.letterboxEnabled}
+                      onChange={(evt) => {
+                        setSettings({
+                          ...settings,
+                          letterboxEnabled: evt.target.checked
+                        });
+                      }}
+                    />
+                    <span>{ DESCRIPTION_SETTINGS_LETTERBOX }</span>
                 </div>
               </div>
             </div>

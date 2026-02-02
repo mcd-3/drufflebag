@@ -16,6 +16,8 @@ const getDefaultSettings = () => {
     splashscreenEnabled: true,
     onlineModeEnabled: false,
     openUrls: false,
+    contextMenuEnabled: true,
+    letterboxEnabled: true,
   };
 }
 
@@ -26,6 +28,8 @@ const saveSettings = ({
   splashscreenEnabled,
   onlineModeEnabled,
   openUrls,
+  contextMenuEnabled,
+  letterboxEnabled,
 }) => {
   setSettings({
     theme,
@@ -34,6 +38,8 @@ const saveSettings = ({
     splashscreenEnabled,
     onlineModeEnabled,
     openUrls,
+    contextMenuEnabled,
+    letterboxEnabled,
   });
 };
 
@@ -73,6 +79,8 @@ const compareSettings = (settings1, settings2) => {
       && settings1.splashscreenEnabled === settings2.splashscreenEnabled
       && settings1.onlineModeEnabled === settings2.onlineModeEnabled
       && settings1.openUrls === settings2.openUrls
+      && settings1.contextMenuEnabled === settings2.contextMenuEnabled
+      && settings1.letterboxEnabled === settings2.letterboxEnabled
   );
 };
 

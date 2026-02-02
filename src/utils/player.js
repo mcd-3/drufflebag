@@ -3,6 +3,8 @@ const getPlayerConfig = (settings) => {
     autoplay: settings.autoplayEnabled ? "on" : "off",
     splashScreen: settings.splashscreenEnabled,
     openUrlMode: settings.openUrls ? "allow" : "deny",
+    contextMenu: settings.contextMenuEnabled,
+    letterbox: settings.letterboxEnabled ? "on" : "off",
   };
 };
 
