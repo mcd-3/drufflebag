@@ -17,6 +17,7 @@
     "dialog:allow-open",
     "core:window:allow-set-size",
     "core:window:allow-destroy",
+    "core:window:allow-set-fullscreen",
     "fs:allow-copy-file",
     "opener:allow-open-url",
     "opener:default"
