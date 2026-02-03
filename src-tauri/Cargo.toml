@@ -1,6 +1,6 @@
 [package]
 name = "drufflebag"
-version = "1.1.1"
+version = "1.2.0"
 description = "A desktop frontend for the Adobe Flash emulator Ruffle"
 authors = ["Matthew Carvalho-Dagenais"]
 edition = "2024"
