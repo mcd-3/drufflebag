@@ -22,12 +22,12 @@
 
 .menu-item:hover {
     color: white;
-    background-color: rgb(0, 89, 255);
+    background-color: rgb(77, 77, 77);
 }
 
 .menu-item:active {
     color: white;
-    background-color: rgb(0, 62, 179);
+    background-color: rgb(57, 57, 57);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,5 +39,15 @@
 
     .divider {
         border-color: rgb(48, 48, 48);
+    }
+
+    .menu-item:hover {
+        color: white;
+        background-color: rgb(42, 42, 42);
+    }
+
+    .menu-item:active {
+        color: white;
+        background-color: rgb(26, 26, 26);
     }
 }
