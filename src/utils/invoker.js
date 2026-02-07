@@ -5,14 +5,14 @@ import { appDataDir } from '@tauri-apps/api/path';
  * Open the About window
  */
 const openAbout = () => {
-  invoke("open_about");
+  invoke("c_open_about");
 };
 
 /**
  * Open the settings window
  */
 const openSettings = () => {
-  invoke("open_settings");
+  invoke("c_open_settings");
 };
 
 /**
@@ -21,14 +21,14 @@ const openSettings = () => {
  * @param {string} swfName - Name of SWF file to display on title bar
  */
 const openRuffle = (swfName) => {
-  invoke("open_ruffle", { swfName });  
+  invoke("c_open_ruffle", { swfName });  
 };
 
 /**
  * Exits the application and closes all windows
  */
 const exitApp = () => {
-  invoke("exit_app");
+  invoke("c_exit_app");
 }
 
 /**
@@ -51,7 +51,7 @@ const writeJsonCache = async (swfFiles) => {
  * @returns {object} - Object containing swf files and path searched
  */
 const scanDirectory = async (directoryPath) => {
-  return await invoke("scan_directory", { cachedDirectoryPath: directoryPath });
+  return await invoke("c_scan_directory", { cachedDirectoryPath: directoryPath });
 };
 
 export {

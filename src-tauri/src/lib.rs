@@ -1,4 +1,3 @@
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 mod data {
     pub mod migrations;
 }
@@ -9,152 +8,35 @@ mod pages {
 
 mod utils {
     pub mod hash;
+    pub mod cache;
 }
 
-use std::{ffi::OsStr, fs::File, io::BufWriter, path::Path};
+mod commands {
+    pub mod c_cache;
+    pub mod c_app;
+    pub mod c_page;
+    pub mod c_path;
+    pub mod c_swf;
+}
+
 use data::migrations::MigrationsHistory;
-use tauri::Emitter;
-use tauri_plugin_dialog::{DialogExt, FilePath};
-use serde_json::{json, Value};
-use pages::open::{open_ruffle, open_settings, open_about};
-use utils::hash::get_file_hash;
-use serde::Serialize;
-
-// Define a serializable payload struct
-#[derive(Clone, Serialize)]
-struct Payload {
-    count: u32,
-}
-
-fn get_full_data_dir_path(app_data_dir: &str) -> String {
-    let mut full_path: String = app_data_dir.to_owned();
-    full_path.push_str("/.cached_swf.json");
-
-    full_path.clone()
-}
-
-#[tauri::command]
-async fn cache_swfs(swfs: Vec<Value>, app_data_dir: String) {
-    // We pass the data dir here because Tauri's Rust bindings feel unfinished
-    let full_path = get_full_data_dir_path(&app_data_dir);
-
-    let path = Path::new(&full_path);
-    if path.exists() {
-        // Delete the existing file first if it exists
-        std::fs::remove_file(path).unwrap();
-    }
-    let file = File::create(path).unwrap();
-    let mut writer = BufWriter::new(file);
-    serde_json::to_writer(&mut writer, &swfs).unwrap();
-}
-
-#[tauri::command]
-async fn get_cached_swfs(app_data_dir: String) -> Vec<Value> {
-    // We pass the data dir here because Tauri's Rust bindings feel unfinished
-    let full_path = get_full_data_dir_path(&app_data_dir);
-    let path = Path::new(&full_path);
-    if path.exists() {
-        let file = File::open(path)
-            .expect("file should open read only");
-        let json: serde_json::Value =
-            serde_json::from_reader(file).unwrap();
-        json.as_array().unwrap().to_vec()
-    } else {
-        // File does not exist so nothing is cached
-        Vec::new()
-    }
-}
-
-#[tauri::command]
-fn exit_app(app: tauri::AppHandle) {
-    app.exit(0);
-}
-
-#[tauri::command]
-async fn scan_directory(
-    app: tauri::AppHandle,
-    cached_directory_path: String
-) -> serde_json::Value {
-    let directory_path = if cached_directory_path == "" {
-        match app.dialog().file().blocking_pick_folder() {
-            Some(fp) => fp,
-            None => FilePath::from(Path::new(""))
-        }
-    } else {
-        FilePath::from(Path::new(&cached_directory_path))
-    };
-
-    let mut swf_files: Vec<Value> = Vec::new();
-    let directory_path_str = directory_path.to_string();
-
-    if directory_path_str == "" {
-        return json!({
-            "cancelled": true,
-        })
-    }
-
-    let entries = std::fs::read_dir(&directory_path_str).unwrap();
-
-    // TODO: Make this multi-threaded for better performance
-    let mut swf_count: u32 = 0;
-    for entry in entries {
-        match entry {
-            Ok(entry) => {
-                let filename = entry.file_name();
-                let extension = Path::new(&filename)
-                    .extension()
-                    .and_then(OsStr::to_str);
-
-                match extension {
-                    Some(ext_str) => {
-                        if ext_str == "swf" {
-                            let full_path_string = format!(
-                                "{}/{:?}",
-                                &directory_path_str, filename
-                            ).replace("\"", "");
-
-                            let swf_json = json!({
-                                "path": full_path_string,
-                                "size": entry.metadata().unwrap().len(),
-                                "md5_hash": get_file_hash(&full_path_string),
-                                "avm": 0,
-                            });
-
-                            swf_files.push(swf_json);
-                            swf_count = swf_count + 1;
-                            app.emit("swf-count-update", Payload { count: swf_count }).unwrap();
-                        }
-                    },
-                    None => println!(""),
-                }
-            }
-            Err(e) => {
-                println!("ERROR: {:?}", e);
-            }
-        }
-    }
-
-    let return_json = json!({
-        "parent_dir": directory_path_str,
-        "swfs": swf_files,
-        "cancelled": false,
-    });
-
-    return_json
-}
-
-#[tauri::command]
-fn copy_to_public(swf_absolute_path: &str) {
-    std::fs::copy(
-        swf_absolute_path,
-        "./../public/play.temp.swf"
-    ).unwrap();
-}
-
-#[tauri::command]
-async fn get_swf_hash(swf_absolute_path: String) -> String {
-    get_file_hash(&swf_absolute_path)
-}
+use commands::{
+    c_cache::{
+        c_get_cached_swfs,
+        c_cache_swfs
+    },
+    c_app::c_exit_app,
+    c_page::{
+        c_open_about,
+        c_open_ruffle,
+        c_open_settings
+    },
+    c_path::{
+        c_copy_to_public,
+        c_scan_directory
+    },
+    c_swf::c_get_swf_hash
+};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -170,15 +52,15 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            open_ruffle,
-            open_settings,
-            open_about,
-            scan_directory,
-            cache_swfs,
-            get_cached_swfs,
-            copy_to_public,
-            get_swf_hash,
-            exit_app,
+            c_open_ruffle,
+            c_open_settings,
+            c_open_about,
+            c_scan_directory,
+            c_cache_swfs,
+            c_get_cached_swfs,
+            c_copy_to_public,
+            c_get_swf_hash,
+            c_exit_app,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

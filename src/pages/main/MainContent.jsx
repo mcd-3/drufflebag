@@ -41,7 +41,7 @@ function MainContent() {
   useEffect(() => {
     setCacheIsLoading(true);
     appDataDir().then((dir, err) => {
-      return invoke('get_cached_swfs', { appDataDir: dir });
+      return invoke('c_get_cached_swfs', { appDataDir: dir });
     }).then((cache, err) => {
       if (!err && cache.length > 0) {
         setSwfFiles(cache);

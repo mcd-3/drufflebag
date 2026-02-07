@@ -123,7 +123,7 @@ function EmulationContent() {
 
         // Asynchronously update the cache and DB to have the correct AVM version & date last played
         invoke(
-          "get_swf_hash",
+          "c_get_swf_hash",
           { swfAbsolutePath: getCurrentlyPlayingSwfPath() }
         ).then((hash) => {
           const avm = player.metadata.isActionScript3 ? 2 : 1;
