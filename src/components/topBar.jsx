@@ -31,8 +31,10 @@ const {
   ICON_BUTTON_REFRESH,
   ICON_BUTTON_SETTINGS,
   ICON_BUTTON_STOP,
+  TITLE_BUTTON_PLAY,
   TITLE_BUTTON_REFRESH,
   TITLE_BUTTON_SCAN_DIRECTORY,
+  TITLE_BUTTON_STOP,
 } = Locale;
 
 /**
@@ -145,6 +147,7 @@ const TopBar = ({
           className={styles["topBar-pause-button"]}
           text={ruffleOpen ? ICON_BUTTON_STOP : ICON_BUTTON_PLAY}
           src={ruffleOpen ? getAsset("ICN_STOP") : getAsset("ICN_PLAY")}
+          title={ruffleOpen ? TITLE_BUTTON_STOP : TITLE_BUTTON_PLAY }
           onClick={() => {
             if (ruffleOpen) {
               evtCloseEmulation({ broadcastChannel: getBroadcastChannel() })
