@@ -59,5 +59,8 @@
     "PROMPT_TITLE_STOP_EMULATION": "Stop emulation?",
 
     "TAB_SETTINGS_EMULATION": "Emulation",
-    "TAB_SETTINGS_RUFFLE": "Ruffle"
+    "TAB_SETTINGS_RUFFLE": "Ruffle",
+
+    "TITLE_BUTTON_SCAN_DIRECTORY": "Select a directory that contains your Flash files (.swf)",
+    "TITLE_BUTTON_REFRESH": "Rescan your collection and update the SWF list below"
 }

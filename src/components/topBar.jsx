@@ -31,6 +31,8 @@ const {
   ICON_BUTTON_REFRESH,
   ICON_BUTTON_SETTINGS,
   ICON_BUTTON_STOP,
+  TITLE_BUTTON_REFRESH,
+  TITLE_BUTTON_SCAN_DIRECTORY,
 } = Locale;
 
 /**
@@ -118,6 +120,7 @@ const TopBar = ({
         <IconButton
           className={styles["topBar-open-button"]}
           text={ ICON_BUTTON_OPEN }
+          title={ TITLE_BUTTON_SCAN_DIRECTORY }
           src={getAsset("ICN_FOLDER")}
           onClick={async () => {
             scanSwfDirectory();
@@ -125,6 +128,7 @@ const TopBar = ({
         <IconButton
           className={styles["topBar-refresh-button"]}
           text={ ICON_BUTTON_REFRESH }
+          title={ TITLE_BUTTON_REFRESH }
           src={getAsset("ICN_REFRESH")}
           onClick={async () => {
             const directory = getCachedDirectory();
