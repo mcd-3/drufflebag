@@ -1,9 +1,6 @@
-use std::{ffi::OsStr, path::Path};
-use tauri::Emitter;
-use tauri_plugin_dialog::{DialogExt, FilePath};
 use serde_json::{json, Value};
-use serde::Serialize;
-use crate::utils::hash::get_file_hash;
+use crate::utils::path::get_directory_path;
+use crate::utils::swf::add_to_swf_list;
 
 #[tauri::command]
 pub fn c_copy_to_public(swf_absolute_path: &str) {
@@ -13,71 +10,32 @@ pub fn c_copy_to_public(swf_absolute_path: &str) {
     ).unwrap();
 }
 
-#[derive(Clone, Serialize)]
-struct Payload {
-    count: u32,
-}
-
 #[tauri::command]
 pub async fn c_scan_directory(
     app: tauri::AppHandle,
     cached_directory_path: String
 ) -> serde_json::Value {
-    let directory_path = if cached_directory_path == "" {
-        match app.dialog().file().blocking_pick_folder() {
-            Some(fp) => fp,
-            None => FilePath::from(Path::new(""))
-        }
-    } else {
-        FilePath::from(Path::new(&cached_directory_path))
-    };
-
     let mut swf_files: Vec<Value> = Vec::new();
-    let directory_path_str = directory_path.to_string();
+    let directory_path: String = get_directory_path(&app, &cached_directory_path);
 
-    if directory_path_str == "" {
+    if directory_path == "" {
         return json!({
             "cancelled": true,
         })
     }
 
-    let entries = std::fs::read_dir(&directory_path_str).unwrap();
+    let entries = std::fs::read_dir(&directory_path).unwrap();
 
     // TODO: Make this multi-threaded for better performance
-    let mut swf_count: u32 = 0;
     for entry in entries {
         match entry {
             Ok(entry) => {
-                let filename = entry.file_name();
-                let extension = Path::new(&filename)
-                    .extension()
-                    .and_then(OsStr::to_str);
-
-                match extension {
-                    Some(ext_str) => {
-                        if ext_str == "swf" {
-                            let full_path_string = format!(
-                                "{}/{:?}",
-                                &directory_path_str, filename
-                            ).replace("\"", "");
-
-                            let swf_json = json!({
-                                "path": full_path_string,
-                                "size": entry.metadata().unwrap().len(),
-                                "md5_hash": get_file_hash(&full_path_string),
-                                "avm": 0,
-                            });
-
-                            swf_files.push(swf_json);
-                            swf_count = swf_count + 1;
-                            app.emit(
-                                "swf-count-update",
-                                Payload { count: swf_count }
-                            ).unwrap();
-                        }
-                    },
-                    None => println!(""),
-                }
+                add_to_swf_list(
+                    &app,
+                    entry,
+                    &directory_path,
+                    &mut swf_files
+                );
             }
             Err(e) => {
                 println!("ERROR: {:?}", e);
@@ -86,7 +44,7 @@ pub async fn c_scan_directory(
     }
 
     let return_json = json!({
-        "parent_dir": directory_path_str,
+        "parent_dir": directory_path,
         "swfs": swf_files,
         "cancelled": false,
     });

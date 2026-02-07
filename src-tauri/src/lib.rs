@@ -9,6 +9,8 @@ mod pages {
 mod utils {
     pub mod hash;
     pub mod cache;
+    pub mod path;
+    pub mod swf;
 }
 
 mod commands {
