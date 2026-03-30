@@ -1,3 +1,9 @@
+/**
+ * This util file is deprecated.
+ * 
+ * Please use the events.js file and functions for events instead
+ *
+ */
 import { BroadcastChannel } from 'broadcast-channel';
 
 const GLOBAL_BC = "drufflebag_channel";
@@ -9,7 +15,8 @@ const EVENT_UPDATE_SWF_BY_HASH = "update_swf_by_hash";
 /**
  * Gets the global BroadcastChannel used within the application
  *
- * @returns {BroadcastChannel} Global BroadcastChannel 
+ * @returns {BroadcastChannel} Global BroadcastChannel
+ * @deprecated
  */
 const getBroadcastChannel = () => {
   return new BroadcastChannel(GLOBAL_BC);
@@ -19,6 +26,7 @@ const getBroadcastChannel = () => {
  * Closes a BroadcastChannel
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to close
+ * @deprecated
  */
 const closeBroadcastChanel = ({ broadcastChannel }) => {
   broadcastChannel.close();
@@ -28,6 +36,7 @@ const closeBroadcastChanel = ({ broadcastChannel }) => {
  * Posts the "close emulation" event
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @deprecated
  */
 const evtCloseEmulation = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_CLOSE_EMULATION);
@@ -37,6 +46,7 @@ const evtCloseEmulation = ({ broadcastChannel }) => {
  * Posts the "update play button" event
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @deprecated
  */
 const evtUpdatePlayButton = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_PLAY_BUTTON_CHANGE);
@@ -46,6 +56,7 @@ const evtUpdatePlayButton = ({ broadcastChannel }) => {
  * Posts the "cache refresh" event
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @deprecated
  */
 const evtCacheRefresh = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_CACHE_REFRESH);
@@ -56,6 +67,7 @@ const evtCacheRefresh = ({ broadcastChannel }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
  * @param {string} hash - Swf hash
+ * @deprecated
  */
 const evtUpdateSwfByHash = ({broadcastChannel, hash, avm, date}) => {
   broadcastChannel.postMessage(`${EVENT_UPDATE_SWF_BY_HASH}:::${hash}:::${avm}:::${date}`);
@@ -66,6 +78,7 @@ const evtUpdateSwfByHash = ({broadcastChannel, hash, avm, date}) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onEmulatorClose - Callback function to execute when emulator is closed
+ * @deprecated
  */
 const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
   broadcastChannel.onmessage = (event) => {
@@ -80,6 +93,7 @@ const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onUpdatePlayButton - Callback function to execute when the update button needs to be updated
+ * @deprecated
  */
 const injectOnUpdatePlayButton = ({ broadcastChannel, onUpdatePlayButton }) => {
   broadcastChannel.onmessage = (event) => {
@@ -94,6 +108,7 @@ const injectOnUpdatePlayButton = ({ broadcastChannel, onUpdatePlayButton }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onCacheRefresh - Callback function to execute when cache needs to be refreshed
+ * @deprecated
  */
 const injectOnCacheRefresh = ({ broadcastChannel, onCacheRefresh }) => {
   broadcastChannel.onmessage = (event) => {
@@ -108,6 +123,7 @@ const injectOnCacheRefresh = ({ broadcastChannel, onCacheRefresh }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onUpdateSwfByHash - Callback function to execute when swf in cache needs to be updated
+ * @deprecated
  */
 const injectOnUpdateSwfByHash = ({ broadcastChannel, onUpdateSwfByHash }) => {
   broadcastChannel.onmessage = (event) => {

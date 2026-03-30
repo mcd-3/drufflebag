@@ -1,15 +1,9 @@
 use std::ffi::OsString;
 use std::fs::DirEntry;
 use std::{ffi::OsStr, path::Path};
-use tauri::Emitter;
 use serde_json::{json, Value};
-use serde::Serialize;
 use crate::utils::hash::get_file_hash;
-
-#[derive(Clone, Serialize)]
-struct Payload {
-    count: usize,
-}
+use crate::events::evt_swf::evt_update_swf_count;
 
 /// Converts a DirEntry of a SWF file into a Serde Value and
 /// adds it to a list of SWF values.
@@ -43,10 +37,7 @@ pub fn add_to_swf_list(
                 });
 
                 swf_files.push(swf_json);
-                app.emit(
-                    "swf-count-update",
-                    Payload { count: swf_files.len() }
-                ).unwrap();
+                evt_update_swf_count(app, swf_files.len())
             }
         },
         None => println!(""),

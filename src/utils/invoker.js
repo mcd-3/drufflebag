@@ -39,7 +39,7 @@ const exitApp = () => {
 const writeJsonCache = async (swfFiles) => {
   const appDataDirPath = await appDataDir();
   await invoke(
-    "cache_swfs",
+    "c_cache_swfs",
     { swfs: swfFiles, appDataDir: appDataDirPath }
   );
 };
