@@ -21,6 +21,10 @@ mod commands {
     pub mod c_swf;
 }
 
+mod events {
+    pub mod evt_play_button;
+}
+
 use data::migrations::MigrationsHistory;
 use commands::{
     c_cache::{
@@ -39,6 +43,7 @@ use commands::{
     },
     c_swf::c_get_swf_hash
 };
+use events::evt_play_button::{evt_update_play_button};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -63,6 +68,7 @@ pub fn run() {
             c_copy_to_public,
             c_get_swf_hash,
             c_exit_app,
+            evt_update_play_button,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

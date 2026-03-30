@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import { listen } from '@tauri-apps/api/event';
 import {
   getBroadcastChannel,
-  injectOnUpdatePlayButton,
   evtCloseEmulation,
 } from './../utils/broadcast.js';
 import {
@@ -53,12 +53,9 @@ const TopBar = ({
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
 
-  injectOnUpdatePlayButton({
-    broadcastChannel: getBroadcastChannel(),
-    onUpdatePlayButton: () => {
+    listen('update_play_button', () => {
       setRuffleOpen(false);
-    }
-  });
+    });
 
   useEffect(() => {
     const globalSpoofStored = getGlobalSpoofUrl();

@@ -5,8 +5,6 @@ import { invoke, convertFileSrc } from "@tauri-apps/api/core";
 import { openUrl } from '@tauri-apps/plugin-opener';
 import {
   getBroadcastChannel,
-  closeBroadcastChanel,
-  evtUpdatePlayButton,
   evtUpdateSwfByHash,
   injectOnEmulatorClose,
 } from './../../utils/broadcast.js';
@@ -18,6 +16,7 @@ import "./../../styles/Emulation.css";
 import { getAsset } from '../../utils/assets.js';
 import { createPlayer } from '../../utils/player.js';
 import { Locale } from "./../../locales/index.js";
+import { emit } from '@tauri-apps/api/event';
 
 const {
   HEADER_ERROR,
@@ -44,9 +43,7 @@ function EmulationContent() {
     if (!confirmed) {
       event.preventDefault();
     } else {
-      const broadcastChannel = getBroadcastChannel();
-      evtUpdatePlayButton({ broadcastChannel });
-      closeBroadcastChanel({ broadcastChannel });
+      await emit('update_play_button', {});
     }
   });
 
@@ -65,8 +62,7 @@ function EmulationContent() {
         { title: PROMPT_TITLE_STOP_EMULATION, kind: 'warning' }
       );
       if (confirmed) {
-        evtUpdatePlayButton({ broadcastChannel: getBroadcastChannel() });
-        getCurrentWindow().destroy();
+        await emit('update_play_button', {});
       }
     }
   });
