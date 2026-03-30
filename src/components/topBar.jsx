@@ -1,9 +1,4 @@
 import { useState, useEffect } from "react";
-import { listen } from '@tauri-apps/api/event';
-import {
-  getBroadcastChannel,
-  evtCloseEmulation,
-} from './../utils/broadcast.js';
 import {
   setCachedDirectory,
   getCachedDirectory,
@@ -23,6 +18,7 @@ import Swf from "../models/swf.js";
 import IconButton from './iconButton';
 import styles from './../styles/components/topBar.module.css';
 import { Locale } from "../locales/index.js";
+import { listenEvtUpdatePlayButton, emitEvtCloseEmulation } from "../utils/events.js";
 
 const {
   ICON_BUTTON_ABOUT,
@@ -53,9 +49,7 @@ const TopBar = ({
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
 
-    listen('update_play_button', () => {
-      setRuffleOpen(false);
-    });
+  listenEvtUpdatePlayButton(() => setRuffleOpen(false));
 
   useEffect(() => {
     const globalSpoofStored = getGlobalSpoofUrl();
@@ -147,7 +141,7 @@ const TopBar = ({
           title={ruffleOpen ? TITLE_BUTTON_STOP : TITLE_BUTTON_PLAY }
           onClick={() => {
             if (ruffleOpen) {
-              evtCloseEmulation({ broadcastChannel: getBroadcastChannel() })
+              emitEvtCloseEmulation();
             } else {
               setCurrentlyPlayingSwfPath(selectedSwfPath);
               playSwfEvt(selectedSwfPath, selectedSwfPath.split('/').pop())

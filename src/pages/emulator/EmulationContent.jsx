@@ -5,8 +5,7 @@ import { invoke, convertFileSrc } from "@tauri-apps/api/core";
 import { openUrl } from '@tauri-apps/plugin-opener';
 import {
   getBroadcastChannel,
-  evtUpdateSwfByHash,
-  injectOnEmulatorClose,
+  evtUpdateSwfByHash
 } from './../../utils/broadcast.js';
 import { getSettingsJSON } from './../../utils/settings.js';
 import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
@@ -15,8 +14,8 @@ import NoItemsBox from './../../components/noItemsBox.jsx';
 import "./../../styles/Emulation.css";
 import { getAsset } from '../../utils/assets.js';
 import { createPlayer } from '../../utils/player.js';
+import { emitEvtUpdatePlayButton, listenEvtCloseEmulation } from './../../utils/events.js';
 import { Locale } from "./../../locales/index.js";
-import { emit } from '@tauri-apps/api/event';
 
 const {
   HEADER_ERROR,
@@ -43,7 +42,7 @@ function EmulationContent() {
     if (!confirmed) {
       event.preventDefault();
     } else {
-      await emit('update_play_button', {});
+      await emitEvtUpdatePlayButton();
     }
   });
 
@@ -54,17 +53,8 @@ function EmulationContent() {
     }
   };
 
-  injectOnEmulatorClose({
-    broadcastChannel: getBroadcastChannel(),
-    onEmulatorClose: async () => {
-      const confirmed = await confirm(
-        PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST,
-        { title: PROMPT_TITLE_STOP_EMULATION, kind: 'warning' }
-      );
-      if (confirmed) {
-        await emit('update_play_button', {});
-      }
-    }
+  listenEvtCloseEmulation(() => {
+    getCurrentWindow().close();
   });
 
   const mountRuffle = () => {

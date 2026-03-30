@@ -28,6 +28,7 @@ const closeBroadcastChanel = ({ broadcastChannel }) => {
  * Posts the "close emulation" event
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @deprecated
  */
 const evtCloseEmulation = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_CLOSE_EMULATION);
@@ -67,6 +68,7 @@ const evtUpdateSwfByHash = ({broadcastChannel, hash, avm, date}) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onEmulatorClose - Callback function to execute when emulator is closed
+ * @deprecated
  */
 const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
   broadcastChannel.onmessage = (event) => {
