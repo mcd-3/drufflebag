@@ -48,6 +48,7 @@ const evtUpdatePlayButton = ({ broadcastChannel }) => {
  * Posts the "cache refresh" event
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @deprecated
  */
 const evtCacheRefresh = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_CACHE_REFRESH);
@@ -98,6 +99,7 @@ const injectOnUpdatePlayButton = ({ broadcastChannel, onUpdatePlayButton }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onCacheRefresh - Callback function to execute when cache needs to be refreshed
+ * @deprecated
  */
 const injectOnCacheRefresh = ({ broadcastChannel, onCacheRefresh }) => {
   broadcastChannel.onmessage = (event) => {
