@@ -1,3 +1,9 @@
+/**
+ * This util file is deprecated.
+ * 
+ * Please use the events.js file and functions for events instead
+ *
+ */
 import { BroadcastChannel } from 'broadcast-channel';
 
 const GLOBAL_BC = "drufflebag_channel";
@@ -9,7 +15,8 @@ const EVENT_UPDATE_SWF_BY_HASH = "update_swf_by_hash";
 /**
  * Gets the global BroadcastChannel used within the application
  *
- * @returns {BroadcastChannel} Global BroadcastChannel 
+ * @returns {BroadcastChannel} Global BroadcastChannel
+ * @deprecated
  */
 const getBroadcastChannel = () => {
   return new BroadcastChannel(GLOBAL_BC);
@@ -19,6 +26,7 @@ const getBroadcastChannel = () => {
  * Closes a BroadcastChannel
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to close
+ * @deprecated
  */
 const closeBroadcastChanel = ({ broadcastChannel }) => {
   broadcastChannel.close();
@@ -59,6 +67,7 @@ const evtCacheRefresh = ({ broadcastChannel }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
  * @param {string} hash - Swf hash
+ * @deprecated
  */
 const evtUpdateSwfByHash = ({broadcastChannel, hash, avm, date}) => {
   broadcastChannel.postMessage(`${EVENT_UPDATE_SWF_BY_HASH}:::${hash}:::${avm}:::${date}`);
@@ -114,6 +123,7 @@ const injectOnCacheRefresh = ({ broadcastChannel, onCacheRefresh }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onUpdateSwfByHash - Callback function to execute when swf in cache needs to be updated
+ * @deprecated
  */
 const injectOnUpdateSwfByHash = ({ broadcastChannel, onUpdateSwfByHash }) => {
   broadcastChannel.onmessage = (event) => {

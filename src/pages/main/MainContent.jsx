@@ -3,9 +3,9 @@ import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
 import { listen } from '@tauri-apps/api/event';
-import { injectOnUpdateSwfByHash, getBroadcastChannel } from './../../utils/broadcast.js';
 import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
 import { getAsset } from './../../utils/assets.js';
+import { listenEvtUpdateSwfByHash } from './../../utils/events.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -34,9 +34,22 @@ function MainContent() {
     }
   );
 
-  const unlistenSwfCountUpdate = listen('swf-count-update', (event) => {
+  listen('swf-count-update', (event) => {
     setSwfFilesScanned(event.payload.count);
-  })
+  });
+
+  listenEvtUpdateSwfByHash((payload) => {
+    for (let i = 0; i < swfFiles.length; i++) {
+      if (swfFiles[i]['md5_hash'] === payload.hash) {
+        const newArray = swfFiles.slice();
+        newArray[i].avm = parseInt(payload.avm);
+        newArray[i].lp = payload.date;
+        setSwfFiles([...newArray]);
+        writeJsonCache([...newArray]);
+        break;
+      }
+    }
+  });
 
   useEffect(() => {
     setCacheIsLoading(true);
@@ -53,7 +66,6 @@ function MainContent() {
 
     return () => {
       unlisten.then(() => {});
-      unlistenSwfCountUpdate.then(() => {});
     };
   }, []);
 
@@ -64,22 +76,6 @@ function MainContent() {
       setRuffleOpen(true);
     }
   };
-
-  injectOnUpdateSwfByHash({
-    broadcastChannel: getBroadcastChannel(),
-    onUpdateSwfByHash: async (params) => {
-      for (let i = 0; i < swfFiles.length; i++) {
-        if (swfFiles[i]['md5_hash'] === params[0]) {
-          const newArray = swfFiles.slice();
-          newArray[i].avm = parseInt(params[1]);
-          newArray[i].lp = params[2];
-          setSwfFiles([...newArray]);
-          writeJsonCache([...newArray]);
-          break;
-        }
-      }
-    } 
-  });
 
   return (
     <div>

@@ -24,6 +24,7 @@ mod commands {
 mod events {
     pub mod evt_play_button;
     pub mod evt_emulation;
+    pub mod evt_swf;
 }
 
 use data::migrations::MigrationsHistory;
@@ -47,6 +48,7 @@ use commands::{
 use events::{
     evt_play_button::evt_update_play_button,
     evt_emulation::evt_close_emulation,
+    evt_swf::evt_update_swf_by_hash,
 };
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -76,6 +78,7 @@ pub fn run() {
             // Events
             evt_update_play_button,
             evt_close_emulation,
+            evt_update_swf_by_hash,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -3,10 +3,6 @@ import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
 import { invoke, convertFileSrc } from "@tauri-apps/api/core";
 import { openUrl } from '@tauri-apps/plugin-opener';
-import {
-  getBroadcastChannel,
-  evtUpdateSwfByHash
-} from './../../utils/broadcast.js';
 import { getSettingsJSON } from './../../utils/settings.js';
 import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
 import { updateSWFDateAVMByHash } from './../../utils/database.js';
@@ -14,7 +10,11 @@ import NoItemsBox from './../../components/noItemsBox.jsx';
 import "./../../styles/Emulation.css";
 import { getAsset } from '../../utils/assets.js';
 import { createPlayer } from '../../utils/player.js';
-import { emitEvtUpdatePlayButton, listenEvtCloseEmulation } from './../../utils/events.js';
+import {
+  emitEvtUpdatePlayButton,
+  emitEvtUpdateSwfByHash,
+  listenEvtCloseEmulation,
+} from './../../utils/events.js';
 import { Locale } from "./../../locales/index.js";
 
 const {
@@ -121,8 +121,7 @@ function EmulationContent() {
             date,
           });
 
-          evtUpdateSwfByHash({
-            broadcastChannel: getBroadcastChannel(),
+          emitEvtUpdateSwfByHash({
             hash,
             avm,
             date,
