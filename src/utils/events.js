@@ -13,6 +13,11 @@ const emitEvtCloseEmulation = async () => {
   await emit(EVT_CLOSE_EMULATION, {});
 };
 
+/**
+ * @param {string} hash - SWF file MD5 hash
+ * @param {number} avm - Flash AVM version
+ * @param {number} date - Date that the SWF file is launches
+ */
 const emitEvtUpdateSwfByHash = async ({ hash, avm, date }) => {
   await emit(EVT_UPDATE_SWF_BY_HASH, { hash, avm, date });
 };
