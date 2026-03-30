@@ -37,6 +37,7 @@ const evtCloseEmulation = ({ broadcastChannel }) => {
  * Posts the "update play button" event
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to post event to
+ * @deprecated
  */
 const evtUpdatePlayButton = ({ broadcastChannel }) => {
   broadcastChannel.postMessage(EVENT_PLAY_BUTTON_CHANGE);
@@ -80,6 +81,7 @@ const injectOnEmulatorClose = ({ broadcastChannel, onEmulatorClose }) => {
  *
  * @param {BroadcastChannel} broadcastChannel - BroadcastChannel to listen on
  * @param {callback} onUpdatePlayButton - Callback function to execute when the update button needs to be updated
+ * @deprecated
  */
 const injectOnUpdatePlayButton = ({ broadcastChannel, onUpdatePlayButton }) => {
   broadcastChannel.onmessage = (event) => {
