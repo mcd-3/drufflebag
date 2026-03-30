@@ -5,7 +5,10 @@ import { appDataDir } from '@tauri-apps/api/path';
 import { listen } from '@tauri-apps/api/event';
 import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
 import { getAsset } from './../../utils/assets.js';
-import { listenEvtUpdateSwfByHash } from './../../utils/events.js';
+import {
+  listenEvtUpdateSwfByHash,
+  listenEvtUpdateSwfCount,
+} from './../../utils/events.js';
 import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
@@ -34,9 +37,7 @@ function MainContent() {
     }
   );
 
-  listen('swf-count-update', (event) => {
-    setSwfFilesScanned(event.payload.count);
-  });
+  listenEvtUpdateSwfCount((payload) => setSwfFilesScanned(payload.count));
 
   listenEvtUpdateSwfByHash((payload) => {
     for (let i = 0; i < swfFiles.length; i++) {

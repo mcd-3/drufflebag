@@ -5,6 +5,7 @@ use tauri::Emitter;
 use serde_json::{json, Value};
 use serde::Serialize;
 use crate::utils::hash::get_file_hash;
+use crate::events::evt_swf::evt_update_swf_count;
 
 #[derive(Clone, Serialize)]
 struct Payload {
@@ -43,10 +44,7 @@ pub fn add_to_swf_list(
                 });
 
                 swf_files.push(swf_json);
-                app.emit(
-                    "swf-count-update",
-                    Payload { count: swf_files.len() }
-                ).unwrap();
+                evt_update_swf_count(app, swf_files.len())
             }
         },
         None => println!(""),

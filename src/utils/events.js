@@ -3,6 +3,7 @@ import { emit, listen } from '@tauri-apps/api/event';
 const EVT_CLOSE_EMULATION = "close_emulation";
 const EVT_UPDATE_PLAY_BUTTON = "update_play_button";
 const EVT_UPDATE_SWF_BY_HASH = "update_swf_by_hash"
+const EVT_UPDATE_SWF_COUNT = "update_swf_count";
 
 const emitEvtUpdatePlayButton = async () => {
   await emit(EVT_UPDATE_PLAY_BUTTON, {});
@@ -14,7 +15,7 @@ const emitEvtCloseEmulation = async () => {
 
 const emitEvtUpdateSwfByHash = async ({ hash, avm, date }) => {
   await emit(EVT_UPDATE_SWF_BY_HASH, { hash, avm, date });
-}
+};
 
 const listenEvtUpdatePlayButton = (callback) => {
   return listen(EVT_UPDATE_PLAY_BUTTON, () => {
@@ -34,6 +35,12 @@ const listenEvtUpdateSwfByHash = (callback) => {
   });
 };
 
+const listenEvtUpdateSwfCount = (callback) => {
+  return listen(EVT_UPDATE_SWF_COUNT, (event) => {
+    callback(event.payload);
+  });
+};
+
 export {
   emitEvtCloseEmulation,
   emitEvtUpdatePlayButton,
@@ -41,4 +48,5 @@ export {
   listenEvtCloseEmulation,
   listenEvtUpdatePlayButton,
   listenEvtUpdateSwfByHash,
+  listenEvtUpdateSwfCount,
 };
