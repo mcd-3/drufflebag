@@ -11,6 +11,23 @@ pub fn c_copy_to_public(swf_absolute_path: &str) {
 }
 
 #[tauri::command]
+pub fn c_get_swf_count_from_dir(
+    cached_directory_path: String
+) -> usize {
+    match std::fs::read_dir(&cached_directory_path) {
+        Ok(entries) =>  {
+            entries
+                .filter_map(|entry| entry.ok())
+                .filter(|entry| {
+                    entry.path().extension()
+                        .and_then(|s| s.to_str()) == Some("swf")
+                }).count()
+        },
+        Err(_) => 0,
+    }
+}
+
+#[tauri::command]
 pub async fn c_scan_directory(
     app: tauri::AppHandle,
     cached_directory_path: String

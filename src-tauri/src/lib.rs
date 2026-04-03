@@ -41,7 +41,8 @@ use commands::{
     },
     c_path::{
         c_copy_to_public,
-        c_scan_directory
+        c_scan_directory,
+        c_get_swf_count_from_dir
     },
     c_swf::c_get_swf_hash
 };
@@ -72,6 +73,7 @@ pub fn run() {
             c_scan_directory,
             c_cache_swfs,
             c_get_cached_swfs,
+            c_get_swf_count_from_dir,
             c_copy_to_public,
             c_get_swf_hash,
             c_exit_app,

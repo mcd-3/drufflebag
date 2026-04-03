@@ -54,8 +54,19 @@ const scanDirectory = async (directoryPath) => {
   return await invoke("c_scan_directory", { cachedDirectoryPath: directoryPath });
 };
 
+/**
+ * Gets the total number of SWF files in a given directory
+ *
+ * @param {string} directoryPath - Directory of path to scan
+ * @returns {number} - Number of SWF files found
+ */
+const getDirectorySwfCount = async (directoryPath) => {
+  return await invoke("c_get_swf_count_from_dir", { cachedDirectoryPath: directoryPath });
+};
+
 export {
   exitApp,
+  getDirectorySwfCount,
   openAbout,
   openRuffle,
   openSettings,

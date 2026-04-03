@@ -11,6 +11,7 @@ import {
   openAbout,
   writeJsonCache,
   scanDirectory,
+  getDirectorySwfCount,
 } from './../utils/invoker.js';
 import { insertSWF, getSWFByHash } from './../utils/database.js';
 import { getAsset } from './../utils/assets.js';
@@ -45,6 +46,7 @@ const TopBar = ({
   setRuffleOpen,
   setCacheIsLoading,
   setSwfFilesScanned,
+  setSwfFilesFound,
   playSwfEvt,
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
@@ -65,6 +67,11 @@ const TopBar = ({
   const scanSwfDirectory = async (cachedDirectoryPath = "") => {
     setCacheIsLoading(true);
     setSwfFilesScanned(0);
+
+    // Need to call this to count the total SWF files first
+    const swfFilesFound = await getDirectorySwfCount(cachedDirectoryPath);
+    setSwfFilesFound(swfFilesFound);
+
     const files = await scanDirectory(cachedDirectoryPath);
 
     if (files.cancelled) {
