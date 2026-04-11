@@ -4,6 +4,7 @@ import headerStyles from './components/header.module.css';
 import iconButtonStyles from './components/iconButton.module.css';
 import noItemsBoxStyles from './components/noItemsBox.module.css';
 import swfTableStyles from './components/swfTable.module.css';
+import topBarStyles from './components/topBar.module.css';
 
 export const collapse = {
   button: collapseStyles["collapse-button"],
@@ -46,5 +47,28 @@ export const swfTable = {
   tdRow: swfTableStyles["td-row"],
   textInput: swfTableStyles["swfTable-text-input"],
   textOverflowEllipsis: swfTableStyles["text-overflow-ellipsis"],
+};
 
-}
+export const topBar = {
+  divider: topBarStyles["topBar-vertical-divider"],
+  root: topBarStyles["topBar-root"],
+
+  // Columns
+  controlColumn: topBarStyles["topBar-control-column"],
+  fileColumn: topBarStyles["topBar-file-column"],
+  moreColumn: topBarStyles["topBar-more-column"],
+
+  // Buttons and Dividers
+  openButton: topBarStyles["topBar-open-button"],
+  refreshButton: topBarStyles["topBar-refresh-button"],
+  settingsButton: topBarStyles["topBar-settings-button"],
+  aboutButton: topBarStyles["topBar-about-button"],
+  pauseButton: topBarStyles["topBar-pause-button"],
+  stopButton: topBarStyles["topBar-stop-button"],
+
+  // Spoof
+  spoofColumn: topBarStyles["topBar-spoof-column"],
+  spoofCheckbox: topBarStyles["topBar-spoof-checkbox"],
+  spoofIcon: topBarStyles["topBar-spoof-icon"],
+  spoorUrlTextbox: topBarStyles["topBar-spoof-url-textbox"],
+};

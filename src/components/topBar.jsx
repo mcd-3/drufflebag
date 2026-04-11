@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { topBar } from './../styles';
 import {
   setCachedDirectory,
   getCachedDirectory,
@@ -17,7 +18,6 @@ import { insertSWF, getSWFByHash } from './../utils/database.js';
 import { getAsset } from './../utils/assets.js';
 import Swf from "../models/swf.js";
 import IconButton from './iconButton';
-import styles from './../styles/components/topBar.module.css';
 import { Locale } from "../locales/index.js";
 import { listenEvtUpdatePlayButton, emitEvtCloseEmulation } from "../utils/events.js";
 
@@ -115,10 +115,10 @@ const TopBar = ({
   }
 
   return (
-    <div className={styles["topBar-root"]}>
-      <div className={styles["topBar-file-column"]}>
+    <div className={topBar.root}>
+      <div className={topBar.fileColumn}>
         <IconButton
-          className={styles["topBar-open-button"]}
+          className={topBar.openButton}
           text={ ICON_BUTTON_OPEN }
           title={ TITLE_BUTTON_SCAN_DIRECTORY }
           src={getAsset("ICN_FOLDER")}
@@ -126,7 +126,7 @@ const TopBar = ({
             scanSwfDirectory();
           }} />
         <IconButton
-          className={styles["topBar-refresh-button"]}
+          className={topBar.refreshButton}
           text={ ICON_BUTTON_REFRESH }
           title={ TITLE_BUTTON_REFRESH }
           src={getAsset("ICN_REFRESH")}
@@ -139,10 +139,10 @@ const TopBar = ({
             scanSwfDirectory(directory);
           }} />
       </div>
-      <div className={styles["topBar-vertical-divider"]}></div>
-      <div className={styles["topBar-control-column"]}>
+      <div className={topBar.divider} />
+      <div className={topBar.controlColumn}>
         <IconButton
-          className={styles["topBar-pause-button"]}
+          className={topBar.pauseButton}
           text={ruffleOpen ? ICON_BUTTON_STOP : ICON_BUTTON_PLAY}
           src={ruffleOpen ? getAsset("ICN_STOP") : getAsset("ICN_PLAY")}
           title={ruffleOpen ? TITLE_BUTTON_STOP : TITLE_BUTTON_PLAY }
@@ -160,31 +160,31 @@ const TopBar = ({
           }}
           disabled={selectedSwfPath == "" ? true : false} />
       </div>
-      <div className={styles["topBar-vertical-divider"]}></div>
-      <div className={styles["topBar-more-column"]}>
+      <div className={topBar.divider} />
+      <div className={topBar.moreColumn}>
         <IconButton
-            className={styles["topBar-settings-button"]}
+            className={topBar.settingsButton}
             text={ ICON_BUTTON_SETTINGS }
             src={getAsset("ICN_SETTINGS")}
             onClick={ () => { openSettings() }} />
         <IconButton
-          className={styles["topBar-about-button"]}
+          className={topBar.aboutButton}
           text={ ICON_BUTTON_ABOUT }
           src={getAsset("ICN_ABOUT")}
           onClick={ () => { openAbout() }} />
       </div>
-      <div className={styles["topBar-vertical-divider"]}></div>
-      {/* <div className={styles["topBar-spoof-column"]}>
+      <div className={topBar.divider} />
+      {/* <div className={topBar.spoofColumn}>
         <input
-          className={styles["topBar-spoof-checkbox"]}
+          className={topBar.spoofCheckbox}
           type='checkbox'
           checked={globalSpoof.isEnabled}
           onChange={(e) => {
             setGlobalSpoof({ url: globalSpoof.url, isEnabled: e.target.checked});
           }}/>
-        <img className={styles["topBar-spoof-icon"]} src={getAsset("ICN_GLOBE")}/>
+        <img className={topBar.spoofIcon} src={getAsset("ICN_GLOBE")}/>
         <input
-          className={styles["topBar-spoof-url-textbox"]}
+          className={topBar.spoofUrlTextbox}
           type='text'
           placeholder='Global Spoof Url...'
           alt="Global Spoof Url"
