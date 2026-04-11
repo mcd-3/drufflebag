@@ -15,16 +15,16 @@
     justify-content: center;
 }
 
-.collapse-content-container {
-    margin-left: 8px;
-    margin-right: 8px;
-}
-
-.button-text {
+.collapse-header-container > span {
     font-size: 16px;
     font-weight: bold;
     text-decoration: underline;
     padding-right: 8px;
+}
+
+.collapse-content-container {
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .collapse-button:hover {

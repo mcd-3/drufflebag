@@ -1,17 +1,27 @@
-import styles from "./../styles/components/contextMenu.module.css";
+import { contextMenu } from "./../styles";
 
 const ContextMenu = ({ items, position }) => {
   return (
     <div
-        className={styles['context-menu']}
-        style={ { top: `${position.y - 2}px`, left: `${position.x + 4}px`, bottom: 'auto' } }
+        className={contextMenu.container}
+        style={{
+          top: `${position.y - 2}px`,
+          left: `${position.x + 4}px`,
+          bottom: 'auto',
+        }}
     >
       {items.map((item, index) => (
         <div>
-          <div className={styles['menu-item']} key={index} onClick={item.action}>
+          <div
+            className={contextMenu.menuItem}
+            key={index}
+            onClick={item.action}
+          >
             {item.label}
           </div>
-          { index !== items.length && <div className={styles.divider}></div>  }
+          { index !== items.length &&
+            <div className={contextMenu.divider}></div>
+          }
         </div>
       ))}
     </div>
