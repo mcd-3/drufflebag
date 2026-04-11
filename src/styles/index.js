@@ -3,6 +3,7 @@ import contextMenuStyles from './components/contextMenu.module.css';
 import headerStyles from './components/header.module.css';
 import iconButtonStyles from './components/iconButton.module.css';
 import noItemsBoxStyles from './components/noItemsBox.module.css';
+import swfTableStyles from './components/swfTable.module.css';
 
 export const collapse = {
   button: collapseStyles["collapse-button"],
@@ -36,3 +37,14 @@ export const noItemsBox = {
   row: noItemsBoxStyles.row,
   subtext: noItemsBoxStyles["noItemsBox-subtext"]
 };
+
+export const swfTable = {
+  active: swfTableStyles.active,
+  noMargin: swfTableStyles["no-margin"],
+  root: swfTableStyles["swfTable-root"],
+  selectInput: swfTableStyles["swfTable-select-input"],
+  tdRow: swfTableStyles["td-row"],
+  textInput: swfTableStyles["swfTable-text-input"],
+  textOverflowEllipsis: swfTableStyles["text-overflow-ellipsis"],
+
+}

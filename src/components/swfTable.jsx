@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from '../styles/components/swfTable.module.css';
+import { swfTable } from './../styles';
 import { formatBytes } from './../utils/bytes.js';
 import { getDateFromTimestamp } from './../utils/date.js';
 import { getAsset } from './../utils/assets.js';
@@ -187,7 +187,7 @@ const SwfTable = ({
 
   return (
     <div>
-      <table className={styles['swfTable-root']}>
+      <table className={swfTable.root}>
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr 
@@ -215,7 +215,7 @@ const SwfTable = ({
             ?
               <tr
                 key={row.id}
-                className={styles['active']}
+                className={swfTable.active}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     unfocusEditableRow(row);
@@ -228,9 +228,12 @@ const SwfTable = ({
                     row.getVisibleCells()[0].getContext()
                   )}
                 </td>
-                <td key={row.getVisibleCells()[1].id} className={styles["td-row"]}>
+                <td
+                  key={row.getVisibleCells()[1].id}
+                  className={swfTable.tdRow}
+                >
                   <input
-                    className={styles['swfTable-text-input']}
+                    className={swfTable.textInput}
                     type="text"
                     value={editedSwf.name}
                     onChange={(evt) => {
@@ -242,9 +245,12 @@ const SwfTable = ({
                     }}
                   />
                 </td>
-                <td key={row.getVisibleCells()[2].id} className={styles["td-row"]}>
+                <td
+                  key={row.getVisibleCells()[2].id}
+                  className={swfTable.tdRow}
+                >
                   <select
-                    className={`${styles['no-margin']} ${styles['swfTable-select-input']}`}
+                    className={`${swfTable.noMargin} ${swfTable.selectInput}`}
                     defaultValue={row.getVisibleCells()[2].getValue()}
                     onChange={(evt) => {
                       setEditedSwf(
@@ -260,21 +266,30 @@ const SwfTable = ({
                     ))}
                   </select>
                 </td>
-                <td key={row.getVisibleCells()[3].id} className={styles["td-row"]}>
+                <td
+                  key={row.getVisibleCells()[3].id}
+                  className={swfTable.tdRow}
+                >
                   {flexRender(
                     row.getVisibleCells()[3].column.columnDef.cell,
                     row.getVisibleCells()[3].getContext()
                   )}
                 </td>
-                <td key={row.getVisibleCells()[4].id} className={styles["td-row"]}>
+                <td
+                  key={row.getVisibleCells()[4].id}
+                  className={swfTable.tdRow}
+                >
                   {flexRender(
                     row.getVisibleCells()[4].column.columnDef.cell,
                     row.getVisibleCells()[4].getContext()
                   )}
                 </td>
-                <td key={row.getVisibleCells()[5].id} className={styles["td-row"]}>
+                <td
+                  key={row.getVisibleCells()[5].id}
+                  className={swfTable.tdRow}
+                >
                   <select
-                    className={`${styles['no-margin']} ${styles['swfTable-select-input']}`}
+                    className={`${swfTable.noMargin} ${swfTable.selectInput}`}
                     defaultValue={row.getVisibleCells()[5].getValue()}
                     onChange={(evt) => {
                       setEditedSwf(
@@ -294,7 +309,7 @@ const SwfTable = ({
             :
               <tr
                 key={row.id}
-                className={styles[`${row.id == activeIndex ? "active" : "inactive"}`]}
+                className={row.id == activeIndex ? swfTable.active : "inactive"}
                 onClick={
                   async () => {
                     unfocusEditableRow(row);
@@ -303,7 +318,7 @@ const SwfTable = ({
                 onContextMenu={(event) => handleContextMenu(event, row)}
               >
                 {row.getVisibleCells().map(cell => (
-                  <td key={cell.id} className={`${styles["td-row"]} ${styles["text-overflow-ellipsis"]}`}>
+                  <td key={cell.id} className={`${swfTable.tdRow} ${swfTable.textOverflowEllipsis}`}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
