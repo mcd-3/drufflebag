@@ -1,4 +1,4 @@
-import styles from './../styles/components/iconButton.module.css';
+import { iconButton } from './../styles';
 
 /**
  * Button that has an icon on top and a string below
@@ -22,11 +22,11 @@ const IconButton = ({
     <div className={className} title={title}>
       <button
         onClick={() => onClick()}
-        className={styles['iconButton-button']}
+        className={iconButton.button}
         disabled={disabled}
       >
-        <img className={styles.icon} src={src}/>
-        <p className={styles.text}>{text}</p>
+        <img className={iconButton.icon} src={src}/>
+        <p className={iconButton.text}>{text}</p>
       </button>
     </div>
   )
