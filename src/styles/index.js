@@ -1,3 +1,4 @@
+import mainStyles from './pages/main.module.css';
 import collapseStyles from './components/collapse.module.css';
 import contextMenuStyles from './components/contextMenu.module.css';
 import headerStyles from './components/header.module.css';
@@ -5,6 +6,13 @@ import iconButtonStyles from './components/iconButton.module.css';
 import noItemsBoxStyles from './components/noItemsBox.module.css';
 import swfTableStyles from './components/swfTable.module.css';
 import topBarStyles from './components/topBar.module.css';
+
+export const main = {
+  topLevelNav: mainStyles["top-level-nav"],
+  contentTable: mainStyles["swf-content-table"],
+  hasItems: mainStyles["has-items"],
+  noItems: mainStyles["no-items"],
+}
 
 export const collapse = {
   button: collapseStyles["collapse-button"],
