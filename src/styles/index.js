@@ -1,4 +1,6 @@
 import mainStyles from './pages/main.module.css';
+import emulationStyles from './pages/emulation.module.css'
+
 import collapseStyles from './components/collapse.module.css';
 import contextMenuStyles from './components/contextMenu.module.css';
 import headerStyles from './components/header.module.css';
@@ -12,7 +14,11 @@ export const main = {
   contentTable: mainStyles["swf-content-table"],
   hasItems: mainStyles["has-items"],
   noItems: mainStyles["no-items"],
-}
+};
+
+export const emulation = {
+  container: emulationStyles["container"],
+};
 
 export const collapse = {
   button: collapseStyles["collapse-button"],
