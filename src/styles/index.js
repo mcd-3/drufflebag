@@ -1,5 +1,6 @@
 import mainStyles from './pages/main.module.css';
-import emulationStyles from './pages/emulation.module.css'
+import emulationStyles from './pages/emulation.module.css';
+import aboutStyles from './pages/about.module.css';
 
 import collapseStyles from './components/collapse.module.css';
 import contextMenuStyles from './components/contextMenu.module.css';
@@ -18,6 +19,16 @@ export const main = {
 
 export const emulation = {
   container: emulationStyles["container"],
+};
+
+export const about = {
+  centered: aboutStyles["centered"],
+  end: aboutStyles["end"],
+  subtext: aboutStyles["subtext"],
+  mediumText: aboutStyles["medium-text"],
+  bigText: aboutStyles["big-text"],
+  licenseContainer: aboutStyles["license-container"],
+  licenseHeader: aboutStyles["license-header"],
 };
 
 export const collapse = {

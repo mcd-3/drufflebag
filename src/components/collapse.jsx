@@ -37,7 +37,7 @@ const Collapse = ({
         </div>
       </button>
       <section {...getCollapseProps()}>
-        <div className={collapse.icon}>
+        <div className={collapse.contentContainer}>
           {children}
         </div>
       </section>

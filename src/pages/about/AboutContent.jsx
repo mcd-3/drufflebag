@@ -3,7 +3,7 @@ import { getVersion } from '@tauri-apps/api/app';
 import { getAsset } from './../../utils/assets.js';
 import Header from '../../components/header';
 import Collapse from '../../components/collapse';
-import "./../../styles/About.css";
+import { about } from './../../styles';
 
 function AboutContent() {
   const [appVersion, setAppVersion] = useState();
@@ -18,12 +18,17 @@ function AboutContent() {
 
   return (
     <div>
-        <p className='centered big-text'>Drufflebag</p>
-        <img className='centered' src={getAsset('LOGO_DRUFFLEBAG')} height={72} width={72} />
-        <p className='centered medium-text'>By: Matthew Carvalho-Dagenais</p>
-        <p className='end subtext'>Version: { appVersion }</p>
+        <p className={`${about.centered} ${about.bigText}`}>Drufflebag</p>
+        <img
+          className={about.centered}
+          src={getAsset('LOGO_DRUFFLEBAG')}
+          height={72}
+          width={72}
+        />
+        <p className={`${about.centered} ${about.mediumText}`}>By: Matthew Carvalho-Dagenais</p>
+        <p className={`${about.end} ${about.subtext}`}>Version: { appVersion }</p>
         <Header>License</Header>
-        <div className="license-container">
+        <div className={about.licenseContainer}>
           <p>MIT License</p>
           <p>Copyright (c) 2024 Matthew Carvalho-Dagenais</p>
           <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,16 +59,16 @@ function AboutContent() {
           and text renders much faster than states.
         */}
         <Collapse expandedText='3rd Party Licenses' collapsedText='3rd Party Licenses'>
-          <h4>Ruffle</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Ruffle</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2018-2022 Ruffle LLC ruffle@ruffle.rs and Ruffle contributors (https://github.com/ruffle-rs/ruffle/graphs/contributors)</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
             <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
             <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
           </div>
-          <h4>Tauri</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Tauri</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2017 - Present Tauri Apps Contributors</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -82,8 +87,8 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.</p>
           </div>
-          <h4>React</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>React</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) Meta Platforms, Inc. and affiliates.</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -102,8 +107,8 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.</p>
           </div>
-          <h4>Tanstack Table</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Tanstack Table</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2016 Tanner Linsley</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy</p>
@@ -122,8 +127,8 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.</p>
           </div>
-          <h4>React Tabs</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>React Tabs</h4>
+          <div className={about.licenseContainer}>
             <p>Copyright (c) Matt Zabriskie and Daniel Tschinder</p>
 
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -144,8 +149,8 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
             THE SOFTWARE.</p>
           </div>
-          <h4>React Collapsed</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>React Collapsed</h4>
+          <div className={about.licenseContainer}>
             <p>The MIT License (MIT)</p>
             <p>Copyright (c) 2019-2024, Rogin Farrer</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -163,8 +168,8 @@ function AboutContent() {
             IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
             CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
           </div>
-          <h4>BroadcastChannel</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>BroadcastChannel</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2018 Daniel Meyer</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -183,8 +188,8 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.</p>
           </div>
-          <h4>Vite</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Vite</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2019-present, VoidZero Inc. and Vite contributors</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -203,8 +208,8 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.</p>
           </div>
-          <h4>Iconoir</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Iconoir</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2021 Luca Burgio</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -223,16 +228,16 @@ function AboutContent() {
             OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
             SOFTWARE.</p>
           </div>
-          <h4>SVG-Loaders</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>SVG-Loaders</h4>
+          <div className={about.licenseContainer}>
             <p>The MIT License (MIT)</p>
             <p>Copyright (c) 2014 Sam Herbert</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
             <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
             <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
           </div>
-          <h4>Inter Font</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Inter Font</h4>
+          <div className={about.licenseContainer}>
             <p>Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)</p>
             <p>This Font Software is licensed under the SIL Open Font License, Version 1.1.</p>
             <p>This license is copied below, and is also available with a FAQ at:</p>
@@ -309,8 +314,8 @@ function AboutContent() {
             FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
             OTHER DEALINGS IN THE FONT SOFTWARE.</p>
           </div>
-          <h4>Serde</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>Serde</h4>
+          <div className={about.licenseContainer}>
             <p>Permission is hereby granted, free of charge, to any
             person obtaining a copy of this software and associated
             documentation files (the "Software"), to deal in the
@@ -333,8 +338,8 @@ function AboutContent() {
             IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
             DEALINGS IN THE SOFTWARE.</p>
           </div>
-          <h4>chksum-md5</h4>
-          <div className="license-container">
+          <h4 className={about.licenseHeader}>chksum-md5</h4>
+          <div className={about.licenseContainer}>
             <p>MIT License</p>
             <p>Copyright (c) 2023-2024 Konrad Goławski</p>
             <p>Permission is hereby granted, free of charge, to any person obtaining a copy
