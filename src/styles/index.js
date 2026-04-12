@@ -1,6 +1,7 @@
 import mainStyles from './pages/main.module.css';
 import emulationStyles from './pages/emulation.module.css';
 import aboutStyles from './pages/about.module.css';
+import settingsStyles from './pages/settings.module.css';
 
 import collapseStyles from './components/collapse.module.css';
 import contextMenuStyles from './components/contextMenu.module.css';
@@ -29,6 +30,22 @@ export const about = {
   bigText: aboutStyles["big-text"],
   licenseContainer: aboutStyles["license-container"],
   licenseHeader: aboutStyles["license-header"],
+};
+
+export const settings = {
+  footer: settingsStyles["footer"],
+  root: settingsStyles["root"],
+  row: settingsStyles["row"],
+  inputCheckbox: settingsStyles["input-checkbox"],
+  inputSelect: settingsStyles["input-select"],
+  panelContainer: settingsStyles["panel-container"],
+  innerPanelContainer: settingsStyles["inner-panel-container"],
+  footerContainer: settingsStyles["footer-container"],
+
+  /* Footer Button Styles */
+  footerButton: settingsStyles["footer-button"],
+  footerButtonSave: settingsStyles["footer-button-save"],
+  footerButtonDanger: settingsStyles["footer-button-danger"],
 };
 
 export const collapse = {
