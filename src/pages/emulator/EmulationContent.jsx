@@ -3,11 +3,11 @@ import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { confirm } from '@tauri-apps/plugin-dialog';
 import { invoke, convertFileSrc } from "@tauri-apps/api/core";
 import { openUrl } from '@tauri-apps/plugin-opener';
+import { emulation } from './../../styles'
 import { getSettingsJSON } from './../../utils/settings.js';
 import { getCurrentlyPlayingSwfPath } from './../../utils/storage.js';
 import { updateSWFDateAVMByHash } from './../../utils/database.js';
 import NoItemsBox from './../../components/noItemsBox.jsx';
-import "./../../styles/Emulation.css";
 import { getAsset } from '../../utils/assets.js';
 import { createPlayer } from '../../utils/player.js';
 import {
@@ -86,8 +86,8 @@ function EmulationContent() {
       const container = document.getElementById("ruffle-container");
       container.appendChild(player);
 
-      // TODO: There's a bug where a duplicate instance of Ruffle is created
-      //        Remove it manually for now until the bug is found and fixed
+      // TODO: Due to strict mode, a duplicate player is spawned
+      //       Remove it if it exists
       try {
         const duplicate = document.getElementsByTagName('ruffle-player-1');
         duplicate[0].parentNode.removeChild(duplicate[0])
@@ -148,7 +148,7 @@ function EmulationContent() {
     <div>
       { !hasError
         ?
-          <div id="ruffle-container" className="container"></div>
+          <div id="ruffle-container" className={emulation.container}></div>
         :
           <NoItemsBox
             topText={error.topText}

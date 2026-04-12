@@ -5,7 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings</title>
+    <link rel="stylesheet" href="./src/styles/css/react-tabs.css">
     <style>
+      body {
+        margin: 0 0 0 0;
+        font-family: 'Inter', sans-serif;
+        height: 100vh;
+      }
+      #root, #root > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
       @font-face {
         font-family: 'Inter';
         src: url(./src/assets/fonts/inter/Inter_18pt-Regular.ttf);
@@ -19,6 +30,14 @@
         :root {
           color: #f6f6f6;
           background-color: #2f2f2f;
+        }
+        ::-webkit-scrollbar {
+          width: 8px;
+          background: #2f2f2f;
+        }
+        ::-webkit-scrollbar-thumb {
+          width: 8px;
+          background: rgb(66, 66, 66);
         }
       }
     </style>

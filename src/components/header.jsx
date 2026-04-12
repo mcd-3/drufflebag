@@ -1,9 +1,9 @@
-import styles from './../styles/components/header.module.css';
+import { header } from './../styles';
 
 const Header = ({children}) => {
   return (
     <div>
-      <h3 className={styles.header}>{children}</h3>
+      <h3 className={header.container}>{children}</h3>
     </div>
   );
 };

@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
-import { listen } from '@tauri-apps/api/event';
+import { main } from './../../styles'
 import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
 import { getAsset } from './../../utils/assets.js';
 import {
   listenEvtUpdateSwfByHash,
   listenEvtUpdateSwfCount,
 } from './../../utils/events.js';
-import "./../../styles/App.css";
 
 import TopBar from "../../components/topBar";
 import SwfTable from "../../components/swfTable";
@@ -81,7 +80,7 @@ function MainContent() {
 
   return (
     <div>
-      <div className="top-level-nav">
+      <div className={main.topLevelNav}>
         <TopBar 
           setSwfFiles={setSwfFiles}
           selectedSwfPath={selectedSwfPath}
@@ -94,7 +93,7 @@ function MainContent() {
         />
       </div>
       <div className={
-        `${swfFiles.length > 0 && !cacheIsLoading ? "has-items" : "no-items"} swf-content-table`
+        `${swfFiles.length > 0 && !cacheIsLoading ? main.hasItems : main.noItems} ${main.contentTable}`
       }>
         {swfFiles.length > 0 && !cacheIsLoading
           ?

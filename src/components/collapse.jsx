@@ -1,6 +1,6 @@
 import { useCollapse } from 'react-collapsed';
 import { getAsset } from './../utils/assets.js';
-import styles from './../styles/components/collapse.module.css';
+import { collapse } from './../styles';
 import { Locale } from "./../locales/index.js";
 
 const {
@@ -13,21 +13,31 @@ const Collapse = ({
   collapsedText = LABEL_EXPAND,
   expandedText = LABEL_COLLAPSE,
 }) => {
-  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
+  const {
+    getCollapseProps,
+    getToggleProps,
+    isExpanded,
+  } = useCollapse()
 
   return (
     <div>
-      <button className={styles['collapse-button']} {...getToggleProps()}>
-        <div className={styles['collapse-header-container']}>
-          <span className={styles['button-text']}>{isExpanded ? expandedText : collapsedText}</span>
+      <button
+        className={collapse.button}
+        {...getToggleProps()}
+      >
+        <div className={collapse.headerContainer}>
+          <span>{isExpanded ? expandedText : collapsedText}</span>
           <img
-            className={styles['collapse-icon']}
-            src={isExpanded ? getAsset('ICN_ARROW_DOWN') : getAsset('ICN_ARROW_RIGHT')}
+            className={collapse.icon}
+            src={isExpanded
+              ? getAsset('ICN_ARROW_DOWN')
+              : getAsset('ICN_ARROW_RIGHT')
+            }
           />
         </div>
       </button>
       <section {...getCollapseProps()}>
-        <div className={styles['collapse-content-container']}>
+        <div className={collapse.contentContainer}>
           {children}
         </div>
       </section>

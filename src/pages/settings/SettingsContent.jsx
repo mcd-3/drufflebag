@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { confirm } from '@tauri-apps/plugin-dialog';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import "./../../styles/Settings.css";
+import { settings as settingsStyles } from './../../styles';
 import Header from './../../components/header.jsx';
 import {
   getSettingsJSON,
@@ -56,29 +56,31 @@ function SettingsContent() {
             <Tab>{ TAB_SETTINGS_RUFFLE }</Tab>
           </TabList>
           <TabPanel>
-            <div className='panel-container'>
+            <div className={settingsStyles.panelContainer}>
                 <br />
-                <div className='inner-panel-container'>
+                <div className={settingsStyles.innerPanelContainer}>
                   <Header>{ HEADER_SETTINGS_USE_LATEST_RUFFLE }</Header>
-                  <div className='row'>
+                  <div className={settingsStyles.row}>
                     <input
-                        type='checkbox'
-                        checked={settings.onlineModeEnabled}
-                        onChange={(evt) => {
-                          setSettings({
-                            ...settings,
-                            onlineModeEnabled: evt.target.checked
-                          });
-                        }}
-                      />
-                      <span>{ DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE }</span>
+                      className={settingsStyles.inputCheckbox}
+                      type='checkbox'
+                      checked={settings.onlineModeEnabled}
+                      onChange={(evt) => {
+                        setSettings({
+                          ...settings,
+                          onlineModeEnabled: evt.target.checked
+                        });
+                      }}
+                    />
+                    <span>{ DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE }</span>
                   </div>
                 </div>
                 <br />
-                <div className='inner-panel-container'>
+                <div className={settingsStyles.innerPanelContainer}>
                   <Header>{ HEADER_SETTINGS_SCALE }</Header>
-                  <div className='row'>
+                  <div className={settingsStyles.row}>
                     <select
+                      className={settingsStyles.inputSelect}
                       onChange={(evt) => {
                         setSettings({
                           ...settings,
@@ -95,10 +97,11 @@ function SettingsContent() {
                   </div>
                 </div>
                 < br/>
-                <div className='inner-panel-container'>
+                <div className={settingsStyles.innerPanelContainer}>
                   <Header>{ HEADER_SETTINGS_START_UP }</Header>
-                  <div className='row'>
+                  <div className={settingsStyles.row}>
                     <input
+                      className={settingsStyles.inputCheckbox}
                       type='checkbox'
                       checked={settings.splashscreenEnabled}
                       onChange={(evt) => {
@@ -110,8 +113,9 @@ function SettingsContent() {
                     />
                     <span>{ DESCRIPTION_SETTINGS_START_UP_SPLASH }</span>
                   </div>
-                  <div className='row'>
+                  <div className={settingsStyles.row}>
                     <input
+                      className={settingsStyles.inputCheckbox}
                       type='checkbox'
                       checked={settings.autoplayEnabled}
                       onChange={(evt) => {
@@ -127,66 +131,69 @@ function SettingsContent() {
               </div>
           </TabPanel>
           <TabPanel>
-            <div className='panel-container'>
+            <div className={settingsStyles.panelContainer}>
               <br />
-              <div className='inner-panel-container'>
+              <div className={settingsStyles.innerPanelContainer}>
                 <Header>{ HEADER_SETTINGS_OPEN_URL }</Header>
-                <div className='row'>
+                <div className={settingsStyles.row}>
                   <input
-                      type='checkbox'
-                      checked={settings.openUrls}
-                      onChange={(evt) => {
-                        setSettings({
-                          ...settings,
-                          openUrls: evt.target.checked
-                        });
-                      }}
-                    />
-                    <span>{ DESCRIPTION_SETTINGS_OPEN_URL }</span>
+                    className={settingsStyles.inputCheckbox}
+                    type='checkbox'
+                    checked={settings.openUrls}
+                    onChange={(evt) => {
+                      setSettings({
+                        ...settings,
+                        openUrls: evt.target.checked
+                      });
+                    }}
+                  />
+                  <span>{ DESCRIPTION_SETTINGS_OPEN_URL }</span>
                 </div>
               </div>
               < br/>
-              <div className='inner-panel-container'>
+              <div className={settingsStyles.innerPanelContainer}>
                 <Header>{ HEADER_SETTINGS_CONTEXT_MENU }</Header>
-                <div className='row'>
+                <div className={settingsStyles.row}>
                   <input
-                      type='checkbox'
-                      checked={settings.contextMenuEnabled}
-                      onChange={(evt) => {
-                        setSettings({
-                          ...settings,
-                          contextMenuEnabled: evt.target.checked
-                        });
-                      }}
-                    />
-                    <span>{ DESCRIPTION_SETTINGS_CONTEXT_MENU }</span>
+                    className={settingsStyles.inputCheckbox}
+                    type='checkbox'
+                    checked={settings.contextMenuEnabled}
+                    onChange={(evt) => {
+                      setSettings({
+                        ...settings,
+                        contextMenuEnabled: evt.target.checked
+                      });
+                    }}
+                  />
+                  <span>{ DESCRIPTION_SETTINGS_CONTEXT_MENU }</span>
                 </div>
               </div>
               < br/>
-              <div className='inner-panel-container'>
+              <div className={settingsStyles.innerPanelContainer}>
                 <Header>{ HEADER_SETTINGS_LETTERBOX }</Header>
-                <div className='row'>
+                <div className={settingsStyles.row}>
                   <input
-                      type='checkbox'
-                      checked={settings.letterboxEnabled}
-                      onChange={(evt) => {
-                        setSettings({
-                          ...settings,
-                          letterboxEnabled: evt.target.checked
-                        });
-                      }}
-                    />
-                    <span>{ DESCRIPTION_SETTINGS_LETTERBOX }</span>
+                    className={settingsStyles.inputCheckbox}
+                    type='checkbox'
+                    checked={settings.letterboxEnabled}
+                    onChange={(evt) => {
+                      setSettings({
+                        ...settings,
+                        letterboxEnabled: evt.target.checked
+                      });
+                    }}
+                  />
+                  <span>{ DESCRIPTION_SETTINGS_LETTERBOX }</span>
                 </div>
               </div>
             </div>
           </TabPanel>
         </Tabs>
-        <footer>
-          <div className='footer-container'>
+        <footer className={settingsStyles.footer}>
+          <div className={settingsStyles.footerContainer}>
             <div>
               <button
-                className='footer-button footer-button-danger'
+                className={`${settingsStyles.footerButton} ${settingsStyles.footerButtonDanger}`}
                 onClick={async () => {
                   const confirmed = await confirm(
                     PROMPT_DESCRIPTION_REVERT_BACK,
@@ -201,7 +208,7 @@ function SettingsContent() {
             </div>
             <div>
               <button
-                className='footer-button'
+                className={settingsStyles.footerButton}
                 onClick={async () => {
                   if (!compareSettings(settings, config)) {
                     const confirmed = await confirm(
@@ -220,7 +227,7 @@ function SettingsContent() {
               {/* This span is just for spacing between the buttons */}
               <span>  </span>
               <button
-                className='footer-button footer-button-save'
+                className={`${settingsStyles.footerButton} ${settingsStyles.footerButtonSave}`}
                 onClick={() => {
                   saveSettings(settings);
                   getCurrentWindow().destroy();

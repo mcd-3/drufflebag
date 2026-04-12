@@ -1,5 +1,5 @@
 import { getAsset } from './../utils/assets.js';
-import styles from '../styles/components/noItemsBox.module.css';
+import { noItemsBox } from './../styles';
 
 const NoItemsBox = ({
   topText = "",
@@ -8,14 +8,19 @@ const NoItemsBox = ({
   icon = getAsset('ICN_FILE_NOT_FOUND'),
 }) => {
   return (
-    <div className={styles['noItemsBox-container']}>
-      <div className={styles['centered']}>
+    <div className={noItemsBox.container}>
+      <div className={noItemsBox.centered}>
         <div>
-          <h2 className={`${styles.row} ${styles['noItemsBox-header']}`}>{topText}</h2>
-          <img className={`${styles.row} ${styles['noItemsBox-icon']}`} width={100} height={100} src={icon} />
-          <p className={`${styles.row} ${styles['noItemsBox-subtext']}`}>{bottomText}</p>
+          <h2 className={`${noItemsBox.row} ${noItemsBox.header}`}>{topText}</h2>
+          <img
+            className={`${noItemsBox.row} ${noItemsBox.icon}`}
+            width={100}
+            height={100}
+            src={icon}
+          />
+          <p className={`${noItemsBox.row} ${noItemsBox.subtext}`}>{bottomText}</p>
           <br />
-          <p className={`${styles.row} ${styles['noItemsBox-extra']}`}>{extraText}</p>
+          <p className={`${noItemsBox.row} ${noItemsBox.extra}`}>{extraText}</p>
         </div>
       </div>
     </div>
