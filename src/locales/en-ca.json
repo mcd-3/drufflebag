@@ -34,6 +34,9 @@
     "DESCRIPTION_CLOSE_WINDOW": "Please close this window and try again.",
     "DESCRIPTION_NO_INTERNET": "You must be connected to the Internet to use the latest version of Ruffle. You can disable this in the Settings if this was set by mistake.",
 
+    "DISCLAIMER_APP_LICENSE": "Disclaimer: This app's license appears in its original language",
+    "DISCLAIMER_3RD_PARTY_LICENSES": "Disclaimer: All licenses appear in their original languages",
+
     "ICON_BUTTON_ABOUT": "About",
     "ICON_BUTTON_OPEN": "Open",
     "ICON_BUTTON_PLAY": "Play",
@@ -42,6 +45,8 @@
     "ICON_BUTTON_STOP": "Stop",
 
     "LABEL_COLLAPSE_": "Collapse",
+    "LABEL_COLLAPSE_3RD_PARTY": "3rd Party Licenses",
+    "LABEL_COLLAPSE_LICENSE": "License",
     "LABEL_EDIT": "Edit",
     "LABEL_EXPAND": "Expand",
     "LABEL_OPTION_DEFAULT": "---",
@@ -60,6 +65,9 @@
 
     "TAB_SETTINGS_EMULATION": "Emulation",
     "TAB_SETTINGS_RUFFLE": "Ruffle",
+
+    "TEXT_BY": "By",
+    "TEXT_VERSION": "Version",
 
     "TITLE_BUTTON_PLAY": "Start emulation",
     "TITLE_BUTTON_SCAN_DIRECTORY": "Select a directory that contains your Flash files (.swf)",

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getVersion } from '@tauri-apps/api/app';
-import { getAsset } from './../../utils/assets.js';
-import Header from '../../components/header';
-import Collapse from '../../components/collapse';
 import { about } from './../../styles';
+import { getAsset } from './../../utils/assets.js';
+import Collapse from '../../components/collapse';
+import { Locale } from '../../locales';
 
 function AboutContent() {
   const [appVersion, setAppVersion] = useState();
@@ -25,29 +25,36 @@ function AboutContent() {
           height={72}
           width={72}
         />
-        <p className={`${about.centered} ${about.mediumText}`}>By: Matthew Carvalho-Dagenais</p>
-        <p className={`${about.end} ${about.subtext}`}>Version: { appVersion }</p>
-        <Header>License</Header>
-        <div className={about.licenseContainer}>
-          <p>MIT License</p>
-          <p>Copyright (c) 2024 Matthew Carvalho-Dagenais</p>
-          <p>Permission is hereby granted, free of charge, to any person obtaining a copy
-          of this software and associated documentation files (the "Software"), to deal
-          in the Software without restriction, including without limitation the rights
-          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-          copies of the Software, and to permit persons to whom the Software is
-          furnished to do so, subject to the following conditions:</p>
-          <p>The above copyright notice and this permission notice shall be included in all
-          copies or substantial portions of the Software.</p>
+        <p className={`${about.centered} ${about.mediumText}`}>{Locale.TEXT_BY}: Matthew Carvalho-Dagenais</p>
+        <p className={`${about.centered} ${about.subtext}`}>{Locale.TEXT_VERSION}: { appVersion }</p>
 
-          <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-          SOFTWARE.</p>
-        </div>
+        {/* Empty div just to give page padding */}
+        <div className={about.empty}></div>
+
+        <Collapse expandedText={Locale.LABEL_COLLAPSE_LICENSE} collapsedText={Locale.LABEL_COLLAPSE_LICENSE}>
+          <p className={`${about.subtext} ${about.centered}`} >{Locale.DISCLAIMER_APP_LICENSE}</p>
+          <h4 className={about.licenseHeader}>Drufflebag</h4>
+          <div className={about.licenseContainer}>
+            <p>MIT License</p>
+            <p>Copyright (c) 2024 Matthew Carvalho-Dagenais</p>
+            <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+            of this software and associated documentation files (the "Software"), to deal
+            in the Software without restriction, including without limitation the rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:</p>
+            <p>The above copyright notice and this permission notice shall be included in all
+            copies or substantial portions of the Software.</p>
+
+            <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+            SOFTWARE.</p>
+          </div>
+        </Collapse>
         <br />
         
         {/*
@@ -58,7 +65,8 @@ function AboutContent() {
           is to not accidentally mis-apply the licenses. There are also a lot of licenses,
           and text renders much faster than states.
         */}
-        <Collapse expandedText='3rd Party Licenses' collapsedText='3rd Party Licenses'>
+        <Collapse expandedText={Locale.LABEL_COLLAPSE_3RD_PARTY} collapsedText={Locale.LABEL_COLLAPSE_3RD_PARTY}>
+          <p className={`${about.subtext} ${about.centered}`} >{Locale.DISCLAIMER_3RD_PARTY_LICENSES}</p>
           <h4 className={about.licenseHeader}>Ruffle</h4>
           <div className={about.licenseContainer}>
             <p>MIT License</p>

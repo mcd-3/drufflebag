@@ -31,7 +31,7 @@ pub fn create_about_page(app: tauri::AppHandle) {
         tauri::WebviewUrl::App("about.html".into())
     )
         .title("About")
-        .inner_size(400.0, 712.0)
+        .inner_size(400.0, 375.0)
         .build()
         .unwrap();
 }

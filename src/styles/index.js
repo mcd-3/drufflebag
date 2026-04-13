@@ -30,6 +30,7 @@ export const about = {
   bigText: aboutStyles["big-text"],
   licenseContainer: aboutStyles["license-container"],
   licenseHeader: aboutStyles["license-header"],
+  empty: aboutStyles["empty"]
 };
 
 export const settings = {

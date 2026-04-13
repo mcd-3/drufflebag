@@ -5,6 +5,10 @@
     margin-right: auto;
 }
 
+.empty {
+    height: 100%;
+}
+
 .end {
     text-align: end;
 }
