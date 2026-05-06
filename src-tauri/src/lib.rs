@@ -51,12 +51,22 @@ use events::{
     evt_emulation::evt_close_emulation,
     evt_swf::evt_update_swf_by_hash,
 };
+use tauri::Emitter;
+
+#[derive(Clone, serde::Serialize)]
+struct Payload {
+    args: Vec<String>,
+    cwd: String,
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let db_migrations = MigrationsHistory::migrations();
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+            app.emit("single-instance", Payload { args: argv, cwd }).unwrap();
+        }))
         .plugin(tauri_plugin_dialog::init())
         .plugin(
             tauri_plugin_sql::Builder::new()

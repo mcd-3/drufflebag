@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
@@ -8,7 +8,11 @@ import { getAsset } from './../../utils/assets.js';
 import {
   listenEvtUpdateSwfByHash,
   listenEvtUpdateSwfCount,
+  listenSingleInstance,
 } from './../../utils/events.js';
+import {
+  setCurrentlyPlayingSwfPath,
+} from './../../utils/storage.js';
 
 import TopBar from "../../components/topBar";
 import SwfTable from "../../components/swfTable";
@@ -16,6 +20,7 @@ import NoItemsBox from "../../components/noItemsBox";
 import { Locale } from "../../locales/index.js";
 
 const {
+  ALERT_ALREADY_RUNNING_WARNING,
   DESCRIPTION_MAIN_CLICK_OPEN,
   DESCRIPTION_MAIN_PLEASE_WAIT,
   HEADER_MAIN_LOADING,
@@ -30,16 +35,24 @@ function MainContent() {
   const [swfFilesScanned, setSwfFilesScanned] = useState(0);
   const [swfFilesFound, setSwfFilesFound] = useState(0);
 
-  const unlisten = getCurrentWindow().onCloseRequested(
+  const launchRuffle = useCallback((swfPath, swfName) => {
+    if (!ruffleOpen) {
+      setSelectedSwfPath(swfPath);
+      openRuffle(swfName);
+      setRuffleOpen(true);
+    }
+  });
+
+  const unlistenOnCloseRequested = getCurrentWindow().onCloseRequested(
     async (event) => {
       event.preventDefault();
       exitApp();
     }
   );
 
-  listenEvtUpdateSwfCount((payload) => setSwfFilesScanned(payload.count));
+  const unlistenUpdateSwfCount = listenEvtUpdateSwfCount((payload) => setSwfFilesScanned(payload.count));
 
-  listenEvtUpdateSwfByHash((payload) => {
+  const unlistenUpdateSwfByHash = listenEvtUpdateSwfByHash((payload) => {
     for (let i = 0; i < swfFiles.length; i++) {
       if (swfFiles[i]['md5_hash'] === payload.hash) {
         const newArray = swfFiles.slice();
@@ -51,6 +64,40 @@ function MainContent() {
       }
     }
   });
+
+  // Note: only works if app is already open
+  // BUG: Multiple instances of the window + alert appear. Alert pops up more if launched a second/third+ time
+  //      Shows up on Strict Mode
+  const unlistenSingleInstance = listenSingleInstance((payload) => {
+    if (payload.payload.args) {
+      payload.payload.args.forEach((item) => {
+        if (typeof item === "string" && item.endsWith('.swf')) {
+          if (!ruffleOpen) {
+            setCurrentlyPlayingSwfPath(item);
+            launchRuffle(item, item);
+          } else {
+            alert(ALERT_ALREADY_RUNNING_WARNING);
+          }
+        }
+      })
+    }
+  })
+
+  useEffect(() => {
+    return () => {
+      unlistenOnCloseRequested.then(f => f());
+      unlistenUpdateSwfByHash.then(f => f());
+      unlistenUpdateSwfCount.then(f => f());
+      unlistenSingleInstance.then(f => f())
+    };
+  }, [
+    cacheIsLoading,
+    swfFiles,
+    selectedSwfPath,
+    ruffleOpen,
+    swfFilesScanned,
+    swfFilesFound
+  ]);
 
   useEffect(() => {
     setCacheIsLoading(true);
@@ -64,19 +111,7 @@ function MainContent() {
       }
       setCacheIsLoading(false);
     });
-
-    return () => {
-      unlisten.then(() => {});
-    };
-  }, []);
-
-  const launchRuffle = (swfPath, swfName) => {
-    if (!ruffleOpen) {
-      setSelectedSwfPath(swfPath);
-      openRuffle(swfName);
-      setRuffleOpen(true);
-    }
-  };
+  }, [setCacheIsLoading, setSwfFiles]);
 
   return (
     <div>
