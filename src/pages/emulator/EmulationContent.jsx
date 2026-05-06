@@ -34,7 +34,7 @@ function EmulationContent() {
 
   const settings = getSettingsJSON();
 
-  const unlisten = getCurrentWindow().onCloseRequested(async (event) => {
+  const unlistenOnCloseRequested = getCurrentWindow().onCloseRequested(async (event) => {
     const confirmed = await confirm(
       PROMPT_DESCRIPTION_UNSAVED_CHANGES_LOST,
       { title: PROMPT_TITLE_STOP_EMULATION, kind: 'warning' }
@@ -53,7 +53,7 @@ function EmulationContent() {
     }
   };
 
-  listenEvtCloseEmulation(() => {
+  const unlistenCloseEmulation = listenEvtCloseEmulation(() => {
     getCurrentWindow().close();
   });
 
@@ -140,7 +140,8 @@ function EmulationContent() {
 
     return () => {
       document.body.removeChild(ruffleScript);
-      unlisten.then(() => {});
+      unlistenOnCloseRequested.then(f => f());
+      unlistenCloseEmulation.then(f => f());
     };
   }, []);
 

@@ -51,7 +51,7 @@ const TopBar = ({
 }) => {
   const [globalSpoof, setGlobalSpoof] = useState({ isEnabled: false, url: '' });
 
-  listenEvtUpdatePlayButton(() => setRuffleOpen(false));
+  const unlistenUpdatePlayButton = listenEvtUpdatePlayButton(() => setRuffleOpen(false));
 
   useEffect(() => {
     const globalSpoofStored = getGlobalSpoofUrl();
@@ -62,7 +62,20 @@ const TopBar = ({
         url: globalSpoofStored.urlSpoof,
       });
     }
-  }, []);
+
+    return () => {
+      unlistenUpdatePlayButton.then(f => f());
+    }
+  }, [
+    setSwfFiles,
+    selectedSwfPath,
+    ruffleOpen,
+    setRuffleOpen,
+    setCacheIsLoading,
+    setSwfFilesScanned,
+    setSwfFilesFound,
+    playSwfEvt
+  ]);
 
   const scanSwfDirectory = async (cachedDirectoryPath = "") => {
     setCacheIsLoading(true);
