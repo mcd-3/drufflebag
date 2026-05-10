@@ -1,9 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
-import { invoke } from "@tauri-apps/api/core";
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { appDataDir } from '@tauri-apps/api/path';
 import { main } from './../../styles'
-import { writeJsonCache, openRuffle, exitApp } from './../../utils/invoker.js';
+import {
+  writeJsonCache,
+  openRuffle,
+  exitApp,
+  getLaunchFile,
+  getCachedSwfs,
+} from './../../utils/invoker.js';
 import { getAsset } from './../../utils/assets.js';
 import {
   listenEvtUpdateSwfByHash,
@@ -43,6 +48,17 @@ function MainContent() {
     }
   });
 
+  const verifyPathToLaunch = (path) => {
+    if (typeof path === "string" && path.endsWith('.swf')) {
+      if (!ruffleOpen) {
+        setCurrentlyPlayingSwfPath(path);
+        launchRuffle(path, path);
+      } else {
+        alert(ALERT_ALREADY_RUNNING_WARNING);
+      }
+    }
+  };
+
   const unlistenOnCloseRequested = getCurrentWindow().onCloseRequested(
     async (event) => {
       event.preventDefault();
@@ -71,17 +87,10 @@ function MainContent() {
   const unlistenSingleInstance = listenSingleInstance((payload) => {
     if (payload.payload.args) {
       payload.payload.args.forEach((item) => {
-        if (typeof item === "string" && item.endsWith('.swf')) {
-          if (!ruffleOpen) {
-            setCurrentlyPlayingSwfPath(item);
-            launchRuffle(item, item);
-          } else {
-            alert(ALERT_ALREADY_RUNNING_WARNING);
-          }
-        }
+        verifyPathToLaunch(item);
       })
     }
-  })
+  });
 
   useEffect(() => {
     return () => {
@@ -102,7 +111,7 @@ function MainContent() {
   useEffect(() => {
     setCacheIsLoading(true);
     appDataDir().then((dir, err) => {
-      return invoke('c_get_cached_swfs', { appDataDir: dir });
+      return getCachedSwfs(dir);
     }).then((cache, err) => {
       if (!err && cache.length > 0) {
         setSwfFiles(cache);
@@ -110,6 +119,10 @@ function MainContent() {
         setSwfFiles([]);
       }
       setCacheIsLoading(false);
+    });
+
+    getLaunchFile().then(res => {
+      verifyPathToLaunch(res);
     });
   }, [setCacheIsLoading, setSwfFiles]);
 

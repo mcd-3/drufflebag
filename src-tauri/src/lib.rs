@@ -27,6 +27,11 @@ mod events {
     pub mod evt_swf;
 }
 
+pub mod structs;
+
+use std::sync::Mutex;
+use tauri::{Emitter, Manager, State};
+
 use data::migrations::MigrationsHistory;
 use commands::{
     c_cache::{
@@ -42,6 +47,7 @@ use commands::{
     c_path::{
         c_copy_to_public,
         c_scan_directory,
+        c_get_launch_file,
         c_get_swf_count_from_dir
     },
     c_swf::c_get_swf_hash
@@ -51,7 +57,7 @@ use events::{
     evt_emulation::evt_close_emulation,
     evt_swf::evt_update_swf_by_hash,
 };
-use tauri::Emitter;
+use crate::structs::FileToOpen;
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -64,6 +70,7 @@ pub fn run() {
     let db_migrations = MigrationsHistory::migrations();
 
     tauri::Builder::default()
+        .manage(FileToOpen(Mutex::new(None)))
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             app.emit("single-instance", Payload { args: argv, cwd }).unwrap();
         }))
@@ -87,11 +94,20 @@ pub fn run() {
             c_copy_to_public,
             c_get_swf_hash,
             c_exit_app,
+            c_get_launch_file,
             // Events
             evt_update_play_button,
             evt_close_emulation,
             evt_update_swf_by_hash,
         ])
+        .setup(|app| {
+            let args: Vec<String> = std::env::args().collect();
+            if args.len() > 1 {
+                let state: State<'_, FileToOpen> = app.state::<FileToOpen>();
+                *state.0.lock().unwrap() = Some(args[1].clone());
+            }
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

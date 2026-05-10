@@ -64,6 +64,25 @@ const getDirectorySwfCount = async (directoryPath) => {
   return await invoke("c_get_swf_count_from_dir", { cachedDirectoryPath: directoryPath });
 };
 
+/**
+ * Reads a list of cached SWFs from a directory
+ *
+ * @param {string} dir - Directory to read 
+ * @returns {array} - List of cached SWFs
+ */
+const getCachedSwfs = (dir) => {
+  return invoke('c_get_cached_swfs', { appDataDir: dir })
+}
+
+/**
+ * Gets the path of a SWF if the app was launched by opening the file
+ *
+ * @returns {string} - Path of SWF to play
+ */
+const getLaunchFile = async () => {
+  return await invoke('c_get_launch_file');
+};
+
 export {
   exitApp,
   getDirectorySwfCount,
@@ -72,4 +91,6 @@ export {
   openSettings,
   scanDirectory,
   writeJsonCache,
+  getCachedSwfs,
+  getLaunchFile,
 };
