@@ -48,12 +48,12 @@ function MainContent() {
     }
   });
 
-  const verifyPathToLaunch = (path) => {
+  const verifyPathToLaunch = (path, useAlert) => {
     if (typeof path === "string" && path.endsWith('.swf')) {
       if (!ruffleOpen) {
         setCurrentlyPlayingSwfPath(path);
         launchRuffle(path, path);
-      } else {
+      } else if (useAlert) {
         alert(ALERT_ALREADY_RUNNING_WARNING);
       }
     }
@@ -87,7 +87,7 @@ function MainContent() {
   const unlistenSingleInstance = listenSingleInstance((payload) => {
     if (payload.payload.args) {
       payload.payload.args.forEach((item) => {
-        verifyPathToLaunch(item);
+        verifyPathToLaunch(item, true);
       })
     }
   });
@@ -122,7 +122,7 @@ function MainContent() {
     });
 
     getLaunchFile().then(res => {
-      verifyPathToLaunch(res);
+      verifyPathToLaunch(res, false);
     });
   }, [setCacheIsLoading, setSwfFiles]);
 
