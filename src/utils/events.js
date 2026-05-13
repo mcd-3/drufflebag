@@ -46,6 +46,12 @@ const listenEvtUpdateSwfCount = (callback) => {
   });
 };
 
+const listenSingleInstance = (callback) => {
+  return listen('single-instance', (payload) => {
+    callback(payload);
+  });
+};
+
 export {
   emitEvtCloseEmulation,
   emitEvtUpdatePlayButton,
@@ -54,4 +60,5 @@ export {
   listenEvtUpdatePlayButton,
   listenEvtUpdateSwfByHash,
   listenEvtUpdateSwfCount,
+  listenSingleInstance,
 };

@@ -1,4 +1,6 @@
 {
+    "ALERT_ALREADY_RUNNING_WARNING": "Player is already running. Stop emulation first before opening another SWF!",
+
     "HEADER_AVM": "AVM",
     "HEADER_ERROR": "An Error has Occured",
     "HEADER_LAST_PLAYED": "Last Played",

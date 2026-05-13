@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import EmulationContent from "./EmulationContent";
 import { getCurrentWindow } from '@tauri-apps/api/window';
@@ -12,5 +13,7 @@ window.addEventListener('keydown', async (e) => {
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <EmulationContent />
+  <React.StrictMode>
+    <EmulationContent />
+  </React.StrictMode>,
 );

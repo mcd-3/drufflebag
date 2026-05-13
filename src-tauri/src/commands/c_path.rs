@@ -1,6 +1,8 @@
 use serde_json::{json, Value};
+use tauri::State;
 use crate::utils::path::get_directory_path;
 use crate::utils::swf::add_to_swf_list;
+use crate::structs::FileToOpen;
 
 #[tauri::command]
 pub fn c_copy_to_public(swf_absolute_path: &str) {
@@ -25,6 +27,11 @@ pub fn c_get_swf_count_from_dir(
         },
         Err(_) => 0,
     }
+}
+
+#[tauri::command]
+pub fn c_get_launch_file(state: State<'_, FileToOpen>) -> Option<String> {
+    state.0.lock().unwrap().take()
 }
 
 #[tauri::command]
