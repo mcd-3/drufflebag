@@ -6,7 +6,8 @@
     "main",
     "emulator",
     "settings",
-    "about"
+    "about",
+    "quickstart"
   ],
   "permissions": [
     "core:default",

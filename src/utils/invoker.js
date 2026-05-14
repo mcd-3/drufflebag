@@ -25,6 +25,13 @@ const openRuffle = (swfName) => {
 };
 
 /**
+ * Opens the Quickstart Guide window
+ */
+const openQuickstart = () => {
+  invoke("c_open_quickstart");
+};
+
+/**
  * Exits the application and closes all windows
  */
 const exitApp = () => {
@@ -88,6 +95,7 @@ export {
   getDirectorySwfCount,
   openAbout,
   openRuffle,
+  openQuickstart,
   openSettings,
   scanDirectory,
   writeJsonCache,

@@ -35,3 +35,18 @@ pub fn create_about_page(app: tauri::AppHandle) {
         .build()
         .unwrap();
 }
+
+/// Create a new Tauri window for the Quickstart Guide page
+pub fn create_quickstart_page(app: tauri::AppHandle) {
+    tauri::WebviewWindowBuilder::new(
+        &app,
+        "quickstart",
+        tauri::WebviewUrl::App("quickstart.html".into())
+    )
+        .title("Quickstart Guide")
+        .inner_size(600.0, 375.0)
+        .focused(true)
+        .always_on_top(true)
+        .build()
+        .unwrap();
+}

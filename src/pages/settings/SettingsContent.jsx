@@ -23,12 +23,14 @@ const {
   DESCRIPTION_SETTINGS_START_UP_AUTOPLAY,
   DESCRIPTION_SETTINGS_START_UP_SPLASH,
   DESCRIPTION_SETTINGS_USE_LATEST_RUFFLE,
+  DESCRIPTION_SETTINGS_ENABLE_QUICKSTART,
   HEADER_SETTINGS_CONTEXT_MENU,
   HEADER_SETTINGS_LETTERBOX,
   HEADER_SETTINGS_OPEN_URL,
   HEADER_SETTINGS_SCALE,
   HEADER_SETTINGS_START_UP,
   HEADER_SETTINGS_USE_LATEST_RUFFLE,
+  HEADER_SETTINGS_QUICKSTART_GUIDE,
   OPTION_SETTINGS_SCALE_1x,
   OPTION_SETTINGS_SCALE_1_5x,
   OPTION_SETTINGS_SCALE_2x,
@@ -38,6 +40,7 @@ const {
   PROMPT_TITLE_UNSAVED_CHANGES,
   TAB_SETTINGS_EMULATION,
   TAB_SETTINGS_RUFFLE,
+  TAB_SETTINGS_OTHER,
 } = Locale;
 
 function SettingsContent() {
@@ -54,6 +57,7 @@ function SettingsContent() {
           <TabList>
             <Tab>{ TAB_SETTINGS_EMULATION  }</Tab>
             <Tab>{ TAB_SETTINGS_RUFFLE }</Tab>
+            <Tab>Other</Tab>
           </TabList>
           <TabPanel>
             <div className={settingsStyles.panelContainer}>
@@ -184,6 +188,28 @@ function SettingsContent() {
                     }}
                   />
                   <span>{ DESCRIPTION_SETTINGS_LETTERBOX }</span>
+                </div>
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className={settingsStyles.panelContainer}>
+              <br />
+              <div className={settingsStyles.innerPanelContainer}>
+                <Header>{HEADER_SETTINGS_QUICKSTART_GUIDE}</Header>
+                <div className={settingsStyles.row}>
+                  <input
+                    className={settingsStyles.inputCheckbox}
+                    type='checkbox'
+                    checked={settings.quickstartEnabled}
+                    onChange={(evt) => {
+                      setSettings({
+                        ...settings,
+                        quickstartEnabled: evt.target.checked
+                      });
+                    }}
+                  />
+                  <span>{DESCRIPTION_SETTINGS_ENABLE_QUICKSTART}</span>
                 </div>
               </div>
             </div>

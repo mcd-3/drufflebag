@@ -2,6 +2,7 @@ import mainStyles from './pages/main.module.css';
 import emulationStyles from './pages/emulation.module.css';
 import aboutStyles from './pages/about.module.css';
 import settingsStyles from './pages/settings.module.css';
+import quickstartStyles from './pages/quickstart.module.css';
 
 import collapseStyles from './components/collapse.module.css';
 import contextMenuStyles from './components/contextMenu.module.css';
@@ -47,6 +48,15 @@ export const settings = {
   footerButton: settingsStyles["footer-button"],
   footerButtonSave: settingsStyles["footer-button-save"],
   footerButtonDanger: settingsStyles["footer-button-danger"],
+};
+
+export const quickstart = {
+  row: quickstartStyles["row"],
+  list: quickstartStyles["list"],
+  inputCheckbox: quickstartStyles["input-checkbox"],
+  closeButton: quickstartStyles["close-button"],
+  link: quickstartStyles["link"],
+  header: quickstartStyles["header"]
 };
 
 export const collapse = {

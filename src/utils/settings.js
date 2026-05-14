@@ -18,6 +18,7 @@ const getDefaultSettings = () => {
     openUrls: false,
     contextMenuEnabled: true,
     letterboxEnabled: true,
+    quickstartEnabled: true,
   };
 }
 
@@ -30,6 +31,7 @@ const saveSettings = ({
   openUrls,
   contextMenuEnabled,
   letterboxEnabled,
+  quickstartEnabled
 }) => {
   setSettings({
     theme,
@@ -40,6 +42,7 @@ const saveSettings = ({
     openUrls,
     contextMenuEnabled,
     letterboxEnabled,
+    quickstartEnabled
   });
 };
 
@@ -81,6 +84,7 @@ const compareSettings = (settings1, settings2) => {
       && settings1.openUrls === settings2.openUrls
       && settings1.contextMenuEnabled === settings2.contextMenuEnabled
       && settings1.letterboxEnabled === settings2.letterboxEnabled
+      && settings1.quickstartEnabled === settings2.quickstartEnabled
   );
 };
 

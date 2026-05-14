@@ -1,7 +1,8 @@
 use crate::pages::open::{
     create_ruffle_page,
     create_settings_page,
-    create_about_page
+    create_about_page,
+    create_quickstart_page
 };
 
 #[cfg(windows)]
@@ -44,4 +45,16 @@ pub async fn c_open_about(app: tauri::AppHandle) {
 #[tauri::command]
 pub fn c_open_about(app: tauri::AppHandle) {
     create_about_page(app);
+}
+
+#[cfg(windows)]
+#[tauri::command]
+pub async fn c_open_quickstart(app: tauri::AppHandle) {
+    create_quickstart_page(app);
+}
+
+#[cfg(not(windows))]
+#[tauri::command]
+pub fn c_open_quickstart(app: tauri::AppHandle) {
+    create_quickstart_page(app);
 }

@@ -13,13 +13,16 @@
     "HEADER_SETTINGS_SCALE": "Scale",
     "HEADER_SETTINGS_START_UP": "Start Up",
     "HEADER_SETTINGS_USE_LATEST_RUFFLE": "Use latest Ruffle",
+    "HEADER_SETTINGS_QUICKSTART_GUIDE": "Enable Quickstart Guide",
     "HEADER_SIZE": "Size",
     "HEADER_STATUS": "Status",
     "HEADER_TYPE": "Type",
+    "HEADER_WELCOME": "Welcome to Drufflebag!",
 
     "BUTTON_SETTINGS_RESET_DEFAULT": "Reset to Default",
     "BUTTON_SETTINGS_CANCEL": "Cancel",
     "BUTTON_SETTINGS_SAVE": "Save",
+    "BUTTON_CLOSE": "Close",
 
     "CHAR_ARROW_UP": "▲",
     "CHAR_ARROW_DOWN": "▼",
@@ -33,8 +36,11 @@
     "DESCRIPTION_SETTINGS_START_UP_SPLASH": "Enable the Ruffle splash screen",
     "DESCRIPTION_SETTINGS_START_UP_AUTOPLAY": "Enable autoplay",
     "DESCRIPTION_SETTINGS_OPEN_URL": "Opens a new browser tab when a URL is clicked",
+    "DESCRIPTION_SETTINGS_QUICKSTART": "Don't show this guide again",
+    "DESCRIPTION_SETTINGS_ENABLE_QUICKSTART": "Shows the quickstart guide on app startup",
     "DESCRIPTION_CLOSE_WINDOW": "Please close this window and try again.",
     "DESCRIPTION_NO_INTERNET": "You must be connected to the Internet to use the latest version of Ruffle. You can disable this in the Settings if this was set by mistake.",
+    "DESCRIPTION_QUICKSTART": "Play Shockwave Flash files, powered by",
 
     "DISCLAIMER_APP_LICENSE": "Disclaimer: This app's license appears in its original language",
     "DISCLAIMER_3RD_PARTY_LICENSES": "Disclaimer: All licenses appear in their original languages",
@@ -54,6 +60,12 @@
     "LABEL_OPTION_DEFAULT": "---",
     "LABEL_PLAY_SWF": "Play SWF",
 
+    "LIST_HOW_TO_1": "Download some .swf files and put them in a folder",
+    "LIST_HOW_TO_2": "Click \"open\" and select the folder with the .swf files",
+    "LIST_HOW_TO_3": "Click a row then press \"Play\" to launch the file",
+    "LIST_HOW_TO_4": "Click \"Refresh\" to refresh the list if you added/removed files",
+    "LIST_HOW_TO_5": "Right click a row to bring up file options",
+
     "OPTION_SETTINGS_SCALE_1x": "1x",
     "OPTION_SETTINGS_SCALE_1_5x": "1.5x",
     "OPTION_SETTINGS_SCALE_2x": "2x",
@@ -67,9 +79,12 @@
 
     "TAB_SETTINGS_EMULATION": "Emulation",
     "TAB_SETTINGS_RUFFLE": "Ruffle",
+    "TAB_SETTINGS_OTHER": "Other",
 
     "TEXT_BY": "By",
     "TEXT_VERSION": "Version",
+    "TEXT_HOW_TO": "How to:",
+    "TEXT_RUFFLE": "Ruffle",
 
     "TITLE_BUTTON_PLAY": "Start emulation",
     "TITLE_BUTTON_SCAN_DIRECTORY": "Select a directory that contains your Flash files (.swf)",
