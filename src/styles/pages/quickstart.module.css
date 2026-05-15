@@ -38,7 +38,7 @@
 
 .close-button {
     border: 1px solid #767676;
-    background-color: #00000000;
+    background-color: #e4e4e4;
     border-radius: 4px;
     padding: 8px 8px 8px 8px;
     font-size: 0.8em;
@@ -50,11 +50,12 @@
 
 .close-button:hover {
     border: 1px solid #b1b1b1;
+    background-color: #f7f6f6;
 }
 
 .close-button:active {
     border: 1px solid #393939;
-    background-color: #5d5d5d;
+    background-color: #b9b9b9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,5 +65,14 @@
 
     .close-button {
         background-color: rgb(130, 130, 130);
+    }
+
+    .close-button:hover {
+        border: 1px solid #b1b1b1;
+    }
+
+    .close-button:active {
+        border: 1px solid #393939;
+        background-color: #5d5d5d;
     }
 }
