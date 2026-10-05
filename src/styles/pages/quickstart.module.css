@@ -68,7 +68,8 @@
     }
 
     .close-button:hover {
-        border: 1px solid #b1b1b1;
+        border: 1px solid #818181;
+        background-color: #9b9b9b;
     }
 
     .close-button:active {
